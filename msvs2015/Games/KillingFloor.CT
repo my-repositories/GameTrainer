@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="21">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"HEALTH"</Description>
+      <LastState Value="100" RealAddress="2C43A480"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Core.dll"+168A4C</Address>
+      <Offsets>
+        <Offset>480</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"DATA1N2 -- ARMOUR"</Description>
+      <LastState Value="42.25" RealAddress="2C43A774"/>
+      <VariableType>Float</VariableType>
+      <Address>"Core.dll"+168A4C</Address>
+      <Offsets>
+        <Offset>774</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"MONEY"</Description>
+      <LastState Value="3028" RealAddress="1A8C9DB4"/>
+      <VariableType>Float</VariableType>
+      <Address>"Core.dll"+1684AC</Address>
+      <Offsets>
+        <Offset>3B4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"DATA2N1 -- MAGAZINE"</Description>
+      <LastState Value="1" RealAddress="3A4F8AA0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Core.dll"+168A4C</Address>
+      <Offsets>
+        <Offset>5A0</Offset>
+        <Offset>43C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"DATA2N2 -- AMMO"</Description>
+      <LastState Value="4" RealAddress="55CC1FBC"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Core.dll"+168A4C</Address>
+      <Offsets>
+        <Offset>3BC</Offset>
+        <Offset>3C8</Offset>
+        <Offset>43C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"DATA2N3 -- GREN"</Description>
+      <LastState Value="0" RealAddress="25A293BC"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Core.dll"+16926C</Address>
+      <Offsets>
+        <Offset>3BC</Offset>
+        <Offset>3C8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"PROCESSNAME"</Description>
+      <LastState Value="9460301" RealAddress="10900000"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>KillingFloor.exe</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"MAXHEALTH"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>100</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"CHEAT_ONEHITKILL"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+cmp dword ptr [ebx-ec],1
+js @F
+mov [ebx],0
+jmp originalcode
+
+@@:
+mov [ebx],eax
+
+originalcode:
+nop
+mov ebx,eax
+mov eax,[esp+14]
+
+exit:
+jmp returnhere
+
+"Core.dll"+2954E:
+jmp newmem
+nop
+nop
+nop
+returnhere:
+
+
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"Core.dll"+2954E:
+mov [ebx],eax
+mov ebx,eax
+mov eax,[esp+14]
+//Alt: db 89 03 8B D8 8B 44 24 14
+//instructionAddress: "Core.dll"+2954E
+//returnAddress: "Core.dll"+29556
+{
+83 BB 14 FF FF FF 01
+0F 88 0B 00 00 00
+C7 03 00 00 00 00
+E9 02 00 00 00
+89 03
+90
+8B D8
+8B 44 24 14
+E9 30 95 92 D6
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

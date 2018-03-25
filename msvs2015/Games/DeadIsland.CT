@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="21">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"HEALTH"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Core.dll"+168A4C</Address>
+      <Offsets>
+        <Offset>480</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"ARMOUR"</Description>
+      <VariableType>Float</VariableType>
+      <Address>"Core.dll"+168A4C</Address>
+      <Offsets>
+        <Offset>774</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"MONEY"</Description>
+      <VariableType>Float</VariableType>
+      <Address>"Core.dll"+1684AC</Address>
+      <Offsets>
+        <Offset>3B4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"MAGAZINE"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Core.dll"+168A4C</Address>
+      <Offsets>
+        <Offset>5A0</Offset>
+        <Offset>43C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"AMMO"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Core.dll"+168A4C</Address>
+      <Offsets>
+        <Offset>3BC</Offset>
+        <Offset>3C8</Offset>
+        <Offset>43C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"GREN"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Core.dll"+16926C</Address>
+      <Offsets>
+        <Offset>3BC</Offset>
+        <Offset>3C8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"PROCESSNAME"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>KillingFloor.exe</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"MAXHEALTH"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>100</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
