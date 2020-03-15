@@ -14,14 +14,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${runtimeOutputDir}/MinSizeRel)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${runtimeOutputDir}/Release)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${runtimeOutputDir}/RelWithDebInfo)
 
-include_directories(inc)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/include)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/deps/lib)
 
+include_directories(inc)
 
 file(GLOB executableFiles
         "inc/*.h"
         "src/*.cpp"
 )
 add_executable(${projectName} ${executableFiles})
+target_link_libraries(${projectName} ${CMAKE_CURRENT_SOURCE_DIR}/deps/lib/lua51.lib)
 
 #-DCMAKE_BUILD_TYPE=Release
 #-DCMAKE_BUILD_TYPE=Debug

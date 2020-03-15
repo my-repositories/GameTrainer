@@ -3,6 +3,7 @@
 
 target = "GameTrainer"
 generator = "Visual Studio 16 2019"
+arch = "Win32" # Win32 || Win64
 configuration = "Release"
 ideName = "clion"
 
@@ -19,7 +20,10 @@ clean:
 	rm -rf bin ${objDirName}
 
 compile:
-	cmake -B $(objDir) -S $(sourceDir) -G ${generator} ${projectDir}
+	cmake -B $(objDir) -S $(sourceDir) -G ${generator} -A ${arch} ${projectDir}
 
 link:
 	cmake --build $(objDir) --target $(target) --config $(configuration) -j 8
+
+copy:
+	cp -r ./data/*.lua ./bin/clion/Release
