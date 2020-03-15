@@ -9,15 +9,14 @@ ideName = "clion"
 
 sourceDir = "."
 projectDir = "."
+binDirName = "bin"
 objDirName = "build"
 objDir = $(addprefix $(objDirName)\\\\,$(ideName))
 
 build: clean compile link
-build2:
-	echo $(objDir)
 
 clean:
-	rm -rf bin ${objDirName}
+	rm -rf ${binDirName} ${objDirName}
 
 compile:
 	cmake -B $(objDir) -S $(sourceDir) -G ${generator} -A ${arch} ${projectDir}
@@ -26,4 +25,4 @@ link:
 	cmake --build $(objDir) --target $(target) --config $(configuration) -j 8
 
 copy:
-	cp -r ./data/*.lua ./bin/clion/Release
+	cp -r ./data/* ./bin/clion/Release

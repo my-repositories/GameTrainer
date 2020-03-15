@@ -25,6 +25,7 @@ file(GLOB executableFiles
 )
 add_executable(${projectName} ${executableFiles})
 target_link_libraries(${projectName} ${CMAKE_CURRENT_SOURCE_DIR}/deps/lib/lua51.lib)
+target_link_libraries(${projectName} winmm.lib)
 
 #-DCMAKE_BUILD_TYPE=Release
 #-DCMAKE_BUILD_TYPE=Debug
