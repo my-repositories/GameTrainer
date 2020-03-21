@@ -1,7 +1,7 @@
 image:
-    - Visual Studio 2015
-    - Visual Studio 2017
     - Visual Studio 2019
+    - Visual Studio 2017
+    - Visual Studio 2015
 
 #remove it
 skip_non_tags: true
@@ -16,11 +16,11 @@ matrix:
     fast_finish: false
 
     exclude:
-        -   image: Visual Studio 2015
-            TOOLCHAIN: msvc15
-
-        -   image: Visual Studio 2019
-            TOOLCHAIN: msvc15
+#        -   image: Visual Studio 2015
+#            TOOLCHAIN: msvc15
+#
+#        -   image: Visual Studio 2019
+#            TOOLCHAIN: msvc15
 
 platform:
     - x64
