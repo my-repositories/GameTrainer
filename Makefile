@@ -15,10 +15,10 @@ else
 	PLATFORM = x86
 endif
 
-TARGET = GameTrainer
-PROJECT_NAME = ${TARGET}
+PROJECT_NAME = GameTrainer
 PROJECT_VERSION = "1.2.3"
 GENERATOR = "Visual Studio 16 2019"
+TOOLCHAIN = msvc15
 
 SOURCE_DIR = .
 PROJECT_DIR = .
@@ -41,14 +41,14 @@ configure:
 	-DMY_PLATFORM=${PLATFORM} \
 	-DMY_PROJECT_NAME=${PROJECT_NAME} \
 	-DMY_PROJECT_VERSION=${PROJECT_VERSION} \
+	-DMY_TOOLCHAIN=${TOOLCHAIN} \
 	${PROJECT_DIR}
 
 build_app:
 	cmake \
 	--build ${OBJ_DIR} \
-	--target ${TARGET} \
 	--config ${CONFIGURATION} \
 	-j 8
 
 copy:
-	cp -r ./data/* ./bin/${CONFIGURATION}-${PLATFORM}
+	cp -r ./data/* ./bin/

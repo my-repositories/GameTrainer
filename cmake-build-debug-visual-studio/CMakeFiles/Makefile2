@@ -54,46 +54,112 @@ CMAKE_BINARY_DIR = D:\projects\my-repositories\GameTrainer\cmake-build-debug-vis
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles\GameTrainer.dir\all
+all: mylib\all
+all: app\all
 
 .PHONY : all
 
 # The main recursive "clean" target.
-clean: CMakeFiles\GameTrainer.dir\clean
+clean: mylib\clean
+clean: app\clean
 
 .PHONY : clean
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: mylib\preinstall
+preinstall: app\preinstall
 
 .PHONY : preinstall
 
 #=============================================================================
-# Target rules for target CMakeFiles/GameTrainer.dir
+# Directory level rules for directory mylib
+
+# Recursive "all" directory target.
+mylib\all: mylib\CMakeFiles\mylib.dir\all
+
+.PHONY : mylib\all
+
+# Recursive "clean" directory target.
+mylib\clean: mylib\CMakeFiles\mylib.dir\clean
+
+.PHONY : mylib\clean
+
+# Recursive "preinstall" directory target.
+mylib\preinstall:
+
+.PHONY : mylib\preinstall
+
+#=============================================================================
+# Target rules for target mylib/CMakeFiles/mylib.dir
 
 # All Build rule for target.
-CMakeFiles\GameTrainer.dir\all:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\depend
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\CMakeFiles --progress-num=1,2,3 "Built target GameTrainer"
-.PHONY : CMakeFiles\GameTrainer.dir\all
+mylib\CMakeFiles\mylib.dir\all:
+	$(MAKE) -f mylib\CMakeFiles\mylib.dir\build.make /nologo -$(MAKEFLAGS) mylib\CMakeFiles\mylib.dir\depend
+	$(MAKE) -f mylib\CMakeFiles\mylib.dir\build.make /nologo -$(MAKEFLAGS) mylib\CMakeFiles\mylib.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\CMakeFiles --progress-num=3,4 "Built target mylib"
+.PHONY : mylib\CMakeFiles\mylib.dir\all
 
 # Build rule for subdir invocation for target.
-CMakeFiles\GameTrainer.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\CMakeFiles 3
-	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\all
+mylib\CMakeFiles\mylib.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\CMakeFiles 2
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) mylib\CMakeFiles\mylib.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\CMakeFiles 0
-.PHONY : CMakeFiles\GameTrainer.dir\rule
+.PHONY : mylib\CMakeFiles\mylib.dir\rule
 
 # Convenience name for target.
-GameTrainer: CMakeFiles\GameTrainer.dir\rule
+mylib: mylib\CMakeFiles\mylib.dir\rule
 
-.PHONY : GameTrainer
+.PHONY : mylib
 
 # clean rule for target.
-CMakeFiles\GameTrainer.dir\clean:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\clean
-.PHONY : CMakeFiles\GameTrainer.dir\clean
+mylib\CMakeFiles\mylib.dir\clean:
+	$(MAKE) -f mylib\CMakeFiles\mylib.dir\build.make /nologo -$(MAKEFLAGS) mylib\CMakeFiles\mylib.dir\clean
+.PHONY : mylib\CMakeFiles\mylib.dir\clean
+
+#=============================================================================
+# Directory level rules for directory app
+
+# Recursive "all" directory target.
+app\all: app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\all
+
+.PHONY : app\all
+
+# Recursive "clean" directory target.
+app\clean: app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\clean
+
+.PHONY : app\clean
+
+# Recursive "preinstall" directory target.
+app\preinstall:
+
+.PHONY : app\preinstall
+
+#=============================================================================
+# Target rules for target app/CMakeFiles/GameTrainer-0.0.1-x86-msvc10.dir
+
+# All Build rule for target.
+app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\all: mylib\CMakeFiles\mylib.dir\all
+	$(MAKE) -f app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\build.make /nologo -$(MAKEFLAGS) app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\depend
+	$(MAKE) -f app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\build.make /nologo -$(MAKEFLAGS) app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\CMakeFiles --progress-num=1,2 "Built target GameTrainer-0.0.1-x86-msvc10"
+.PHONY : app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\all
+
+# Build rule for subdir invocation for target.
+app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\CMakeFiles 4
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\CMakeFiles 0
+.PHONY : app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\rule
+
+# Convenience name for target.
+GameTrainer-0.0.1-x86-msvc10: app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\rule
+
+.PHONY : GameTrainer-0.0.1-x86-msvc10
+
+# clean rule for target.
+app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\clean:
+	$(MAKE) -f app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\build.make /nologo -$(MAKEFLAGS) app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\clean
+.PHONY : app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

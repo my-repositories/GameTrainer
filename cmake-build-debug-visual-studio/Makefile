@@ -112,71 +112,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named GameTrainer
+# Target rules for targets named mylib
 
 # Build rule for target.
-GameTrainer: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) GameTrainer
-.PHONY : GameTrainer
+mylib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) mylib
+.PHONY : mylib
 
 # fast build rule for target.
-GameTrainer\fast:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\build
-.PHONY : GameTrainer\fast
+mylib\fast:
+	$(MAKE) -f mylib\CMakeFiles\mylib.dir\build.make /nologo -$(MAKEFLAGS) mylib\CMakeFiles\mylib.dir\build
+.PHONY : mylib\fast
 
-src\gg.obj: src\gg.cpp.obj
+#=============================================================================
+# Target rules for targets named GameTrainer-0.0.1-x86-msvc10
 
-.PHONY : src\gg.obj
+# Build rule for target.
+GameTrainer-0.0.1-x86-msvc10: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) GameTrainer-0.0.1-x86-msvc10
+.PHONY : GameTrainer-0.0.1-x86-msvc10
 
-# target to build an object file
-src\gg.cpp.obj:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\src\gg.cpp.obj
-.PHONY : src\gg.cpp.obj
-
-src\gg.i: src\gg.cpp.i
-
-.PHONY : src\gg.i
-
-# target to preprocess a source file
-src\gg.cpp.i:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\src\gg.cpp.i
-.PHONY : src\gg.cpp.i
-
-src\gg.s: src\gg.cpp.s
-
-.PHONY : src\gg.s
-
-# target to generate assembly for a file
-src\gg.cpp.s:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\src\gg.cpp.s
-.PHONY : src\gg.cpp.s
-
-src\main.obj: src\main.cpp.obj
-
-.PHONY : src\main.obj
-
-# target to build an object file
-src\main.cpp.obj:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\src\main.cpp.obj
-.PHONY : src\main.cpp.obj
-
-src\main.i: src\main.cpp.i
-
-.PHONY : src\main.i
-
-# target to preprocess a source file
-src\main.cpp.i:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\src\main.cpp.i
-.PHONY : src\main.cpp.i
-
-src\main.s: src\main.cpp.s
-
-.PHONY : src\main.s
-
-# target to generate assembly for a file
-src\main.cpp.s:
-	$(MAKE) -f CMakeFiles\GameTrainer.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\GameTrainer.dir\src\main.cpp.s
-.PHONY : src\main.cpp.s
+# fast build rule for target.
+GameTrainer-0.0.1-x86-msvc10\fast:
+	$(MAKE) -f app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\build.make /nologo -$(MAKEFLAGS) app\CMakeFiles\GameTrainer-0.0.1-x86-msvc10.dir\build
+.PHONY : GameTrainer-0.0.1-x86-msvc10\fast
 
 # Help Target
 help:
@@ -184,15 +143,10 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
-	@echo ... GameTrainer
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... src/gg.obj
-	@echo ... src/gg.i
-	@echo ... src/gg.s
-	@echo ... src/main.obj
-	@echo ... src/main.i
-	@echo ... src/main.s
+	@echo ... mylib
+	@echo ... GameTrainer-0.0.1-x86-msvc10
 .PHONY : help
 
 

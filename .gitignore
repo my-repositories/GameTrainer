@@ -14,6 +14,9 @@ x86/
 [Bb]uild/
 [Oo]bj/
 [Ll]og/
+deps/lib/mylib.lib
+cmake-build-debug-visual-studio
+cmake-build-release-visual-studio
 
 # JetBrains CLion
 .idea/
@@ -222,7 +225,7 @@ ClientBin/
 *.publishsettings
 orleans.codegen.cs
 
-# Including strong name files can present a security risk 
+# Including strong name files can present a security risk
 # (https://github.com/github/gitignore/pull/2483#issue-259490424)
 #*.snk
 
@@ -314,7 +317,7 @@ __pycache__/
 # OpenCover UI analysis results
 OpenCover/
 
-# Azure Stream Analytics local run output 
+# Azure Stream Analytics local run output
 ASALocalRun/
 
 # MSBuild Binary and Structured Log

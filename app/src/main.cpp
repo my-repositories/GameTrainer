@@ -84,7 +84,7 @@ int playSound(lua_State* LUA)
 
 int main(int argc, char* argv[])
 {
-    std::cout << "Version:" << MY_VERSION << std::endl;
+    std::cout << "Version:" << MY_PROJECT_VERSION << std::endl;
     std::cout << wp() << std::endl;
 
     {

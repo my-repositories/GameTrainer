@@ -28,10 +28,12 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/soft/CLion2019.3.4/bin/cmake/win/share/cmake-3.15/Modules/Platform/WindowsPaths.cmake"
   "C:/soft/CLion2019.3.4/bin/cmake/win/share/cmake-3.15/Modules/ProcessorCount.cmake"
   "../CMakeLists.txt"
+  "../app/CMakeLists.txt"
   "CMakeFiles/3.15.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.15.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.15.3/CMakeRCCompiler.cmake"
   "CMakeFiles/3.15.3/CMakeSystem.cmake"
+  "../mylib/CMakeLists.txt"
   )
 
 # The corresponding makefile is:
@@ -43,9 +45,12 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "mylib/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "app/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/GameTrainer.dir/DependInfo.cmake"
+  "mylib/CMakeFiles/mylib.dir/DependInfo.cmake"
+  "app/CMakeFiles/GameTrainer-0.0.1-x86-msvc10.dir/DependInfo.cmake"
   )
