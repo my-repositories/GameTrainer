@@ -47,6 +47,7 @@ environment:
         #- TOOLCHAIN: msvc16
 
 install:
+    - appveyor UpdateBuild -Version "0.1.1"
     - call .ci/install.bat %TOOLCHAIN% %PLATFORM% %APPVEYOR_REPO_TAG_NAME%
 
 build_script:
@@ -83,19 +84,6 @@ deploy:
 - Killing Floor
 - Killing Floor2
 - Left 4 Dead2
-
----
-
-## Install
-- CMake: https://cmake.org/download/
-- Visual Studio 2019: https://visualstudio.microsoft.com/ru/vs/
-- (Optional) Lua: https://www.lua.org/download.html
-
-## Build
-`make run`
-
-## Authors
-* Aleksandr Loktionov <loktionov129@gmail.com>
 
 
 "
