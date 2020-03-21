@@ -5,6 +5,8 @@
 
 #include <gg.hpp>
 #include <lua.hpp>
+#include <config.hpp>
+#include <game.hpp>
 
 #define KEY_Q 0x51
 
@@ -84,6 +86,14 @@ int playSound(lua_State* LUA)
 
 int main(int argc, char* argv[])
 {
+    Config cfg;
+    std::cout << cfg.method(1) << std::endl;
+    std::cout << cfg.method(3) << std::endl;
+    std::cout << cfg.method(2) << std::endl;
+    Game game;
+    std::cout << game.method(1) << std::endl;
+    std::cout << game.method(3) << std::endl;
+    std::cout << game.method(2) << std::endl;
     std::cout << "Version:" << MY_PROJECT_VERSION << std::endl;
     std::cout << wp() << std::endl;
 
