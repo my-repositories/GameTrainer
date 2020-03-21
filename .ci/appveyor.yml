@@ -54,10 +54,9 @@ build_script:
     - cmake %CMAKE_CONFIGURE_FLAGS%
     - cmake %CMAKE_BUILD_FLAGS%
     - call .ci/zip.bat
-    - dir
 
 artifacts:
-    - path: bin/*.zip
+    - path: bin/**/.zip
       name: app
 
 deploy:
