@@ -9,7 +9,7 @@ skip_non_tags: true
 init:
     - git config --global core.autocrlf input
 
-clone_folder: c:\projects\privetik
+clone_folder: c:\projects\GameTrainer
 shallow_clone: true
 
 matrix:
@@ -58,18 +58,18 @@ build_script:
     #- 7z -o x86.zip x86.exe data_with_lua
 
 artifacts:
-    - path: build/Release/*.exe
-      name: privetik
+    - path: bin/*.exe
+      name: app
 
 deploy:
-    description: 'This is description from appveyor'
+    description: 'This is description\r\n<br> from appveyor'
     tag: $(APPVEYOR_REPO_TAG_NAME)
     provider: GitHub
 
     auth_token:
         secure: JBkOxrXSpCaqb+CJ2KADRvCOfQyjMXhSA92UIaoxBNWhLnsY3Mp1SOlke3r5P/Rs
 
-    artifact: privetik
+    artifact: app
     force_update: true
 
     on:
