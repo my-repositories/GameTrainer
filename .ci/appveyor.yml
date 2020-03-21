@@ -55,6 +55,11 @@ build_script:
     - cd build
     - cmake .. %CMAKE_CONFIGURE_FLAGS%
     - cmake --build . %CMAKE_BUILD_FLAGS%
+    - dir
+    - cd .ci
+    - dir
+    - call zip.bat
+    - cd ..
     - call .ci/zip.bat
 
 artifacts:
