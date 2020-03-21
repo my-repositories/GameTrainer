@@ -54,11 +54,10 @@ build_script:
     - cd build
     - cmake .. %CMAKE_CONFIGURE_FLAGS%
     - cmake --build . %CMAKE_BUILD_FLAGS%
-    #- 7z -o x64.zip x64.exe data_with_lua
-    #- 7z -o x86.zip x86.exe data_with_lua
+    - call .ci/zip.bat
 
 artifacts:
-    - path: bin/*.exe
+    - path: bin/*.zip
       name: app
 
 deploy:
@@ -75,36 +74,28 @@ deploy:
         appveyor_repo_tag: true
 
     description: "
-  This is description\n
-  privet\r\n
-  lorem
+# GameTrainer
+### Powered by C++17 & Lua-5.3.4
 
-  ipsum
+## Support Games:
+- Dead Island
+- Dead Island: Riptide
+- Killing Floor
+- Killing Floor2
+- Left 4 Dead2
 
-  dollor
+---
 
+## Install
+- CMake: https://cmake.org/download/
+- Visual Studio 2019: https://visualstudio.microsoft.com/ru/vs/
+- (Optional) Lua: https://www.lua.org/download.html
 
+## Build
+`make run`
 
-  - spisok
-  - texta
-
-  * test1
-  * test2
-
-  # intriga
-  ## intriga
-  ### intriga
-
-  -spisok
-  -texta
-
-  *test1
-  *test2
-
-  #Intriga
-  ##Intriga
-  ###Intriga
+## Authors
+* Aleksandr Loktionov <loktionov129@gmail.com>
 
 
-  from *appveyor* app
 "
