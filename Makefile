@@ -26,7 +26,7 @@ BIN_DIR_NAME = bin
 OBJ_DIR_NAME = build
 OBJ_DIR = ${OBJ_DIR_NAME}/${CONFIGURATION}-${ARCH}
 
-excq: clean configure build_app copy
+run: clean configure build_all copy
 
 clean:
 	rm -rf ${BIN_DIR_NAME} ${OBJ_DIR_NAME}
@@ -44,7 +44,7 @@ configure:
 	-DMY_TOOLCHAIN=${TOOLCHAIN} \
 	${PROJECT_DIR}
 
-build_app:
+build_all:
 	cmake \
 	--build ${OBJ_DIR} \
 	--config ${CONFIGURATION} \

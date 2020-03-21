@@ -62,7 +62,11 @@ artifacts:
       name: app
 
 deploy:
-    description: 'This is description\r\n<br> from appveyor'
+    description: |
+  This is description
+  from appveyor
+
+
     tag: $(APPVEYOR_REPO_TAG_NAME)
     provider: GitHub
 
