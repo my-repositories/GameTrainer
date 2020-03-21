@@ -47,7 +47,7 @@ environment:
         #- TOOLCHAIN: msvc16
 
 install:
-    - appveyor UpdateBuild -Version "0.1.1"
+    - appveyor UpdateBuild -Version %APPVEYOR_REPO_TAG_NAME%
     - call .ci/install.bat %TOOLCHAIN% %PLATFORM% %APPVEYOR_REPO_TAG_NAME%
 
 build_script:
