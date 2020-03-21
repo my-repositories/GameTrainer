@@ -10,7 +10,7 @@ add_executable(${MY_PROJECT_NAME} ${MY_APP_HEADERS} ${MY_APP_SOURCES})
 target_include_directories(
         ${MY_PROJECT_NAME} PRIVATE
         ${PROJECT_ROOT_DIR}/app/inc
-        ${PROJECT_ROOT_DIR}/deps/inc/lua-5.3.4
+        ${PROJECT_ROOT_DIR}/app/deps/inc/lua-5.3.4
         ${PROJECT_ROOT_DIR}/mylib/inc
 )
 
@@ -28,7 +28,7 @@ target_compile_definitions(
 
 target_link_directories(
         ${MY_PROJECT_NAME} PRIVATE
-        ${PROJECT_ROOT_DIR}/deps/lib
+        ${PROJECT_ROOT_DIR}/app/deps/lib
 )
 
 include(../tools/find_lib.cmake)
@@ -38,6 +38,6 @@ message(STATUS "LIBWMM: ${LIBWMM}")
 target_link_libraries(
         ${MY_PROJECT_NAME} PRIVATE
         ${MY_LIBRARY_NAME}
-        ${PROJECT_ROOT_DIR}/deps/lib/lua-5.3.4-${MY_PLATFORM}.lib
+        ${PROJECT_ROOT_DIR}/app/deps/lib/lua-5.3.4-${MY_PLATFORM}.lib
         ${LIBWMM}
 )

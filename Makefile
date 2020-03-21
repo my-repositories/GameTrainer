@@ -51,4 +51,4 @@ build_all:
 	-j 8
 
 copy:
-	cp -r ./data/* ./bin/${CONFIGURATION}/*/
+	cp -r ./app/data/* ./bin/${CONFIGURATION}/*/
