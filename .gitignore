@@ -14,7 +14,7 @@ x86/
 [Bb]uild/
 [Oo]bj/
 [Ll]og/
-deps/lib/mylib.lib
+mylib.lib
 cmake-build-debug-visual-studio
 cmake-build-release-visual-studio
 
