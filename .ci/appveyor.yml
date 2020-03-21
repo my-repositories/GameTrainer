@@ -3,7 +3,6 @@ image:
     - Visual Studio 2017
     - Visual Studio 2015
 
-#remove it
 skip_non_tags: true
 
 init:
@@ -15,12 +14,18 @@ shallow_clone: true
 matrix:
     fast_finish: false
 
-#    exclude:
-#        -   image: Visual Studio 2015
-#            TOOLCHAIN: msvc15
-#
-#        -   image: Visual Studio 2019
-#            TOOLCHAIN: msvc15
+    exclude:
+        -   image: Visual Studio 2019
+            TOOLCHAIN: msvc15
+
+        -   image: Visual Studio 2017
+            TOOLCHAIN: msvc16
+
+        -   image: Visual Studio 2015
+            TOOLCHAIN: msvc15
+
+        -   image: Visual Studio 2015
+            TOOLCHAIN: msvc16
 
 platform:
     - x64
