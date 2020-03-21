@@ -54,6 +54,7 @@ build_script:
     - cmake %CMAKE_CONFIGURE_FLAGS%
     - cmake %CMAKE_BUILD_FLAGS%
     - call .ci/zip.bat
+    - dir
 
 artifacts:
     - path: bin/*.zip
@@ -74,13 +75,17 @@ deploy:
 
     description: "
 # GameTrainer
-### Powered by C++17 & Lua-5.3.4
 
 ## Support Games:
+
 - Dead Island
+
 - Dead Island: Riptide
+
 - Killing Floor
+
 - Killing Floor2
+
 - Left 4 Dead2
 
 
