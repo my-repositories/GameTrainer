@@ -62,11 +62,6 @@ artifacts:
       name: app
 
 deploy:
-    description: "
-  This is description
-  from appveyor
-"
-
     tag: $(APPVEYOR_REPO_TAG_NAME)
     provider: GitHub
 
@@ -78,3 +73,38 @@ deploy:
 
     on:
         appveyor_repo_tag: true
+
+    description: "
+  This is description\n
+  privet\r\n
+  lorem
+
+  ipsum
+
+  dollor
+
+
+
+  - spisok
+  - texta
+
+  * test1
+  * test2
+
+  # intriga
+  ## intriga
+  ### intriga
+
+  -spisok
+  -texta
+
+  *test1
+  *test2
+
+  #Intriga
+  ##Intriga
+  ###Intriga
+
+
+  from *appveyor* app
+"
