@@ -15,7 +15,7 @@ shallow_clone: true
 matrix:
     fast_finish: false
 
-    exclude:
+#    exclude:
 #        -   image: Visual Studio 2015
 #            TOOLCHAIN: msvc15
 #
