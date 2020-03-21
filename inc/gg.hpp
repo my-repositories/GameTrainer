@@ -1,6 +1,6 @@
-#ifndef GAMETRAINER_GG_H
-#define GAMETRAINER_GG_H
+#ifndef GAMETRAINER_GG_HPP
+#define GAMETRAINER_GG_HPP
 
 char wp();
 
-#endif //GAMETRAINER_GG_H
+#endif //GAMETRAINER_GG_HPP

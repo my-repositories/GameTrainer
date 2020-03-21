@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 
-#include <gg.h>
+#include <gg.hpp>
 #include <lua.hpp>
 
 #define KEY_Q 0x51
@@ -26,6 +26,7 @@ std::vector<int> getRegisteredKeys()
     lua_getfield(LUA, -1, "size");
     int size = lua_tointeger(LUA, -1);
     lua_pop(LUA, 1);
+    std::cout << "size=" << size << std::endl;
 
     lua_pushliteral(LUA, "registered");
     lua_gettable(LUA, -2);
@@ -83,6 +84,27 @@ int playSound(lua_State* LUA)
 
 int main(int argc, char* argv[])
 {
+    std::cout << "Version:" << MY_VERSION << std::endl;
+    std::cout << wp() << std::endl;
+
+    {
+        lua_State* L = luaL_newstate();
+        luaL_dostring(L, "x = 42");
+        lua_getglobal(L, "x");
+        lua_Number x = lua_tonumber(L, 1);
+        std::cout << (int)x << std::endl;
+        lua_close(L);
+    }
+
+    {
+        lua_State* L = luaL_newstate();
+        luaL_dofile(L, "a.lua");
+        lua_getglobal(L, "x");
+        lua_Number x = lua_tonumber(L, 1);
+        std::cout << (int)x << std::endl;
+        lua_close(L);
+    }
+
     LUA = luaL_newstate();
     luaL_openlibs(LUA);
     lua_register(LUA, "playSound", playSound);

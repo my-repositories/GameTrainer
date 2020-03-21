@@ -7,14 +7,16 @@ keys.registered = {
 }
 
 --refactor
-keys.size = table.getn(keys.registered)
+keys.size = #keys.registered
 
 function handleKey (key)
 	if key == key_codes.VK_F6 then
+		print('many many')
 		playSound('sounds/money.wav')
 	elseif key == key_codes.VK_F7 then
+		print('off')
 		playSound('sounds/off.wav')
 	else
-		print ('unknown key')
+		print('unknown key')
 	end
 end

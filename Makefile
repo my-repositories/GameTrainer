@@ -7,33 +7,48 @@ else
 	CONFIGURATION = Release
 endif
 
-ifeq ($(strip $(A)), x86)
-	ARCH = Win32
-else
+ifeq ($(strip $(A)), x64)
 	ARCH = x64
+	PLATFORM = x64
+else
+	ARCH = Win32
+	PLATFORM = x86
 endif
 
 TARGET = GameTrainer
+PROJECT_NAME = ${TARGET}
+PROJECT_VERSION = "1.2.3"
 GENERATOR = "Visual Studio 16 2019"
-
-IDE_NAME = clion
 
 SOURCE_DIR = .
 PROJECT_DIR = .
 BIN_DIR_NAME = bin
 OBJ_DIR_NAME = build
-OBJ_DIR = ${OBJ_DIR_NAME}/${IDE_NAME}/${CONFIGURATION}-${ARCH}
+OBJ_DIR = ${OBJ_DIR_NAME}/${CONFIGURATION}-${ARCH}
 
-build: clean compile link
+excq: clean configure build_app copy
 
 clean:
 	rm -rf ${BIN_DIR_NAME} ${OBJ_DIR_NAME}
 
-compile:
-	cmake -B ${OBJ_DIR} -S ${SOURCE_DIR} -G ${GENERATOR} -A ${ARCH} -DCONFIGURATION=${CONFIGURATION} ${PROJECT_DIR}
+configure:
+	cmake \
+	-B ${OBJ_DIR} \
+	-S ${SOURCE_DIR} \
+	-G ${GENERATOR} \
+	-A ${ARCH} \
+	-DMY_CONFIGURATION=${CONFIGURATION} \
+	-DMY_PLATFORM=${PLATFORM} \
+	-DMY_PROJECT_NAME=${PROJECT_NAME} \
+	-DMY_PROJECT_VERSION=${PROJECT_VERSION} \
+	${PROJECT_DIR}
 
-link:
-	cmake --build ${OBJ_DIR} --target ${TARGET} --config ${CONFIGURATION} -j 8
+build_app:
+	cmake \
+	--build ${OBJ_DIR} \
+	--target ${TARGET} \
+	--config ${CONFIGURATION} \
+	-j 8
 
 copy:
-	cp -r ./data/* ./bin/clion/Release-Win32
+	cp -r ./data/* ./bin/${CONFIGURATION}-${PLATFORM}

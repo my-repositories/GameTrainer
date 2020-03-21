@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="GameTrainer"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="GameTrainer">
+				<Option output="D:/projects/my-repositories/GameTrainer/bin/Debug-x86/GameTrainer.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/projects/my-repositories/GameTrainer/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DMY_VERSION=&quot;0.0.1&quot;"/>
+					<Add directory="D:/projects/my-repositories/GameTrainer/inc"/>
+					<Add directory="D:/projects/my-repositories/GameTrainer/deps/inc/lua-5.3.4"/>
+					<Add directory="C:\soft\vs2019\VC\Tools\MSVC\14.24.28314\ATLMFC\include"/>
+					<Add directory="C:\soft\vs2019\VC\Tools\MSVC\14.24.28314\include"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 GameTrainer"/>
+					<CompileFile command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="GameTrainer/fast">
+				<Option output="D:/projects/my-repositories/GameTrainer/bin/Debug-x86/GameTrainer.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/projects/my-repositories/GameTrainer/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DMY_VERSION=&quot;0.0.1&quot;"/>
+					<Add directory="D:/projects/my-repositories/GameTrainer/inc"/>
+					<Add directory="D:/projects/my-repositories/GameTrainer/deps/inc/lua-5.3.4"/>
+					<Add directory="C:\soft\vs2019\VC\Tools\MSVC\14.24.28314\ATLMFC\include"/>
+					<Add directory="C:\soft\vs2019\VC\Tools\MSVC\14.24.28314\include"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 GameTrainer/fast"/>
+					<CompileFile command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\projects\my-repositories\GameTrainer\cmake-build-debug-visual-studio\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/projects/my-repositories/GameTrainer/src/gg.cpp">
+			<Option target="GameTrainer"/>
+		</Unit>
+		<Unit filename="D:/projects/my-repositories/GameTrainer/src/main.cpp">
+			<Option target="GameTrainer"/>
+		</Unit>
+		<Unit filename="D:/projects/my-repositories/GameTrainer/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

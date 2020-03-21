@@ -1,4 +1,4 @@
-#include <gg.h>
+#include <gg.hpp>
 
 char wp()
 {
