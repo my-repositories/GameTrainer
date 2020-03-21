@@ -94,7 +94,7 @@ set CMAKE_CONFIGURE_FLAGS= ^
 	.
 
 set CMAKE_BUILD_FLAGS= ^
-    --build build
+    --build build ^
 	--config %CONFIGURATION% ^
 	-- ^
 	/nologo ^
