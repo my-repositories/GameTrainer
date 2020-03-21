@@ -83,7 +83,7 @@ int playSound(lua_State* LUA)
 
 int main(int argc, char* argv[])
 {
-    LUA = lua_open();
+    LUA = luaL_newstate();
     luaL_openlibs(LUA);
     lua_register(LUA, "playSound", playSound);
     lua_register(LUA, "writeMemory", writeMemory);
