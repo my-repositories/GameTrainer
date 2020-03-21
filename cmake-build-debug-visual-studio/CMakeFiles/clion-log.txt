@@ -1,5 +1,0 @@
-C:\soft\CLion2019.3.4\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m64 -G "CodeBlocks - NMake Makefiles" D:\projects\my-repositories\GameTrainer
--- LIBWMM: C:/Windows Kits/10/Lib/10.0.18362.0/um/x86/WinMM.Lib
--- Configuring done
--- Generating done
--- Build files have been written to: D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio
