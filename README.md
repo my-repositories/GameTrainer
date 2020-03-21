@@ -1,5 +1,12 @@
 # GameTrainer
-## Powered by C++17 & Lua-5.3.4
+Powered by C++17 & Lua-5.3.4
+
+## Support Games:
+- Dead Island
+- Dead Island: Riptide
+- Killing Floor
+- Killing Floor 2
+- Left 4 Dead 2
 
 ## Install
 - CMake: https://cmake.org/download/
