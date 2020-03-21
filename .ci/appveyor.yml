@@ -1,5 +1,5 @@
 image:
-    #- Visual Studio 2015
+    - Visual Studio 2015
     - Visual Studio 2017
     #- Visual Studio 2019
 
@@ -33,16 +33,16 @@ matrix:
 
 platform:
     - x64
-    #- x86
+    - x86
 
 configuration:
     - Release
 
 environment:
     matrix:
-        #- TOOLCHAIN: msvc10
-        #- TOOLCHAIN: msvc12
-        #- TOOLCHAIN: msvc14
+        - TOOLCHAIN: msvc10
+        - TOOLCHAIN: msvc12
+        - TOOLCHAIN: msvc14
         - TOOLCHAIN: msvc15
         #- TOOLCHAIN: msvc16
 
