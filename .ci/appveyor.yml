@@ -51,8 +51,8 @@ install:
     - call .ci/install.bat %TOOLCHAIN% %PLATFORM% %APPVEYOR_REPO_TAG_NAME%
 
 build_script:
-    - cmake .. %CMAKE_CONFIGURE_FLAGS%
-    - cmake --build . %CMAKE_BUILD_FLAGS%
+    - cmake %CMAKE_CONFIGURE_FLAGS%
+    - cmake %CMAKE_BUILD_FLAGS%
     - call .ci/zip.bat
 
 artifacts:
