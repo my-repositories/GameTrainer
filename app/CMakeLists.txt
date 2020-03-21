@@ -3,9 +3,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_ROOT_DIR}/bin/${MY_CONFIGURATION}/$
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
+include(../tools/version/generate_product_version.cmake)
+generate_product_version(
+        VersionFilesOutputVariable
+        NAME ${MY_PROJECT_NAME}
+        ICON ${CMAKE_CURRENT_SOURCE_DIR}/logo.ico
+        VERSION_FULL ${MY_PROJECT_VERSION}
+        FILE_DESCRIPTION "Powered by C++17 & Lua-5.3.4"
+)
+
 file(GLOB MY_APP_SOURCES "src/*.cpp")
-file(GLOB MY_APP_HEADERS "inc/*.hpp")
-add_executable(${MY_PROJECT_NAME} ${MY_APP_HEADERS} ${MY_APP_SOURCES})
+add_executable(${MY_PROJECT_NAME} ${MY_APP_SOURCES} ${VersionFilesOutputVariable})
 
 target_include_directories(
         ${MY_PROJECT_NAME} PRIVATE
