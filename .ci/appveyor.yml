@@ -1,7 +1,7 @@
 image:
     - Visual Studio 2015
     - Visual Studio 2017
-    #- Visual Studio 2019
+    - Visual Studio 2019
 
 #remove it
 skip_non_tags: true
@@ -19,15 +19,6 @@ matrix:
         -   image: Visual Studio 2015
             TOOLCHAIN: msvc15
 
-        -   image: Visual Studio 2017
-            TOOLCHAIN: msvc10
-
-        -   image: Visual Studio 2019
-            TOOLCHAIN: msvc10
-
-        -   image: Visual Studio 2019
-            TOOLCHAIN: msvc12
-
         -   image: Visual Studio 2019
             TOOLCHAIN: msvc15
 
@@ -40,15 +31,13 @@ configuration:
 
 environment:
     matrix:
-        - TOOLCHAIN: msvc10
-        - TOOLCHAIN: msvc12
         - TOOLCHAIN: msvc14
         - TOOLCHAIN: msvc15
-        #- TOOLCHAIN: msvc16
+        - TOOLCHAIN: msvc16
 
 install:
     - appveyor UpdateBuild -Version %APPVEYOR_REPO_TAG_NAME%
-    - call .ci/install.bat %TOOLCHAIN% %PLATFORM% %APPVEYOR_REPO_TAG_NAME%
+    - call .ci/install.bat %PLATFORM% %TOOLCHAIN% %APPVEYOR_REPO_TAG_NAME%
 
 build_script:
     - cmake %CMAKE_CONFIGURE_FLAGS%

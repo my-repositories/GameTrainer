@@ -21,7 +21,7 @@ if (NOT DEFINED MY_PLATFORM)
 endif()
 
 if (NOT DEFINED MY_TOOLCHAIN)
-    set(MY_TOOLCHAIN msvc10)
+    set(MY_TOOLCHAIN msvc15)
 endif()
 
 project(${MY_PROJECT_NAME} VERSION ${MY_PROJECT_VERSION})

@@ -3,13 +3,12 @@
 :loop
 
 if "%1" == "" goto :finalize
-if /i "%1" == "msvc10" goto :msvc10
+if /i "%1" == "x86" goto :x86
+if /i "%1" == "x64" goto :x64
 if /i "%1" == "msvc12" goto :msvc12
 if /i "%1" == "msvc14" goto :msvc14
 if /i "%1" == "msvc15" goto :msvc15
 if /i "%1" == "msvc16" goto :msvc16
-if /i "%1" == "x86" goto :x86
-if /i "%1" == "x64" goto :x64
 
 :: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
@@ -22,13 +21,25 @@ goto :loop
 
 :: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-:: Toolchain
+:: Platform
 
-:msvc10
-set TOOLCHAIN=msvc10
-set CMAKE_GENERATOR=Visual Studio 10 2010
+:x86
+set TARGET_CPU=Win32
+set CMAKE_GENERATOR_SUFFIX=
+set MY_PLATFORM=x86
 shift
 goto :loop
+
+:x64
+set TARGET_CPU=x64
+set CMAKE_GENERATOR_SUFFIX= Win64
+set MY_PLATFORM=x64
+shift
+goto :loop
+
+:: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+:: Toolchain
 
 :msvc12
 set TOOLCHAIN=msvc12
@@ -51,24 +62,8 @@ goto :loop
 :msvc16
 set TOOLCHAIN=msvc16
 set CMAKE_GENERATOR=Visual Studio 16 2019
-shift
-goto :loop
-
-:: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-:: Platform
-
-:x86
-set TARGET_CPU=x86
 set CMAKE_GENERATOR_SUFFIX=
-set MY_PLATFORM=%TARGET_CPU%
-shift
-goto :loop
-
-:x64
-set TARGET_CPU=amd64
-set CMAKE_GENERATOR_SUFFIX= Win64
-set MY_PLATFORM=x64
+set CMAKE_GENERATOR_ARCH=-A %TARGET_CPU%
 shift
 goto :loop
 
@@ -85,7 +80,7 @@ if "%MY_VERSION%" == "" set MY_VERSION=master
 set CMAKE_CONFIGURE_FLAGS= ^
 	-B build ^
 	-S . ^
-	-G "%CMAKE_GENERATOR%%CMAKE_GENERATOR_SUFFIX%" ^
+	-G "%CMAKE_GENERATOR%%CMAKE_GENERATOR_SUFFIX%"%CMAKE_GENERATOR_ARCH% ^
 	-DMY_CONFIGURATION=%CONFIGURATION% ^
 	-DMY_PLATFORM=%MY_PLATFORM% ^
 	-DMY_PROJECT_NAME=%PROJECT_NAME% ^
