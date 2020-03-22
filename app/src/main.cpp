@@ -3,8 +3,8 @@
 #include <vector>
 #include <algorithm>
 #include <type_traits>
-#include <optional>
-#include <variant>
+//#include <optional>
+//#include <variant>
 
 #include <gg.hpp>
 #include <lua.hpp>
@@ -87,51 +87,51 @@ std::vector<int> getRegisteredKeys()
     return registeredKeys;
 }
 
-std::optional<int> getInt(lua_State* LUA, char* variableName)
-{
-    lua_getglobal(LUA, variableName);
-    if (lua_isinteger(LUA, -1))
-    {
-        int number = (int) lua_tointeger(LUA, -1);
-        return std::make_optional(number);
-    }
-
-    return std::nullopt;
-}
-
-std::optional<char*> getString(lua_State* LUA, char* variableName)
-{
-    lua_getglobal(LUA, variableName);
-    if (lua_isstring(LUA, -1))
-    {
-        char* str = (char*) lua_tostring(LUA, -1);
-        return std::make_optional(str);
-    }
-
-    return std::nullopt;
-}
-
-std::vector<int> getVectorOfInt(lua_State* LUA, char* variableName)
-{
-    lua_getglobal(LUA, "registeredKeys");
-
-    std::vector<int> registeredKeys;
-    for (LUA_NUMBER i = 1; true; ++i)
-    {
-        lua_pushnumber(LUA, i);
-        lua_gettable(LUA, -2);
-
-        if (!lua_isinteger(LUA, -1))
-        {
-            break;
-        }
-
-        registeredKeys.push_back(lua_tointeger(LUA, -1));
-        lua_pop(LUA, 1);
-    }
-
-    return registeredKeys;
-}
+//std::optional<int> getInt(lua_State* LUA, char* variableName)
+//{
+//    lua_getglobal(LUA, variableName);
+//    if (lua_isinteger(LUA, -1))
+//    {
+//        int number = (int) lua_tointeger(LUA, -1);
+//        return std::make_optional(number);
+//    }
+//
+//    return std::nullopt;
+//}
+//
+//std::optional<char*> getString(lua_State* LUA, char* variableName)
+//{
+//    lua_getglobal(LUA, variableName);
+//    if (lua_isstring(LUA, -1))
+//    {
+//        char* str = (char*) lua_tostring(LUA, -1);
+//        return std::make_optional(str);
+//    }
+//
+//    return std::nullopt;
+//}
+//
+//std::vector<int> getVectorOfInt(lua_State* LUA, char* variableName)
+//{
+//    lua_getglobal(LUA, "registeredKeys");
+//
+//    std::vector<int> registeredKeys;
+//    for (LUA_NUMBER i = 1; true; ++i)
+//    {
+//        lua_pushnumber(LUA, i);
+//        lua_gettable(LUA, -2);
+//
+//        if (!lua_isinteger(LUA, -1))
+//        {
+//            break;
+//        }
+//
+//        registeredKeys.push_back(lua_tointeger(LUA, -1));
+//        lua_pop(LUA, 1);
+//    }
+//
+//    return registeredKeys;
+//}
 
 enum LUA_STATUS {
     LUA_STATUS_HAS_VALUE,
