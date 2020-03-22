@@ -19,7 +19,7 @@ target_include_directories(
         ${MY_PROJECT_NAME} PRIVATE
         ${PROJECT_ROOT_DIR}/app/inc
         ${PROJECT_ROOT_DIR}/app/deps/inc/lua-5.3.4
-        ${PROJECT_ROOT_DIR}/mylib/inc
+        ${PROJECT_ROOT_DIR}/mylib/inc/public
 )
 
 set_target_properties(

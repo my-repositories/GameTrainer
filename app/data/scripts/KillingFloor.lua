@@ -1,5 +1,12 @@
 local key_codes = require('scripts/shared/key_codes')
 
+processName = 'KillingFloor.exe'
+maxHealth = 100
+registeredKeys = {
+    key_codes.VK_F6,
+    key_codes.VK_F7
+}
+
 keys = {}
 keys.registered = {
 	key_codes.VK_F6,

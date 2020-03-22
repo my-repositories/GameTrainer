@@ -1,0 +1,8 @@
+D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio2/CMakeFiles/edit_cache.dir
+D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio2/CMakeFiles/rebuild_cache.dir
+D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio2/mylib/CMakeFiles/mylib.dir
+D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio2/mylib/CMakeFiles/edit_cache.dir
+D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio2/mylib/CMakeFiles/rebuild_cache.dir
+D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio2/app/CMakeFiles/GameTrainer.dir
+D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio2/app/CMakeFiles/edit_cache.dir
+D:/projects/my-repositories/GameTrainer/cmake-build-debug-visual-studio2/app/CMakeFiles/rebuild_cache.dir

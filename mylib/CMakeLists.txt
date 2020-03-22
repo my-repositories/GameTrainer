@@ -7,5 +7,6 @@ add_library(${MY_LIBRARY_NAME} ${MY_LIBRARY_SOURCES})
 
 target_include_directories(
         ${MY_LIBRARY_NAME} PRIVATE
-        inc
+        ${PROJECT_ROOT_DIR}/mylib/inc/public
+        ${PROJECT_ROOT_DIR}/mylib/inc/private
 )

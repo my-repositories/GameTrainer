@@ -1,0 +1,4 @@
+ToolSet: 16.0 (local)@C:\soft\vs2019
+Options: msvc.arch=x86
+
+Options:
