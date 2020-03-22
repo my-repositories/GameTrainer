@@ -1,8 +1,8 @@
 #ifndef GAMETRAINER_CONFIG_HPP
 #define GAMETRAINER_CONFIG_HPP
 
-//namespace GameTrainer::mylib
-//{
+namespace GameTrainer::mylib
+{
     class Config
     {
     public:
@@ -13,6 +13,6 @@
     private:
         int field;
     };
-//}
+}
 
 #endif //GAMETRAINER_CONFIG_HPP

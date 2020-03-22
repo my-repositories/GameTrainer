@@ -6,7 +6,8 @@ file(GLOB MY_LIBRARY_SOURCES "src/*.cpp")
 add_library(${MY_LIBRARY_NAME} ${MY_LIBRARY_SOURCES})
 
 target_include_directories(
-        ${MY_LIBRARY_NAME} PRIVATE
-        ${PROJECT_ROOT_DIR}/mylib/inc/public
-        ${PROJECT_ROOT_DIR}/mylib/inc/private
+        ${MY_LIBRARY_NAME}
+        PUBLIC ${PROJECT_ROOT_DIR}/mylib/inc/private/lua-5.3.4
+        PUBLIC ${PROJECT_ROOT_DIR}/mylib/inc/public
+        PRIVATE ${PROJECT_ROOT_DIR}/mylib/inc/private
 )

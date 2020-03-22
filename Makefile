@@ -26,7 +26,7 @@ BIN_DIR_NAME = bin
 OBJ_DIR_NAME = build
 OBJ_DIR = ${OBJ_DIR_NAME}/${CONFIGURATION}-${ARCH}
 
-run: clean configure build_all #copy
+run: clean configure build_all copy
 
 clean:
 	rm -rf ${BIN_DIR_NAME} ${OBJ_DIR_NAME}

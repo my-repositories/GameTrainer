@@ -1,7 +1,7 @@
 #include <config.hpp>
 
-//namespace GameTrainer::mylib
-//{
+namespace GameTrainer::mylib
+{
     Config::Config()
     {
         this->field = 24;
@@ -11,4 +11,4 @@
         this->field = x + this->field;
         return this->field;
     }
-//}
+}
