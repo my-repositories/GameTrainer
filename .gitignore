@@ -15,8 +15,8 @@ x86/
 [Oo]bj/
 [Ll]og/
 mylib.lib
-cmake-build-debug-visual-studio
-cmake-build-release-visual-studio
+cmake-build-debug-visual-studio*
+cmake-build-release-visual-studio*
 
 # JetBrains CLion
 .idea/
