@@ -7,15 +7,6 @@ registeredKeys = {
     key_codes.VK_F7
 }
 
-keys = {}
-keys.registered = {
-	key_codes.VK_F6,
-	key_codes.VK_F7
-}
-
---refactor
-keys.size = #keys.registered
-
 function handleKey (key)
 	if key == key_codes.VK_F6 then
 		print('many many')
