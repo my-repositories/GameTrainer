@@ -34,6 +34,14 @@ target_compile_definitions(
         MY_PROJECT_VERSION="${MY_PROJECT_VERSION}"
 )
 
+if( MY_CONFIGURATION STREQUAL "Debug" )
+    target_compile_definitions(
+            ${MY_PROJECT_NAME} PRIVATE
+            DEBUG=true
+    )
+endif()
+
+
 target_link_directories(
         ${MY_PROJECT_NAME} PRIVATE
         ${MY_APP_DIR}/deps/lib

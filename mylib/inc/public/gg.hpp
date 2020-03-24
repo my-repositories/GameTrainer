@@ -3,4 +3,8 @@
 
 char wp();
 
+namespace GameTrainer::mylib
+{
+}
+
 #endif //GAMETRAINER_GG_HPP

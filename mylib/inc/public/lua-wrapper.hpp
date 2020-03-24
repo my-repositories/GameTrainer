@@ -2,120 +2,167 @@
 #define GAMETRAINER_LUA_WRAPPER_HPP
 
 #include <iostream>
+#include <optional>
+#include <type_traits>
+#include <variant>
 #include <vector>
 
 #include <lua.hpp>
 
-#include "lua-status.hpp"
-
 namespace GameTrainer::mylib
 {
-    template<class T>
-    LUA_STATUS setInteger(T& value, lua_State* LUA);
-
-    template<class T>
-    LUA_STATUS setString(T& value, lua_State* LUA);
-
-    template<class T>
-    bool setValue(T& value, lua_State* LUA, char* variableName = nullptr);
-
-    template<class T>
-    void setVector(std::vector<T>& vector, lua_State* LUA, char* variableName);
-
-    void execute();
-
-    template<class T>
-    LUA_STATUS setInteger(T& value, lua_State* LUA)
-    {
-        if (std::is_same<T, int>::value)
-        {
-            if (lua_isinteger(LUA, -1))
-            {
-                value = (T) lua_tointeger(LUA, -1);
-                return LUA_STATUS_HAS_VALUE;
-            }
-
-            return LUA_STATUS_HAS_NO_VALUE;
-        }
-
-        return LUA_STATUS_HAS_ANOTHER_TYPE;
-    }
-
-    template<class T>
-    LUA_STATUS setString(T& value, lua_State* LUA)
-    {
-        if (std::is_same<T, char*>::value)
-        {
-            if (lua_isstring(LUA, -1))
-            {
-                value = (T) lua_tostring(LUA, -1);
-                return LUA_STATUS_HAS_VALUE;
-            }
-
-            return LUA_STATUS_HAS_NO_VALUE;
-        }
-
-        return LUA_STATUS_HAS_ANOTHER_TYPE;
-    }
-
-    template<class T>
-    bool setValue(T& value, lua_State* LUA, char* variableName)
-    {
-        if (variableName) {
-            lua_getglobal(LUA, variableName);
-        }
-
-        LUA_STATUS (*valueSetters[])(T&, lua_State*) = {
-                setString,
-                setInteger
-        };
-
-        for(const auto& setter : valueSetters)
-        {
-            switch (setter(value, LUA))
-            {
-                case LUA_STATUS_HAS_VALUE: return true;
-                case LUA_STATUS_HAS_NO_VALUE: return false;
-                case LUA_STATUS_HAS_ANOTHER_TYPE: break;
-                default: break;
-            }
-        }
-
-        return false;
-    }
-
-    template<class T>
-    void setVector(std::vector<T>& vector, lua_State* LUA, char* variableName)
-    {
-        lua_getglobal(LUA, variableName);
-
-        for (LUA_NUMBER i = 1; true; ++i)
-        {
-            lua_pushnumber(LUA, i);
-            lua_gettable(LUA, -2);
-
-            T item;
-            if (!setValue(item, LUA))
-            {
-                break;
-            }
-
-            vector.push_back(item);
-            lua_pop(LUA, 1);
-        }
-    }
+    typedef std::optional<int> lua_int;
+    typedef std::optional<char*> lua_string;
+    typedef
+    std::variant<
+            std::nullopt_t,
+            lua_int,
+            lua_string
+    >
+    lua_variant;
 
     class LuaWrapper
     {
     public:
-        int method(const int x);
+        LuaWrapper()
+        : LuaWrapper(luaL_newstate()) {}
 
-        LuaWrapper();
+        explicit LuaWrapper(lua_State* state)
+        {
+            this->state = state;
+            luaL_openlibs(this->state);
+        }
+
+        ~LuaWrapper()
+        {
+            lua_close(this->state);
+        }
+
+        inline void loadFile(const char* path) const
+        {
+            luaL_dofile(this->state, path);
+        }
+        inline void loadString(const char* script) const
+        {
+            luaL_dostring(this->state, script);
+        }
+
+        template<class T>
+        std::optional<T> getValue(char* variableName = nullptr) const
+        {
+            if (variableName)
+            {
+                lua_getglobal(this->state, variableName);
+            }
+
+            auto variant = this->getVariant<T>();
+            if (!variant.index())
+            {
+                return std::nullopt;
+            }
+
+            return std::get<std::optional<T>>(variant);
+        }
+
+        template<class T>
+        std::vector<T> getVector(char* variableName) const
+        {
+            lua_getglobal(this->state, variableName);
+            std::vector<T> vector;
+
+            for (LUA_NUMBER i = 1; true; ++i)
+            {
+                lua_pushnumber(this->state, i);
+                lua_gettable(this->state, -2);
+
+                auto item = getValue<T>();
+                if (!item.has_value())
+                {
+                    break;
+                }
+
+                vector.push_back(*item);
+                lua_pop(this->state, 1);
+            }
+
+            return vector;
+        }
+
+        void callFunction(const char* name, const int arg) const
+        {
+            lua_getglobal(this->state, name);
+            if (!lua_isfunction(this->state, -1))
+            {
+                std::cout << "function \"" << name << "\"" << " was not found." << std::endl;
+
+                return;
+            }
+
+            lua_pushinteger(this->state, arg);
+            lua_call(this->state, 1, 0);
+        }
+
+        void registerFunction(const char* name, void(*callback)(const char*)) const
+        {
+            lua_pushlightuserdata(state, (void*)callback);
+            lua_pushcclosure(state, [](lua_State* state) -> int
+            {
+                if (lua_gettop(state) == 1 && lua_isstring(state, -1))
+                {
+                    constexpr const int userDataIndex = lua_upvalueindex(1);
+
+                    if (lua_isuserdata(state, userDataIndex))
+                    {
+                        auto func = (void(*)(const char*))lua_touserdata(state, userDataIndex);
+                        func(lua_tostring(state, -1));
+                    }
+                }
+
+                return 0;
+            }, 1);
+
+            lua_setglobal(state, name);
+        }
 
     private:
-        int field;
-    };
+        lua_State* state;
 
+        template<class T>
+        [[nodiscard]] lua_variant getVariant() const
+        {
+            if constexpr (std::is_same<T, int>::value)
+            {
+                return this->getInteger();
+            }
+
+            if constexpr (std::is_same<T, char*>::value)
+            {
+                return this->getString();
+            }
+
+            return std::nullopt;
+        }
+
+        [[nodiscard]] lua_int getInteger() const
+        {
+            if (lua_isinteger(this->state, -1))
+            {
+                return (int) lua_tointeger(this->state, -1);
+            }
+
+            return std::nullopt;
+        }
+
+        [[nodiscard]] lua_string getString() const
+        {
+            if (lua_isstring(this->state, -1))
+            {
+                return (char*) lua_tostring(this->state, -1);
+            }
+
+            return std::nullopt;
+        }
+    };
 }
 
 #endif //GAMETRAINER_LUA_WRAPPER_HPP
