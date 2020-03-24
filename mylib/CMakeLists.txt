@@ -2,12 +2,14 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_ROOT_DIR}/app/deps/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 
-file(GLOB MY_LIBRARY_SOURCES "src/*.cpp")
+set(MY_LIBRARY_DIR ${PROJECT_ROOT_DIR}/mylib)
+
+file(GLOB MY_LIBRARY_SOURCES ${MY_LIBRARY_DIR}/src/*.cpp)
 add_library(${MY_LIBRARY_NAME} ${MY_LIBRARY_SOURCES})
 
 target_include_directories(
         ${MY_LIBRARY_NAME}
-        PUBLIC ${PROJECT_ROOT_DIR}/mylib/inc/private/lua-5.3.4
-        PUBLIC ${PROJECT_ROOT_DIR}/mylib/inc/public
-        PRIVATE ${PROJECT_ROOT_DIR}/mylib/inc/private
+        PUBLIC ${MY_LIBRARY_DIR}/inc/private/lua-5.3.4
+        PUBLIC ${MY_LIBRARY_DIR}/inc/public
+        PUBLIC ${MY_LIBRARY_DIR}/inc/private
 )
