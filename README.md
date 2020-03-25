@@ -7,12 +7,16 @@ Powered by C++17 & Lua-5.3.4
 [![stable](https://img.shields.io/badge/stability-stable-blue.svg?longCache=true)](https://github.com/Naereen/badges)
 [![Build status](https://ci.appveyor.com/api/projects/status/c4apaupf8ixe8d8y/branch/reborn?svg=true)](https://ci.appveyor.com/project/loktionov129/gametrainer/branch/reborn)
 
-## Support Games:
+## Support Games
 - Dead Island
 - Dead Island: Riptide
 - Killing Floor
 - Killing Floor 2
 - Left 4 Dead 2
+
+## System Requirements
+- Windows 10
+- Microsoft Visual C++ Redistributable ([x86](https://aka.ms/vs/16/release/VC_redist.x86.exe) / [x64](https://aka.ms/vs/16/release/VC_redist.x64.exe))
 
 ## Install
 - Visual Studio 2019: https://visualstudio.microsoft.com/ru/vs/
