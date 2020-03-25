@@ -5,8 +5,6 @@
 if "%1" == "" goto :finalize
 if /i "%1" == "x86" goto :x86
 if /i "%1" == "x64" goto :x64
-if /i "%1" == "msvc12" goto :msvc12
-if /i "%1" == "msvc14" goto :msvc14
 if /i "%1" == "msvc15" goto :msvc15
 if /i "%1" == "msvc16" goto :msvc16
 
@@ -41,18 +39,6 @@ goto :loop
 
 :: Toolchain
 
-:msvc12
-set TOOLCHAIN=msvc12
-set CMAKE_GENERATOR=Visual Studio 12 2013
-shift
-goto :loop
-
-:msvc14
-set TOOLCHAIN=msvc14
-set CMAKE_GENERATOR=Visual Studio 14 2015
-shift
-goto :loop
-
 :msvc15
 set TOOLCHAIN=msvc15
 set CMAKE_GENERATOR=Visual Studio 15 2017
@@ -71,7 +57,7 @@ goto :loop
 
 :finalize
 
-if "%TOOLCHAIN%" == "" goto :msvc14
+if "%TOOLCHAIN%" == "" goto :msvc15
 if "%TARGET_CPU%" == "" goto :x64
 if "%PROJECT_NAME%" == "" set PROJECT_NAME=GameTrainer
 if "%CONFIGURATION%" == "" set CONFIGURATION=Release

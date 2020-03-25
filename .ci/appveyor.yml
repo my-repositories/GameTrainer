@@ -1,7 +1,6 @@
 image:
     - Visual Studio 2019
     - Visual Studio 2017
-    - Visual Studio 2015
 
 skip_non_tags: true
 
@@ -21,12 +20,6 @@ matrix:
         -   image: Visual Studio 2017
             TOOLCHAIN: msvc16
 
-        -   image: Visual Studio 2015
-            TOOLCHAIN: msvc15
-
-        -   image: Visual Studio 2015
-            TOOLCHAIN: msvc16
-
 platform:
     - x64
     - x86
@@ -36,7 +29,6 @@ configuration:
 
 environment:
     matrix:
-        - TOOLCHAIN: msvc14
         - TOOLCHAIN: msvc15
         - TOOLCHAIN: msvc16
 
@@ -82,6 +74,13 @@ Powered by C++17 & Lua-5.3.4
 - Killing Floor 2
 
 - Left 4 Dead 2
+
+## System Requirements
+
+- Windows 10
+
+- Microsoft Visual C++ Redistributable ([x86](https://aka.ms/vs/16/release/VC_redist.x86.exe) / [x64](https://aka.ms/vs/16/release/VC_redist.x64.exe))
+
 
 
 "
