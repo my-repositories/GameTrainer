@@ -9,6 +9,8 @@
 
 #include <lua.hpp>
 
+#include <lua-stack-cleaner.hpp>
+
 namespace GameTrainer::mylib
 {
     typedef std::optional<int> lua_int;
@@ -67,6 +69,8 @@ namespace GameTrainer::mylib
         template<class T>
         std::vector<T> getVector(char* variableName) const
         {
+            LuaStackCleaner cleaner(this->state);
+
             lua_getglobal(this->state, variableName);
             std::vector<T> vector;
 
@@ -90,6 +94,9 @@ namespace GameTrainer::mylib
 
         void callFunction(const char* name, const int arg) const
         {
+            LuaStackCleaner cleaner(this->state);
+
+            lua_pushcfunction(this->state, &LuaWrapper::errorHandler);
             lua_getglobal(this->state, name);
             if (!lua_isfunction(this->state, -1))
             {
@@ -99,29 +106,29 @@ namespace GameTrainer::mylib
             }
 
             lua_pushinteger(this->state, arg);
-            lua_call(this->state, 1, 0);
+            lua_pcall(this->state, 1, 0, -3);
         }
 
         void registerFunction(const char* name, void(*callback)(const char*)) const
         {
-            lua_pushlightuserdata(state, (void*)callback);
-            lua_pushcclosure(state, [](lua_State* state) -> int
+            lua_pushlightuserdata(this->state, (void*)callback);
+            lua_pushcclosure(this->state, [](lua_State* luaState) -> int
             {
-                if (lua_gettop(state) == 1 && lua_isstring(state, -1))
+                if (lua_gettop(luaState) == 1 && lua_isstring(luaState, -1))
                 {
                     constexpr const int userDataIndex = lua_upvalueindex(1);
 
-                    if (lua_isuserdata(state, userDataIndex))
+                    if (lua_islightuserdata(luaState, userDataIndex))
                     {
-                        auto func = (void(*)(const char*))lua_touserdata(state, userDataIndex);
-                        func(lua_tostring(state, -1));
+                        auto func = (void(*)(const char*))lua_touserdata(luaState, userDataIndex);
+                        func(lua_tostring(luaState, -1));
                     }
                 }
 
                 return 0;
             }, 1);
 
-            lua_setglobal(state, name);
+            lua_setglobal(this->state, name);
         }
 
     private:
@@ -161,6 +168,28 @@ namespace GameTrainer::mylib
             }
 
             return std::nullopt;
+        }
+
+        static int errorHandler(lua_State* state)
+        {
+            const char* message = lua_tostring(state, 1);
+            std::cout << "Error: " << message << std::endl;
+
+            lua_getglobal(state, "debug");
+            lua_getfield(state, -1, "traceback");
+
+            if(lua_pcall(state, 0, 1, 0))
+            {
+                const char* err = lua_tostring(state, -1);
+                std::cout << "Error in debug.traceback() call: " << err << std::endl;
+            }
+            else
+            {
+                const char* err = lua_tostring(state, -1);
+                std::cout << "C++ stack traceback: " << err << std::endl;
+            }
+
+            return 1;
         }
     };
 }

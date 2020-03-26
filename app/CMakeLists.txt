@@ -32,6 +32,7 @@ set_target_properties(
 target_compile_definitions(
         ${MY_PROJECT_NAME} PRIVATE
         MY_PROJECT_VERSION="${MY_PROJECT_VERSION}"
+        MY_PROJECT_NAME="${MY_PROJECT_NAME}"
 )
 
 if( MY_CONFIGURATION STREQUAL "Debug" )

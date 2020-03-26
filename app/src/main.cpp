@@ -11,8 +11,12 @@ void loadLuaState(GameTrainer::mylib::LuaWrapper& lua);
 
 int main(int argc, char* argv[])
 {
-    std::cout << "Version:" << MY_PROJECT_VERSION << std::endl;
-    std::cout << wp() << std::endl;
+    std::string title = std::string(MY_PROJECT_NAME) + " " + MY_PROJECT_VERSION;
+    SetConsoleTitle(title.c_str());
+
+#if !DEBUG
+    system("color a");
+#endif
 
     GameTrainer::mylib::LuaWrapper lua;
     loadLuaState(lua);
@@ -27,7 +31,7 @@ int main(int argc, char* argv[])
         PlaySoundA((LPCSTR)sound, nullptr, SND_APPLICATION | SND_ASYNC | SND_NODEFAULT);
     });
 
-    const auto registeredKeys = lua.getVector<int>("registeredKeys");
+    const auto registeredKeys = lua.getVector<int>((char*)"registeredKeys");
     const auto begin = registeredKeys.begin();
     const auto end = registeredKeys.end();
 
