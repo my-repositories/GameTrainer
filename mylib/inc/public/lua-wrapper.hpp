@@ -26,28 +26,19 @@ namespace GameTrainer::mylib
     class LuaWrapper
     {
     public:
-        LuaWrapper()
-        : LuaWrapper(luaL_newstate()) {}
+        LuaWrapper();
 
-        explicit LuaWrapper(lua_State* state)
-        {
-            this->state = state;
-            luaL_openlibs(this->state);
-        }
+        explicit LuaWrapper(lua_State* state);
 
-        ~LuaWrapper()
-        {
-            lua_close(this->state);
-        }
+        ~LuaWrapper();
 
-        inline void loadFile(const char* path) const
-        {
-            luaL_dofile(this->state, path);
-        }
-        inline void loadString(const char* script) const
-        {
-            luaL_dostring(this->state, script);
-        }
+        inline void loadFile(const char* path) const { luaL_dofile(this->state, path); }
+
+        inline void loadString(const char* script) const { luaL_dostring(this->state, script); }
+
+        void callFunction(const char* name, int arg) const;
+
+        void registerFunction(const char* name, void(*callback)(const char*)) const;
 
         template<class T>
         std::optional<T> getValue(char* variableName = nullptr) const
@@ -92,47 +83,14 @@ namespace GameTrainer::mylib
             return vector;
         }
 
-        void callFunction(const char* name, const int arg) const
-        {
-            LuaStackCleaner cleaner(this->state);
-
-            lua_pushcfunction(this->state, &LuaWrapper::errorHandler);
-            lua_getglobal(this->state, name);
-            if (!lua_isfunction(this->state, -1))
-            {
-                std::cout << "function \"" << name << "\"" << " was not found." << std::endl;
-
-                return;
-            }
-
-            lua_pushinteger(this->state, arg);
-            lua_pcall(this->state, 1, 0, -3);
-        }
-
-        void registerFunction(const char* name, void(*callback)(const char*)) const
-        {
-            lua_pushlightuserdata(this->state, (void*)callback);
-            lua_pushcclosure(this->state, [](lua_State* luaState) -> int
-            {
-                if (lua_gettop(luaState) == 1 && lua_isstring(luaState, -1))
-                {
-                    constexpr const int userDataIndex = lua_upvalueindex(1);
-
-                    if (lua_islightuserdata(luaState, userDataIndex))
-                    {
-                        auto func = (void(*)(const char*))lua_touserdata(luaState, userDataIndex);
-                        func(lua_tostring(luaState, -1));
-                    }
-                }
-
-                return 0;
-            }, 1);
-
-            lua_setglobal(this->state, name);
-        }
-
     private:
         lua_State* state;
+
+        static int errorHandler(lua_State* state);
+
+        [[nodiscard]] lua_int getInteger() const;
+
+        [[nodiscard]] lua_string getString() const;
 
         template<class T>
         [[nodiscard]] lua_variant getVariant() const
@@ -148,48 +106,6 @@ namespace GameTrainer::mylib
             }
 
             return std::nullopt;
-        }
-
-        [[nodiscard]] lua_int getInteger() const
-        {
-            if (lua_isinteger(this->state, -1))
-            {
-                return (int) lua_tointeger(this->state, -1);
-            }
-
-            return std::nullopt;
-        }
-
-        [[nodiscard]] lua_string getString() const
-        {
-            if (lua_isstring(this->state, -1))
-            {
-                return (char*) lua_tostring(this->state, -1);
-            }
-
-            return std::nullopt;
-        }
-
-        static int errorHandler(lua_State* state)
-        {
-            const char* message = lua_tostring(state, 1);
-            std::cout << "Error: " << message << std::endl;
-
-            lua_getglobal(state, "debug");
-            lua_getfield(state, -1, "traceback");
-
-            if(lua_pcall(state, 0, 1, 0))
-            {
-                const char* err = lua_tostring(state, -1);
-                std::cout << "Error in debug.traceback() call: " << err << std::endl;
-            }
-            else
-            {
-                const char* err = lua_tostring(state, -1);
-                std::cout << "C++ stack traceback: " << err << std::endl;
-            }
-
-            return 1;
         }
     };
 }

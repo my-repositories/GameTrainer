@@ -6,7 +6,7 @@
 class LuaStackCleaner
 {
 public:
-    LuaStackCleaner(lua_State* state)
+    explicit LuaStackCleaner(lua_State* state)
     {
         this->state = state;
         this->top = lua_gettop(this->state);
