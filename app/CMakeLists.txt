@@ -35,7 +35,7 @@ target_compile_definitions(
         MY_PROJECT_NAME="${MY_PROJECT_NAME}"
 )
 
-if( MY_CONFIGURATION STREQUAL "Debug" )
+if(MY_CONFIGURATION STREQUAL "Debug")
     target_compile_definitions(
             ${MY_PROJECT_NAME} PRIVATE
             DEBUG=true
