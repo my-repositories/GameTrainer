@@ -59,11 +59,11 @@ namespace GameTrainer::mylib::lua
         template<class T>
         void pushToState(const T& arg) const
         {
-            if (std::is_same<T, int>::value)
+            if constexpr (std::is_same<T, int>::value)
             {
                 lua_pushinteger(this->state, arg);
             }
-            else if (std::is_same<T, bool>::value)
+            else if constexpr (std::is_same<T, bool>::value)
             {
                 lua_pushboolean(this->state, arg);
             }
