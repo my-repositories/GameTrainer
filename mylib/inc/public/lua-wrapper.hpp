@@ -36,7 +36,48 @@ namespace GameTrainer::mylib
 
         inline void loadString(const char* script) const { luaL_dostring(this->state, script); }
 
-        void callFunction(const char* name, int arg) const;
+        template<class... Args>
+        void callFunction(const char *name, const Args&... args) const
+        {
+            LuaStackCleaner cleaner(this->state);
+
+            lua_pushcfunction(this->state, &LuaWrapper::errorHandler);
+            lua_getglobal(this->state, name);
+            if (!lua_isfunction(this->state, -1))
+            {
+                std::cout << "function '" << name << "'" << " was not found." << std::endl;
+
+                return;
+            }
+
+            this->pushToState(args...);
+            const int argsCount = sizeof...(args);
+
+            lua_pcall(this->state, argsCount, 0, -3);
+        }
+
+        template<class T>
+        void pushToState(const T& arg) const
+        {
+            if (std::is_same<T, int>::value)
+            {
+                lua_pushinteger(this->state, arg);
+            }
+            else if (std::is_same<T, bool>::value)
+            {
+                lua_pushboolean(this->state, arg);
+            }
+        }
+
+        template<
+            class FIRST,
+            class... REST
+        >
+        void pushToState(const FIRST& first, const REST&... rest) const
+        {
+            pushToState(first);
+            pushToState(rest...);
+        }
 
         void registerFunction(const char* name, void(*callback)(const char*)) const;
 

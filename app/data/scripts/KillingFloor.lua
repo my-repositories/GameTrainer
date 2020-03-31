@@ -6,15 +6,23 @@ maxHealth = 100
 
 registeredKeys = {
     keyCodes.VK_F6,
-    keyCodes.VK_F7
+    keyCodes.VK_F7,
+    keyCodes.VK_F8,
+    keyCodes.VK_F9
 }
 
-function handleKey (key)
+function handleKey (key, shift, ctrl, alt)
 	if key == keyCodes.VK_F6 then
-		print('many many')
-		playSound('sounds/money.wav')
+		print('god mode')
+		playSound('sounds/on.wav')
 	elseif key == keyCodes.VK_F7 then
-		print('off')
-		playSound('sounds/off.wav')
+		print('no reload')
+        playSound('sounds/on.wav')
+    elseif key == keyCodes.VK_F8 then
+        print('increase money')
+        playSound('sounds/money.wav')
+    elseif key == keyCodes.VK_F9 and shift and ctrl and alt then
+        print('level up for all perks')
+        playSound('sounds/experience.wav')
 	end
 end

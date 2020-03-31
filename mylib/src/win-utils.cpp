@@ -2,11 +2,6 @@
 
 namespace GameTrainer::mylib::win
 {
-    bool ifKeyPressed(const int key)
-    {
-        return GetAsyncKeyState(key) & 1; // NOLINT(hicpp-signed-bitwise)
-    }
-
     void playSound(const char* sound)
     {
         PlaySoundA((LPCSTR)sound, nullptr, SND_APPLICATION | SND_ASYNC | SND_NODEFAULT); // NOLINT(hicpp-signed-bitwise)

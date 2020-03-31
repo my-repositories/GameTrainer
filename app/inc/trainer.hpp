@@ -4,6 +4,7 @@
 #include <xstring>
 #include <utility>
 
+#include <keyboard-watcher.hpp>
 #include <lua-wrapper.hpp>
 #include <window-manager.hpp>
 #include <win-utils.hpp>

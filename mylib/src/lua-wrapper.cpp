@@ -16,23 +16,6 @@ namespace GameTrainer::mylib
         lua_close(this->state);
     }
 
-    void LuaWrapper::callFunction(const char *name, const int arg) const
-    {
-        LuaStackCleaner cleaner(this->state);
-
-        lua_pushcfunction(this->state, &LuaWrapper::errorHandler);
-        lua_getglobal(this->state, name);
-        if (!lua_isfunction(this->state, -1))
-        {
-            std::cout << "function '" << name << "'" << " was not found." << std::endl;
-
-            return;
-        }
-
-        lua_pushinteger(this->state, arg);
-        lua_pcall(this->state, 1, 0, -3);
-    }
-
     void LuaWrapper::registerFunction(const char *name, void (*callback)(const char *)) const
     {
         lua_pushlightuserdata(this->state, (void*)callback);

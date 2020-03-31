@@ -39,14 +39,22 @@ namespace GameTrainer::app
         const auto registeredKeys = lua.getVector<int>((char *) "registeredKeys");
         const auto begin = registeredKeys.begin();
         const auto end = registeredKeys.end();
+        GameTrainer::mylib::KeyboardWatcher keyboardWatcher(registeredKeys);
 
         for (;; GameTrainer::mylib::win::sleep(50))
         {
-            // Close Trainer IF GAME is NOT RUNNING
-            if (!gameIsRunning())
+            // TODO: remove it!
+            if(keyboardWatcher.isKeyDown(VK_F13))
             {
                 break;
             }
+
+            // TODO: uncomment it!
+            // Close Trainer IF GAME is NOT RUNNING
+//            if (!gameIsRunning())
+//            {
+//                break;
+//            }
 
             // TODO: uncomment it!
 //        // Continue IF GAME is not active || PLAYER is DEAD
@@ -68,9 +76,15 @@ namespace GameTrainer::app
 
             for (const int key : registeredKeys)
             {
-                if (GameTrainer::mylib::win::ifKeyPressed(key))
+                if (keyboardWatcher.isKeyPressed(key))
                 {
-                    lua.callFunction("handleKey", key);
+                    lua.callFunction(
+                            "handleKey",
+                            key,
+                            keyboardWatcher.isKeyDown(VK_SHIFT),
+                            keyboardWatcher.isKeyDown(VK_CONTROL),
+                            keyboardWatcher.isKeyDown(VK_MENU)
+                    );
                 }
             }
         }
@@ -106,7 +120,12 @@ registeredKeys = {
     key_codes.VK_F7
 }
 
-function handleKey (key)
+function handleKey (key, shift, ctrl, alt)
+    print(key)
+    print(shift)
+    print(ctrl)
+    print(alt)
+
 	if key == key_codes.VK_F6 then
 		print('many many')
 		playSound('sounds/money.wav')

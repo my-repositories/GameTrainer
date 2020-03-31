@@ -5,7 +5,6 @@
 
 namespace GameTrainer::mylib::win
 {
-    bool ifKeyPressed(int key);
     void playSound(const char* sound);
     void setConsoleTitle(const char* title);
     void sleep(size_t ms);
