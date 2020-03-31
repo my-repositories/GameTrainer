@@ -2,7 +2,8 @@
 
 int main(int argc, char* argv[])
 {
-    GameTrainer::app::Trainer trainer(std::string(MY_PROJECT_NAME) + " " + MY_PROJECT_VERSION);
+    const std::string title = std::string(MY_PROJECT_NAME) + " " + MY_PROJECT_VERSION;
+    GameTrainer::app::Trainer trainer(title);
 
     // Allow only one instance of application.
     if (trainer.trainerIsRunning())
@@ -24,7 +25,7 @@ int main(int argc, char* argv[])
     // Waiting for the game to start ...
     while (!trainer.gameIsRunning())
     {
-        GameTrainer::mylib::win::sleep(1000);
+        GameTrainer::mylib::windows::sleep(1000);
     }
 
     trainer.start();

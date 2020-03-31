@@ -1,6 +1,6 @@
-#include <keyboard-watcher.hpp>
+#include <windows/keyboard-watcher.hpp>
 
-namespace GameTrainer::mylib
+namespace GameTrainer::mylib::windows
 {
     KeyboardWatcher::KeyboardWatcher(const std::vector<int> &keysToWatch)
     {

@@ -1,6 +1,6 @@
-#include <win-utils.hpp>
+#include <windows/utils.hpp>
 
-namespace GameTrainer::mylib::win
+namespace GameTrainer::mylib::windows
 {
     void playSound(const char* sound)
     {

@@ -1,6 +1,6 @@
-#include <window-manager.hpp>
+#include <windows/window-manager.hpp>
 
-namespace GameTrainer::mylib
+namespace GameTrainer::mylib::windows
 {
     HWND WindowManager::window = nullptr;
     std::string WindowManager::title;

@@ -5,7 +5,7 @@
 #include <vector>
 #include <windows.h>
 
-namespace GameTrainer::mylib
+namespace GameTrainer::mylib::windows
 {
     class KeyboardWatcher
     {

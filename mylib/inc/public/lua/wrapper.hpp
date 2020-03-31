@@ -1,5 +1,5 @@
-#ifndef GAMETRAINER_LUA_WRAPPER_HPP
-#define GAMETRAINER_LUA_WRAPPER_HPP
+#ifndef GAMETRAINER_WRAPPER_HPP
+#define GAMETRAINER_WRAPPER_HPP
 
 #include <iostream>
 #include <optional>
@@ -9,9 +9,9 @@
 
 #include <lua.hpp>
 
-#include <lua-stack-cleaner.hpp>
+#include <lua/stack-cleaner.hpp>
 
-namespace GameTrainer::mylib
+namespace GameTrainer::mylib::lua
 {
     typedef std::optional<int> lua_int;
     typedef std::optional<char*> lua_string;
@@ -151,4 +151,4 @@ namespace GameTrainer::mylib
     };
 }
 
-#endif //GAMETRAINER_LUA_WRAPPER_HPP
+#endif //GAMETRAINER_WRAPPER_HPP

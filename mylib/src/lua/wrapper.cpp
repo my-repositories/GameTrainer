@@ -1,9 +1,10 @@
-#include <lua-wrapper.hpp>
+#include <lua/wrapper.hpp>
 
-namespace GameTrainer::mylib
+namespace GameTrainer::mylib::lua
 {
     LuaWrapper::LuaWrapper()
-        : LuaWrapper(luaL_newstate()) {}
+        : LuaWrapper(luaL_newstate())
+        {}
 
     LuaWrapper::LuaWrapper(lua_State *state)
     {
@@ -58,7 +59,8 @@ namespace GameTrainer::mylib
         return std::nullopt;
     }
 
-    int LuaWrapper::errorHandler(lua_State *state) {
+    int LuaWrapper::errorHandler(lua_State *state)
+    {
         const char* message = lua_tostring(state, 1);
         std::cout << "Error: " << message << std::endl;
 

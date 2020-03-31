@@ -4,14 +4,14 @@
 #include <xstring>
 #include <utility>
 
-#include <keyboard-watcher.hpp>
-#include <lua-wrapper.hpp>
-#include <window-manager.hpp>
-#include <win-utils.hpp>
+#include <lua/wrapper.hpp>
+#include <windows/keyboard-watcher.hpp>
+#include <windows/utils.hpp>
+#include <windows/window-manager.hpp>
 
 namespace GameTrainer::app
 {
-    void loadLuaState(GameTrainer::mylib::LuaWrapper &lua);
+    void loadLuaState(GameTrainer::mylib::lua::LuaWrapper &lua);
 
     class Trainer
     {
@@ -32,7 +32,7 @@ namespace GameTrainer::app
 
     private:
         const std::string title;
-        GameTrainer::mylib::WindowManager *windowManager;
+        GameTrainer::mylib::windows::WindowManager *windowManager;
     };
 }
 

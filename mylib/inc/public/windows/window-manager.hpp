@@ -4,8 +4,10 @@
 #include <xstring>
 #include <Windows.h>
 
-namespace GameTrainer::mylib {
-    class WindowManager {
+namespace GameTrainer::mylib::windows
+{
+    class WindowManager
+    {
     public:
         explicit WindowManager(const std::string &title);
 

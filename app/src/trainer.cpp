@@ -2,11 +2,13 @@
 
 namespace GameTrainer::app
 {
+    using namespace GameTrainer::mylib;
+
     Trainer::Trainer(std::string trainerTitle) :
             title(std::move(trainerTitle))
     {
-        GameTrainer::mylib::win::setConsoleTitle(this->title.c_str());
-        this->windowManager = new GameTrainer::mylib::WindowManager(this->title);
+        windows::setConsoleTitle(this->title.c_str());
+        this->windowManager = new windows::WindowManager(this->title);
     }
 
     Trainer::~Trainer()
@@ -26,7 +28,7 @@ namespace GameTrainer::app
 
     void Trainer::start() const
     {
-        GameTrainer::mylib::LuaWrapper lua;
+        lua::LuaWrapper lua;
         loadLuaState(lua);
 
         lua.registerFunction("writeMemory", [](const char *mem)
@@ -34,14 +36,14 @@ namespace GameTrainer::app
             std::cout << "write memory: " << mem << std::endl;
         });
 
-        lua.registerFunction("playSound", GameTrainer::mylib::win::playSound);
+        lua.registerFunction("playSound", windows::playSound);
 
         const auto registeredKeys = lua.getVector<int>((char *) "registeredKeys");
         const auto begin = registeredKeys.begin();
         const auto end = registeredKeys.end();
-        GameTrainer::mylib::KeyboardWatcher keyboardWatcher(registeredKeys);
+        windows::KeyboardWatcher keyboardWatcher(registeredKeys);
 
-        for (;; GameTrainer::mylib::win::sleep(50))
+        for (;; windows::sleep(50))
         {
             // TODO: remove it!
             if(keyboardWatcher.isKeyDown(VK_F13))
@@ -104,7 +106,7 @@ namespace GameTrainer::app
         return true;
     }
 
-    void loadLuaState(GameTrainer::mylib::LuaWrapper &lua)
+    void loadLuaState(lua::LuaWrapper &lua)
     {
 #if DEBUG
         constexpr char *script = (char *) R"(
