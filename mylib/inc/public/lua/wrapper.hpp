@@ -6,10 +6,12 @@
 #include <type_traits>
 #include <variant>
 #include <vector>
+#include <Windows.h>
 
 #include <lua.hpp>
 
 #include <lua/stack-cleaner.hpp>
+#include <xml/table-reader.hpp>
 
 namespace GameTrainer::mylib::lua
 {
@@ -53,7 +55,7 @@ namespace GameTrainer::mylib::lua
             this->pushToState(args...);
             const int argsCount = sizeof...(args);
 
-            lua_pcall(this->state, argsCount, 0, -3);
+            lua_pcall(this->state, argsCount, 0, -(2 + argsCount));
         }
 
         template<class T>
@@ -79,7 +81,11 @@ namespace GameTrainer::mylib::lua
             pushToState(rest...);
         }
 
+        void registerFunction(const char* name, void(*callback)(xml::CheatEntry*, float)) const;
+
         void registerFunction(const char* name, void(*callback)(const char*)) const;
+
+        void registerFunction(const char* name, int(*callback)(lua_State*, const char*)) const;
 
         template<class T>
         std::optional<T> getValue(char* variableName = nullptr) const
@@ -122,6 +128,38 @@ namespace GameTrainer::mylib::lua
             }
 
             return vector;
+        }
+
+        static int createUserData(lua_State* luaState, const char* fileName)
+        {
+            auto entries = xml::TableReader::read(fileName);
+
+            lua_newtable(luaState);
+
+            for (auto& entry : entries)
+            {
+                lua_pushstring(luaState, entry.description);
+
+                auto field = (xml::CheatEntry *) lua_newuserdata(luaState, sizeof(xml::CheatEntry));
+
+                field->size = entry.size;
+                field->offsetsCount = entry.offsetsCount;
+
+                constexpr const size_t offsetsSize = sizeof(entry.offsets);
+                memcpy_s(field->offsets, offsetsSize, entry.offsets, offsetsSize);
+
+                field->address = entry.address;
+
+                constexpr const size_t moduleCount = sizeof(field->module)/sizeof(field->module[0]);
+                strncpy_s(field->module, entry.module, moduleCount);
+
+                field->description[0] = '\0';
+                field->variableType[0] = '\0';
+
+                lua_settable(luaState, -3);
+            }
+
+            return 1;
         }
 
     private:

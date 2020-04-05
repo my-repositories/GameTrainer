@@ -29,18 +29,24 @@ namespace GameTrainer::app
     void Trainer::start() const
     {
         lua::LuaWrapper lua;
-        loadLuaState(lua);
 
-        lua.registerFunction("writeMemory", [](const char *mem)
+        void (*lambada)(xml::CheatEntry*, float) = [](xml::CheatEntry* entry, float valueToAdd)
         {
-            std::cout << "write memory: " << mem << std::endl;
-        });
+            DWORD processId = windows::getProcessIdByName("KillingFloor.exe");
+
+            Game game(processId);
+            game.updateValue(entry, valueToAdd);
+        };
+
+        lua.registerFunction("addValueTo", lambada);
 
         lua.registerFunction("playSound", windows::playSound);
 
+        lua.registerFunction("readFile", lua::LuaWrapper::createUserData);
+
+        loadLuaState(lua);
+
         const auto registeredKeys = lua.getVector<int>((char *) "registeredKeys");
-        const auto begin = registeredKeys.begin();
-        const auto end = registeredKeys.end();
         windows::KeyboardWatcher keyboardWatcher(registeredKeys);
 
         for (;; windows::sleep(50))
@@ -113,30 +119,38 @@ namespace GameTrainer::app
 key_codes = {
 	VK_F5 = 0x74,
 	VK_F6 = 0x75,
-	VK_F7 = 0x76
+	VK_F7 = 0x76,
+	VK_F8 = 0x77
 }
 processName = 'KillingFloor.exe'
-maxHealth = 100
+
+entries = readFile('KillingFloor.CT')
+
 registeredKeys = {
     key_codes.VK_F6,
-    key_codes.VK_F7
+    key_codes.VK_F7,
+    key_codes.VK_F8
 }
 
 function handleKey (key, shift, ctrl, alt)
-    print(key)
-    print(shift)
-    print(ctrl)
-    print(alt)
-
 	if key == key_codes.VK_F6 then
 		print('many many')
-		playSound('sounds/money.wav')
+		playSound('sounds/on.wav')
+        addValueTo(entries.armor, 10.5)
 	elseif key == key_codes.VK_F7 then
 		print('off')
 		playSound('sounds/off.wav')
+    elseif key == key_codes.VK_F8 then
+        print('increase money')
+        addValueTo(entries.money, 100.5)
+        playSound('sounds/money.wav')
 	else
 		print('unknown key')
 	end
+end
+
+function tick()
+-- addValueTo(entries.armor, 100)
 end
 		)";
         lua.loadString(script);

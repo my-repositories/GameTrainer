@@ -1,7 +1,7 @@
 #ifndef GAMETRAINER_WINDOW_MANAGER_HPP
 #define GAMETRAINER_WINDOW_MANAGER_HPP
 
-#include <xstring>
+#include <string>
 #include <Windows.h>
 
 namespace GameTrainer::mylib::windows

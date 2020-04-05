@@ -1,8 +1,7 @@
 local keyCodes = require('scripts/shared/key-codes')
 
-cheatTableName = 'KillingFloor.CT'
 processName = 'KillingFloor.exe'
-maxHealth = 100
+entries = readFile('KillingFloor.CT')
 
 registeredKeys = {
     keyCodes.VK_F6,
@@ -12,17 +11,22 @@ registeredKeys = {
 }
 
 function handleKey (key, shift, ctrl, alt)
-	if key == keyCodes.VK_F6 then
-		print('god mode')
-		playSound('sounds/on.wav')
-	elseif key == keyCodes.VK_F7 then
-		print('no reload')
+    if key == keyCodes.VK_F6 then
+        print('god mode')
+        playSound('sounds/on.wav')
+    elseif key == keyCodes.VK_F7 then
+        print('no reload')
         playSound('sounds/on.wav')
     elseif key == keyCodes.VK_F8 then
+        addValueTo(entries.money, 1000)
         print('increase money')
         playSound('sounds/money.wav')
     elseif key == keyCodes.VK_F9 and shift and ctrl and alt then
         print('level up for all perks')
         playSound('sounds/experience.wav')
-	end
+    end
+end
+
+function tick()
+    -- addValueTo(entries.armor, 100)
 end

@@ -1,13 +1,15 @@
 #ifndef GAMETRAINER_TRAINER_HPP
 #define GAMETRAINER_TRAINER_HPP
 
-#include <xstring>
+#include <string>
 #include <utility>
 
+#include <game.hpp>
 #include <lua/wrapper.hpp>
 #include <windows/keyboard-watcher.hpp>
 #include <windows/utils.hpp>
 #include <windows/window-manager.hpp>
+#include <xml/table-reader.hpp>
 
 namespace GameTrainer::app
 {
