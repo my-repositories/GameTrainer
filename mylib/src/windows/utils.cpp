@@ -20,7 +20,7 @@ namespace GameTrainer::mylib::windows
     DWORD_PTR getModuleAddress(const char *moduleName, const DWORD processId)
     {
         MODULEENTRY32 lpModuleEntry = { 0 };
-        HANDLE hSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processId);
+        HANDLE hSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processId); // NOLINT(hicpp-signed-bitwise)
 
         if (!hSnapShot)
             return NULL;

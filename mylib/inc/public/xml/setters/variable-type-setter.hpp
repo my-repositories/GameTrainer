@@ -12,7 +12,7 @@ namespace GameTrainer::mylib::xml
     public:
         explicit VariableTypeSetter(std::ifstream* file);
 
-        virtual ~VariableTypeSetter();
+        ~VariableTypeSetter() override;
 
         void set(const std::string& buffer, CheatEntry& entry) override;
     };

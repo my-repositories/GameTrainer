@@ -11,9 +11,9 @@ namespace GameTrainer::mylib::xml
         short offsetsCount{};
         DWORD offsets[5]{};
         DWORD_PTR address{};
-        char module[32];
-        char variableType[32];
-        char description[56];
+        char module[32]{};
+        char variableType[32]{};
+        char description[56]{};
     };
 }
 

@@ -12,7 +12,7 @@ namespace GameTrainer::mylib::xml
     public:
         explicit OffsetsSetter(std::ifstream* file);
 
-        virtual ~OffsetsSetter();
+        ~OffsetsSetter() override;
 
         void set(const std::string& buffer, CheatEntry& entry) override;
     };

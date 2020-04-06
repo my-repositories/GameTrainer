@@ -19,7 +19,7 @@ namespace GameTrainer::app
         DWORD processId;
         HANDLE process;
 
-        DWORD_PTR getValueAddress(const GameTrainer::mylib::xml::CheatEntry* entry) const;
+        [[nodiscard]] DWORD_PTR getValueAddress(const GameTrainer::mylib::xml::CheatEntry* entry) const;
 
         [[nodiscard]] BOOL isWow64() const;
     };

@@ -12,7 +12,7 @@ namespace GameTrainer::mylib::xml
     public:
         explicit DescriptionSetter(std::ifstream* file);
 
-        virtual ~DescriptionSetter();
+        ~DescriptionSetter() override;
 
         void set(const std::string& buffer, CheatEntry& entry) override;
     };

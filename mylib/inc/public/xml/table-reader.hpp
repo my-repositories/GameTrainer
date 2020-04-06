@@ -22,9 +22,9 @@ namespace GameTrainer::mylib::xml
         std::ifstream file;
         TableMediator* tableMediator;
 
-        std::vector<CheatEntry> readEntries();
+        [[nodiscard]] std::vector<CheatEntry> readEntries();
 
-        CheatEntry readEntry();
+        [[nodiscard]] CheatEntry readEntry();
     };
 }
 

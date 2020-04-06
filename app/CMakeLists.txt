@@ -42,7 +42,6 @@ if(MY_CONFIGURATION STREQUAL "Debug")
     )
 endif()
 
-
 target_link_directories(
         ${MY_PROJECT_NAME} PRIVATE
         ${MY_APP_DIR}/deps/lib

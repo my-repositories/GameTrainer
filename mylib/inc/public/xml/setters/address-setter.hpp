@@ -12,7 +12,7 @@ namespace GameTrainer::mylib::xml
     public:
         explicit AddressSetter(std::ifstream* file);
 
-        virtual ~AddressSetter();
+        ~AddressSetter() override;
 
         void set(const std::string& buffer, CheatEntry& entry) override;
     };

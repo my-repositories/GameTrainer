@@ -13,13 +13,13 @@ namespace GameTrainer::mylib::windows
 
         void show();
 
-        bool isOpened();
+        [[nodiscard]] bool isOpened();
 
     private:
         static HWND window;
         static std::string title;
 
-        static BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam);
+        [[nodiscard]] static  BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam);
     };
 }
 

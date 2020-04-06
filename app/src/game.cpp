@@ -6,7 +6,7 @@ namespace GameTrainer::app
     Game::Game(DWORD processId)
     {
         this->processId = processId;
-        this->process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, this->processId);
+        this->process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, this->processId); // NOLINT(hicpp-signed-bitwise)
     }
 
     Game::~Game()
@@ -21,9 +21,9 @@ namespace GameTrainer::app
         const DWORD_PTR ptr = this->getValueAddress(entry);
         float currentValue = 0;
 
-        ReadProcessMemory(this->process, (LPVOID)ptr, &currentValue, entry->size, NULL);
+        ReadProcessMemory(this->process, (LPVOID)ptr, &currentValue, entry->size, nullptr);
         currentValue += valueToAdd;
-        WriteProcessMemory(this->process, (LPVOID)ptr, &currentValue, entry->size, NULL);
+        WriteProcessMemory(this->process, (LPVOID)ptr, &currentValue, entry->size, nullptr);
 //        }
     }
 
@@ -38,7 +38,7 @@ namespace GameTrainer::app
 
         auto moduleAddress = windows::getModuleAddress(entry->module, this->processId);
         auto baseAddress = moduleAddress + entry->address;
-        ReadProcessMemory(this->process, (LPCVOID)baseAddress, &valueAddress, dwSize, NULL);
+        ReadProcessMemory(this->process, (LPCVOID)baseAddress, &valueAddress, dwSize, nullptr);
 
         if (entry->offsetsCount == -1)
         {
@@ -48,7 +48,7 @@ namespace GameTrainer::app
         for (int i = 1; i < entry->offsetsCount; i++)
         {
             auto offset = valueAddress + entry->offsets[entry->offsetsCount - i];
-            ReadProcessMemory(this->process, (LPCVOID)offset, &valueAddress, dwSize, NULL);
+            ReadProcessMemory(this->process, (LPCVOID)offset, &valueAddress, dwSize, nullptr);
         }
 
         return valueAddress + entry->offsets[0];
@@ -63,7 +63,7 @@ namespace GameTrainer::app
         LPFN_ISWOW64PROCESS fnIsWow64Process;
         fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
 
-        if (NULL != fnIsWow64Process)
+        if (nullptr != fnIsWow64Process)
         {
             if (!fnIsWow64Process(this->process, &bIsWow64))
             {

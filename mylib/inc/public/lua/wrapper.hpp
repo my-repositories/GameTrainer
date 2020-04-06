@@ -71,13 +71,10 @@ namespace GameTrainer::mylib::lua
             }
         }
 
-        template<
-            class FIRST,
-            class... REST
-        >
-        void pushToState(const FIRST& first, const REST&... rest) const
+        template<class T, class... Rest>
+        void pushToState(const T& arg, const Rest&... rest) const
         {
-            pushToState(first);
+            pushToState(arg);
             pushToState(rest...);
         }
 
@@ -88,7 +85,7 @@ namespace GameTrainer::mylib::lua
         void registerFunction(const char* name, int(*callback)(lua_State*, const char*)) const;
 
         template<class T>
-        std::optional<T> getValue(char* variableName = nullptr) const
+        [[nodiscard]] std::optional<T> getValue(char* variableName = nullptr) const
         {
             if (variableName)
             {
@@ -105,7 +102,7 @@ namespace GameTrainer::mylib::lua
         }
 
         template<class T>
-        std::vector<T> getVector(char* variableName) const
+        [[nodiscard]] std::vector<T> getVector(char* variableName) const
         {
             LuaStackCleaner cleaner(this->state);
 
@@ -130,7 +127,7 @@ namespace GameTrainer::mylib::lua
             return vector;
         }
 
-        static int createUserData(lua_State* luaState, const char* fileName)
+        [[nodiscard]] static int createUserData(lua_State* luaState, const char* fileName)
         {
             auto entries = xml::TableReader::read(fileName);
 

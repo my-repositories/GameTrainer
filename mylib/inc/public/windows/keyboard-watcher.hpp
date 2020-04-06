@@ -14,7 +14,7 @@ namespace GameTrainer::mylib::windows
 
         [[nodiscard]] bool isKeyDown(int key) const;
 
-        bool isKeyPressed(int key);
+        [[nodiscard]] bool isKeyPressed(int key);
 
     private:
         std::map<int, bool> states;
