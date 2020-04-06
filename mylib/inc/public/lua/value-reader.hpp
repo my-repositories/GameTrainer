@@ -6,17 +6,18 @@
 
 #include <lua.h>
 
-namespace GameTrainer::mylib::lua {
-
-
+namespace GameTrainer::mylib::lua
+{
     template<typename T>
-    struct ValueReader {
-        static auto read(lua_State *luaState) {
+    struct ValueReader
+    {
+        static auto read(lua_State *luaState)
+        {
             throw std::exception("Invalid type for struct 'valueReader'");
         }
     };
 
-    #define GENERATE_TYPENAME(T, predicate, getter) \
+    #define GENERATE_VALUE_READER(T, predicate, getter) \
     template<>                                      \
     struct ValueReader<T>                           \
     {                                               \
@@ -33,9 +34,9 @@ namespace GameTrainer::mylib::lua {
         }                                           \
     };                                              \
 
-    GENERATE_TYPENAME(int, lua_isinteger, lua_tointeger);
+    GENERATE_VALUE_READER(int, lua_isinteger, lua_tointeger);
 
-    GENERATE_TYPENAME(char*, lua_isstring, lua_tostring);
+    GENERATE_VALUE_READER(char*, lua_isstring, lua_tostring);
 }
 
 #endif //GAMETRAINER_VALUE_READER_HPP

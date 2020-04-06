@@ -116,11 +116,12 @@ namespace GameTrainer::app
     {
 #if DEBUG
         constexpr char *script = (char *) R"(
-key_codes = {
+keyCodes = {
 	VK_F5 = 0x74,
 	VK_F6 = 0x75,
 	VK_F7 = 0x76,
-	VK_F8 = 0x77
+	VK_F8 = 0x77,
+	VK_F9 = 0x78
 }
 api = {
     playSound = playSound,
@@ -132,30 +133,31 @@ processName = 'KillingFloor.exe'
 entries = api.readFile('KillingFloor.CT')
 
 registeredKeys = {
-    key_codes.VK_F6,
-    key_codes.VK_F7,
-    key_codes.VK_F8
+    keyCodes.VK_F6,
+    keyCodes.VK_F7,
+    keyCodes.VK_F8,
+    keyCodes.VK_F9
 }
 
 function handleKey (key, shift, ctrl, alt)
-	if key == key_codes.VK_F6 then
-		print('many many')
-		api.playSound('sounds/on.wav')
-        api.addValueTo(entries.armor, 10.5)
-	elseif key == key_codes.VK_F7 then
-		print('off')
-		api.playSound('sounds/off.wav')
-    elseif key == key_codes.VK_F8 then
+    if key == keyCodes.VK_F6 then
+        print('god mode')
+        api.playSound('sounds/on.wav')
+    elseif key == keyCodes.VK_F7 then
+        print('no reload')
+        api.playSound('sounds/on.wav')
+    elseif key == keyCodes.VK_F8 then
+        api.addValueTo(entries.money, 1000)
         print('increase money')
-        api.addValueTo(entries.money, 100.5)
         api.playSound('sounds/money.wav')
-	else
-		print('unknown key')
-	end
+    elseif key == keyCodes.VK_F9 and shift and ctrl and alt then
+        print('level up for all perks')
+        api.playSound('sounds/experience.wav')
+    end
 end
 
 function tick()
--- addValueTo(entries.armor, 100)
+    -- addValueTo(entries.armor, 100)
 end
 		)";
         lua.loadString(script);
