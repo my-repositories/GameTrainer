@@ -4,27 +4,17 @@
 #include <iostream>
 #include <optional>
 #include <type_traits>
-#include <variant>
 #include <vector>
 #include <Windows.h>
 
 #include <lua.hpp>
 
 #include <lua/stack-cleaner.hpp>
+#include <lua/value-reader.hpp>
 #include <xml/table-reader.hpp>
 
 namespace GameTrainer::mylib::lua
 {
-    typedef std::optional<int> lua_int;
-    typedef std::optional<char*> lua_string;
-    typedef
-    std::variant<
-            std::nullopt_t,
-            lua_int,
-            lua_string
-    >
-    lua_variant;
-
     class LuaWrapper
     {
     public:
@@ -92,13 +82,7 @@ namespace GameTrainer::mylib::lua
                 lua_getglobal(this->state, variableName);
             }
 
-            auto variant = this->getVariant<T>();
-            if (!variant.index())
-            {
-                return std::nullopt;
-            }
-
-            return std::get<std::optional<T>>(variant);
+            return ValueReader<T>::read(this->state);
         }
 
         template<class T>
@@ -163,26 +147,6 @@ namespace GameTrainer::mylib::lua
         lua_State* state;
 
         static int errorHandler(lua_State* state);
-
-        [[nodiscard]] lua_int getInteger() const;
-
-        [[nodiscard]] lua_string getString() const;
-
-        template<class T>
-        [[nodiscard]] lua_variant getVariant() const
-        {
-            if constexpr (std::is_same<T, int>::value)
-            {
-                return this->getInteger();
-            }
-
-            if constexpr (std::is_same<T, char*>::value)
-            {
-                return this->getString();
-            }
-
-            return std::nullopt;
-        }
     };
 }
 

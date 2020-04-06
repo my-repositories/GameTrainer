@@ -91,26 +91,6 @@ namespace GameTrainer::mylib::lua
         lua_setglobal(this->state, name);
     }
 
-    lua_int LuaWrapper::getInteger() const
-    {
-        if (lua_isinteger(this->state, -1))
-        {
-            return (int) lua_tointeger(this->state, -1);
-        }
-
-        return std::nullopt;
-    }
-
-    lua_string LuaWrapper::getString() const
-    {
-        if (lua_isstring(this->state, -1))
-        {
-            return (char*) lua_tostring(this->state, -1);
-        }
-
-        return std::nullopt;
-    }
-
     int LuaWrapper::errorHandler(lua_State *state)
     {
         const char* message = lua_tostring(state, 1);
