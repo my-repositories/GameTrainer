@@ -3,13 +3,13 @@
 
 #include <iostream>
 #include <optional>
-#include <type_traits>
 #include <vector>
 #include <Windows.h>
 
 #include <lua.hpp>
 
 #include <lua/stack-cleaner.hpp>
+#include <lua/state-pusher.hpp>
 #include <lua/value-reader.hpp>
 #include <xml/table-reader.hpp>
 
@@ -51,14 +51,7 @@ namespace GameTrainer::mylib::lua
         template<class T>
         void pushToState(const T& arg) const
         {
-            if constexpr (std::is_same<T, int>::value)
-            {
-                lua_pushinteger(this->state, arg);
-            }
-            else if constexpr (std::is_same<T, bool>::value)
-            {
-                lua_pushboolean(this->state, arg);
-            }
+            StatePusher<T>::push(this->state, arg);
         }
 
         template<class T, class... Rest>
