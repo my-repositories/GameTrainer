@@ -57,38 +57,13 @@ namespace GameTrainer::mylib::lua
         template<class T>
         [[nodiscard]] std::optional<T> getValue(char* variableName = nullptr) const
         {
-            if (variableName)
-            {
-                lua_getglobal(this->state, variableName);
-            }
-
-            return ValueReader<T>::read(this->state);
+            return ValueReader::readValue<T>(this->state, variableName);
         }
 
         template<class T>
         [[nodiscard]] std::vector<T> getVector(char* variableName) const
         {
-            LuaStackCleaner cleaner(this->state);
-
-            lua_getglobal(this->state, variableName);
-            std::vector<T> vector;
-
-            for (LUA_NUMBER i = 1; true; ++i)
-            {
-                lua_pushnumber(this->state, i);
-                lua_gettable(this->state, -2);
-
-                auto item = getValue<T>();
-                if (!item.has_value())
-                {
-                    break;
-                }
-
-                vector.push_back(*item);
-                lua_pop(this->state, 1);
-            }
-
-            return vector;
+            return ValueReader::readVector<T>(this->state, variableName);
         }
 
         [[nodiscard]] static int createUserData(lua_State* luaState, const char* fileName)

@@ -47,6 +47,8 @@ namespace GameTrainer::app
         loadLuaState(lua);
 
         const auto registeredKeys = lua.getVector<int>((char *) "registeredKeys");
+        const char* processName = *lua.getValue<char*>((char *) "processName");
+        std::cout << processName << std::endl;
         windows::KeyboardWatcher keyboardWatcher(registeredKeys);
 
         for (;; windows::sleep(50))
