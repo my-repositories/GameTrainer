@@ -42,23 +42,10 @@ namespace GameTrainer::mylib::lua
                 return;
             }
 
-            this->pushToState(args...);
+            StatePusher::push(this->state, args...);
             const int argsCount = sizeof...(args);
 
             lua_pcall(this->state, argsCount, 0, -(2 + argsCount));
-        }
-
-        template<class T>
-        void pushToState(const T& arg) const
-        {
-            StatePusher<T>::push(this->state, arg);
-        }
-
-        template<class T, class... Rest>
-        void pushToState(const T& arg, const Rest&... rest) const
-        {
-            pushToState(arg);
-            pushToState(rest...);
         }
 
         void registerFunction(const char* name, void(*callback)(xml::CheatEntry*, float)) const;

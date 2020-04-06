@@ -7,8 +7,8 @@
 
 namespace GameTrainer::mylib::lua
 {
-    template<typename T>
-    struct StatePusher
+    template<class T>
+    struct StatePusherInternal
     {
         static void push(lua_State *luaState, const T& arg)
         {
@@ -18,7 +18,7 @@ namespace GameTrainer::mylib::lua
 
 #define GENERATE_STATE_PUSHER(T, func)                          \
     template<>                                                  \
-    struct StatePusher<T>                                       \
+    struct StatePusherInternal<T>                                       \
     {                                                           \
         static void push(lua_State* luaState, const T& arg)     \
         {                                                       \
@@ -29,6 +29,22 @@ namespace GameTrainer::mylib::lua
     GENERATE_STATE_PUSHER(int, lua_pushinteger);
 
     GENERATE_STATE_PUSHER(bool, lua_pushboolean);
+
+    struct StatePusher
+    {
+        template<class T>
+        static void push(lua_State* luaState, const T& arg)
+        {
+            StatePusherInternal<T>::push(luaState, arg);
+        }
+
+        template<class T, class... Rest>
+        static void push(lua_State* luaState, const T& arg, const Rest&... rest)
+        {
+            StatePusher::push(luaState, arg);
+            StatePusher::push(luaState, rest...);
+        }
+    };
 }
 
 #endif //GAMETRAINER_STATE_PUSHER_HPP
