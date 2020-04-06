@@ -11,36 +11,6 @@
 
 namespace GameTrainer::mylib::lua
 {
-    template<class T>
-    struct ValueReaderInternal
-    {
-        static auto read(lua_State *luaState)
-        {
-            throw std::exception("Invalid type for struct 'valueReader'");
-        }
-    };
-
-    #define GENERATE_VALUE_READER(T, predicate, reader)         \
-    template<>                                                  \
-    struct ValueReaderInternal<T>                               \
-    {                                                           \
-        static auto read(lua_State* luaState)                   \
-        {                                                       \
-            std::optional<T> value;                             \
-                                                                \
-            if (predicate(luaState, -1))                        \
-            {                                                   \
-                value = (T)reader(luaState, -1);                \
-            }                                                   \
-                                                                \
-            return value;                                       \
-        }                                                       \
-    };                                                          \
-
-    GENERATE_VALUE_READER(int, lua_isinteger, lua_tointeger);
-
-    GENERATE_VALUE_READER(char*, lua_isstring, lua_tostring);
-
     struct ValueReader
     {
         template<class T>
@@ -79,6 +49,37 @@ namespace GameTrainer::mylib::lua
 
             return vector;
         }
+
+    private:
+        template<class T>
+        struct ValueReaderInternal
+        {
+            static auto read(lua_State *luaState)
+            {
+                throw std::exception("Invalid type for struct 'valueReader'");
+            }
+        };
+
+        #define GENERATE_VALUE_READER(T, predicate, reader)         \
+        template<>                                                  \
+        struct ValueReaderInternal<T>                               \
+        {                                                           \
+            static auto read(lua_State* luaState)                   \
+            {                                                       \
+                std::optional<T> value;                             \
+                                                                    \
+                if (predicate(luaState, -1))                        \
+                {                                                   \
+                    value = (T)reader(luaState, -1);                \
+                }                                                   \
+                                                                    \
+                return value;                                       \
+            }                                                       \
+        };                                                          \
+
+        GENERATE_VALUE_READER(int, lua_isinteger, lua_tointeger);
+
+        GENERATE_VALUE_READER(char*, lua_isstring, lua_tostring);
     };
 }
 
