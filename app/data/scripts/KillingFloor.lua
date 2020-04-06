@@ -1,4 +1,5 @@
 local keyCodes = require('scripts/shared/key-codes')
+local api = require('scripts/shared/api')
 
 processName = 'KillingFloor.exe'
 entries = readFile('KillingFloor.CT')
@@ -13,17 +14,17 @@ registeredKeys = {
 function handleKey (key, shift, ctrl, alt)
     if key == keyCodes.VK_F6 then
         print('god mode')
-        playSound('sounds/on.wav')
+        api.playSound('sounds/on.wav')
     elseif key == keyCodes.VK_F7 then
         print('no reload')
-        playSound('sounds/on.wav')
+        api.playSound('sounds/on.wav')
     elseif key == keyCodes.VK_F8 then
-        addValueTo(entries.money, 1000)
+        api.addValueTo(entries.money, 1000)
         print('increase money')
-        playSound('sounds/money.wav')
+        api.playSound('sounds/money.wav')
     elseif key == keyCodes.VK_F9 and shift and ctrl and alt then
         print('level up for all perks')
-        playSound('sounds/experience.wav')
+        api.playSound('sounds/experience.wav')
     end
 end
 

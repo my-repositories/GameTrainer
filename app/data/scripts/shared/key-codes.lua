@@ -101,4 +101,3 @@ return {
     VK_PRINT = 0x2A,
     VK_EXECUTE = 0x2B
 }
-

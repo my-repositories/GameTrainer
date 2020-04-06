@@ -122,9 +122,14 @@ key_codes = {
 	VK_F7 = 0x76,
 	VK_F8 = 0x77
 }
+api = {
+    playSound = playSound,
+    addValueTo = addValueTo,
+    readFile = readFile
+}
 processName = 'KillingFloor.exe'
 
-entries = readFile('KillingFloor.CT')
+entries = api.readFile('KillingFloor.CT')
 
 registeredKeys = {
     key_codes.VK_F6,
@@ -135,15 +140,15 @@ registeredKeys = {
 function handleKey (key, shift, ctrl, alt)
 	if key == key_codes.VK_F6 then
 		print('many many')
-		playSound('sounds/on.wav')
-        addValueTo(entries.armor, 10.5)
+		api.playSound('sounds/on.wav')
+        api.addValueTo(entries.armor, 10.5)
 	elseif key == key_codes.VK_F7 then
 		print('off')
-		playSound('sounds/off.wav')
+		api.playSound('sounds/off.wav')
     elseif key == key_codes.VK_F8 then
         print('increase money')
-        addValueTo(entries.money, 100.5)
-        playSound('sounds/money.wav')
+        api.addValueTo(entries.money, 100.5)
+        api.playSound('sounds/money.wav')
 	else
 		print('unknown key')
 	end
