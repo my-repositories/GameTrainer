@@ -28,6 +28,9 @@ OBJ_DIR = ${OBJ_DIR_NAME}/${CONFIGURATION}-${ARCH}
 
 run: clean configure build_all copy
 
+install:
+	.\\.ci\\install-testing-deps.bat
+
 clean:
 	rm -rf ${BIN_DIR_NAME} ${OBJ_DIR_NAME}
 

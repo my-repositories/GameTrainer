@@ -34,11 +34,19 @@ environment:
 
 install:
     - appveyor UpdateBuild -Version %APPVEYOR_REPO_TAG_NAME%
-    - call .ci/install.bat %PLATFORM% %TOOLCHAIN% %APPVEYOR_REPO_TAG_NAME%
+    - call .ci/install-testing-deps.bat
+    - call .ci/set-env.bat %PLATFORM% %TOOLCHAIN% %APPVEYOR_REPO_TAG_NAME%
 
 build_script:
     - cmake %CMAKE_CONFIGURE_FLAGS%
     - cmake %CMAKE_BUILD_FLAGS%
+
+test_script:
+    - cd build
+    - ctest -VV
+    - cd ..
+
+on_success:
     - call .ci/zip.bat
 
 artifacts:

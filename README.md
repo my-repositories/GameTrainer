@@ -31,6 +31,8 @@ Powered by C++17 & Lua-5.3.4
 - (Optional) Lua: https://www.lua.org/download.html
 
 ## Build
+`make install`
+
 `make run`
 
 ## Authors
