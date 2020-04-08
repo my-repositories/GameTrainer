@@ -46,7 +46,7 @@ test_script:
     - ctest -VV -C Release
     - cd ..
 
-on_success:
+before_deploy:
     - call .ci/zip.bat
 
 artifacts:
