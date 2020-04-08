@@ -18,6 +18,9 @@ Powered by C++17 & Lua-5.3.4
 - Windows 10
 - Microsoft Visual C++ Redistributable ([x86](https://aka.ms/vs/16/release/VC_redist.x86.exe) / [x64](https://aka.ms/vs/16/release/VC_redist.x64.exe))
 
+## Download
+GameTrainer can be downloaded from [here](../../releases).
+
 ---
 
 ---
