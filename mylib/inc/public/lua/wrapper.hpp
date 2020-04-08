@@ -8,6 +8,7 @@
 
 #include <lua.hpp>
 
+#include <lua/error-handler.hpp>
 #include <lua/stack-cleaner.hpp>
 #include <lua/state-pusher.hpp>
 #include <lua/value-reader.hpp>
@@ -33,7 +34,7 @@ namespace GameTrainer::mylib::lua
         {
             LuaStackCleaner cleaner(this->state);
 
-            lua_pushcfunction(this->state, &LuaWrapper::errorHandler);
+            lua_pushcfunction(this->state, errorHandler);
             lua_getglobal(this->state, name);
             if (!lua_isfunction(this->state, -1))
             {
@@ -100,8 +101,6 @@ namespace GameTrainer::mylib::lua
 
     private:
         lua_State* state;
-
-        static int errorHandler(lua_State* state);
     };
 }
 
