@@ -1,5 +1,5 @@
 dist: trusty
-sudo: true
+sudo: false
 language: cpp
 
 addons:
@@ -14,13 +14,9 @@ addons:
 before_install:
     - cd temp
     - git clone https://github.com/google/googletest.git gtest
-    - git clone https://github.com/eddyxu/cpp-coveralls.git
-    - cd cpp-coveralls
-    - sudo apt-get update
-    - sudo apt-get install python3-pip
-    - pip3 install --user -r requirements.txt
-    - pip3 install --user pyyaml
-    - cd ../..
+    - pyenv global 3.6.3
+    - pip3 install --user cpp-coveralls pyyaml
+    - cd ..
 
 script:
     - cd temp
@@ -31,5 +27,6 @@ script:
 
 after_success:
     - cd temp
-    - python3 coveralls.py --skip-ssl-verify --root . -E ".*CMakeFiles.*"
+    - cp ./.ci/.coveralls.yml ./
+    - coveralls --skip-ssl-verify --root . -E ".*CMakeFiles.*"
     - cd ..
