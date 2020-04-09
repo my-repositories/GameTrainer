@@ -4,10 +4,11 @@ Powered by C++17 & Lua-5.3.4
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-7fa706.svg?longCache=true)](https://github.com/my-repositories/GameTrainer/pulls)
 
-[![stable](https://img.shields.io/badge/stability-stable-blue.svg?longCache=true)](https://github.com/Naereen/badges)
+[![Build Status](https://travis-ci.org/my-repositories/GameTrainer.svg?branch=reborn)](https://travis-ci.org/my-repositories/GameTrainer)
 [![Build status](https://ci.appveyor.com/api/projects/status/c4apaupf8ixe8d8y/branch/reborn?svg=true)](https://ci.appveyor.com/project/loktionov129/gametrainer/branch/reborn)
 
 [![Coverage Status](https://coveralls.io/repos/github/my-repositories/GameTrainer/badge.svg?branch=reborn)](https://coveralls.io/github/my-repositories/GameTrainer?branch=reborn)
+[![stable](https://img.shields.io/badge/stability-stable-yellow.svg?longCache=true)](https://github.com/Naereen/badges)
 
 ## Support Games
 - Dead Island
