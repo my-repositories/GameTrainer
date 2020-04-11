@@ -13,7 +13,6 @@ add_executable(${MY_TEST_NAME} ${MY_TEST_SOURCES})
 target_link_libraries(
         ${MY_TEST_NAME}
         PUBLIC gtest_main
-        PUBLIC ${MY_LIBRARY_NAME}
 )
 
 add_test(

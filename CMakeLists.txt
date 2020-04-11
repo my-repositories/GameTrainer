@@ -1,7 +1,6 @@
 # Download https://cmake.org/download/
 cmake_minimum_required(VERSION 3.15)
 
-set(MY_LIBRARY_NAME mylib)
 set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(PROJECT_DEPS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -43,9 +42,10 @@ endif()
 
 project(${MY_PROJECT_NAME} VERSION ${MY_PROJECT_VERSION})
 
-enable_testing()
-
-add_subdirectory(${PROJECT_DEPS_DIR}/googletest)
-add_subdirectory(mylib)
 add_subdirectory(app)
-add_subdirectory(test)
+
+if(GT_ENABLE_TESTING)
+    enable_testing()
+    add_subdirectory(${PROJECT_DEPS_DIR}/googletest)
+    add_subdirectory(test)
+endif()

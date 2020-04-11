@@ -54,7 +54,7 @@ build_all:
 	-j 8
 
 copy:
-	cp -r ./app/data/* ./bin/${CONFIGURATION}/*/
+	cp -r ./app/resources/data/* ./bin/${CONFIGURATION}/*/
 
 release:
 	git tag $$(git tag -l | tail -n 1 | sed -E "s/^([0-9]+.[0-9]+.)[0-9]+$$/\1/")$$((1 + $$(git tag -l | tail -n 1 | tr "." "\\n" | tail -n 1)))
