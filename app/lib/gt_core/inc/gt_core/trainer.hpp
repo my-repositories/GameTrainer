@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-#include <game.hpp>
+#include <gt_core/game.hpp>
 #include <keyboard-watcher.hpp>
 #include <utils.hpp>
 #include <window-manager.hpp>
