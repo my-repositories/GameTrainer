@@ -41,13 +41,13 @@ build_script:
     - cmake %CMAKE_CONFIGURE_FLAGS%
     - cmake %CMAKE_BUILD_FLAGS%
 
+after_build:
+    - call .ci/zip.bat
+
 test_script:
     - cd build
     - ctest -VV -C Release
     - cd ..
-
-before_deploy:
-    - call .ci/zip.bat
 
 artifacts:
     - path: bin/**/.zip
