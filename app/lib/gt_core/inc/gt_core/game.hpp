@@ -4,7 +4,7 @@
 #include <Windows.h>
 
 #include <gt_lua/wrapper.hpp>
-#include <utils.hpp>
+#include <gt_os/utils.hpp>
 
 namespace gt::core
 {

@@ -5,9 +5,9 @@
 #include <utility>
 
 #include <gt_core/game.hpp>
-#include <keyboard-watcher.hpp>
-#include <utils.hpp>
-#include <window-manager.hpp>
+#include <gt_os/keyboard-watcher.hpp>
+#include <gt_os/utils.hpp>
+#include <gt_os/window-manager.hpp>
 
 namespace gt::core
 {
