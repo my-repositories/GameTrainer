@@ -13,7 +13,7 @@ if /i "%1" == "msvc16" goto :msvc16
 :: Version
 
 :version
-set MY_VERSION=%1
+set GT_VERSION=%1
 shift
 goto :loop
 
@@ -24,14 +24,14 @@ goto :loop
 :x86
 set TARGET_CPU=Win32
 set CMAKE_GENERATOR_SUFFIX=
-set MY_PLATFORM=x86
+set GT_PLATFORM=x86
 shift
 goto :loop
 
 :x64
 set TARGET_CPU=x64
 set CMAKE_GENERATOR_SUFFIX= Win64
-set MY_PLATFORM=x64
+set GT_PLATFORM=x64
 shift
 goto :loop
 
@@ -61,17 +61,17 @@ if "%TOOLCHAIN%" == "" goto :msvc15
 if "%TARGET_CPU%" == "" goto :x64
 if "%PROJECT_NAME%" == "" set PROJECT_NAME=GameTrainer
 if "%CONFIGURATION%" == "" set CONFIGURATION=Release
-if "%MY_VERSION%" == "" set MY_VERSION=master
+if "%GT_VERSION%" == "" set GT_VERSION=master
 
 set CMAKE_CONFIGURE_FLAGS= ^
 	-B build ^
 	-S . ^
 	-G "%CMAKE_GENERATOR%%CMAKE_GENERATOR_SUFFIX%"%CMAKE_GENERATOR_ARCH% ^
-	-DMY_CONFIGURATION=%CONFIGURATION% ^
-	-DMY_PLATFORM=%MY_PLATFORM% ^
-	-DMY_PROJECT_NAME=%PROJECT_NAME% ^
-	-DMY_PROJECT_VERSION=%MY_VERSION% ^
-	-DMY_TOOLCHAIN=%TOOLCHAIN% ^
+	-DGT_CONFIGURATION=%CONFIGURATION% ^
+	-DGT_PLATFORM=%GT_PLATFORM% ^
+	-DGT_PROJECT_NAME=%PROJECT_NAME% ^
+	-DGT_PROJECT_VERSION=%GT_VERSION% ^
+	-DGT_TOOLCHAIN=%TOOLCHAIN% ^
 	.
 
 set CMAKE_BUILD_FLAGS= ^
