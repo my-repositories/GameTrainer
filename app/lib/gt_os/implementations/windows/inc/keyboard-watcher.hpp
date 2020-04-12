@@ -3,9 +3,9 @@
 
 #include <map>
 #include <vector>
-#include <windows.h>
+#include <Windows.h>
 
-namespace GameTrainer::mylib::windows
+namespace gt::os
 {
     class KeyboardWatcher
     {

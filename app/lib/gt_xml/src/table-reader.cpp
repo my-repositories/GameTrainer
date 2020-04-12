@@ -1,6 +1,6 @@
-#include <table-reader.hpp>
+#include <gt_xml/table-reader.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     TableReader::TableReader(const char *filePath)
     {

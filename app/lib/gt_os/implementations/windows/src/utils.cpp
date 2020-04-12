@@ -1,6 +1,6 @@
 #include <utils.hpp>
 
-namespace GameTrainer::mylib::windows
+namespace gt::os
 {
     void playSound(const char* sound)
     {

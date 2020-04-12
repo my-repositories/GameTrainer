@@ -1,9 +1,9 @@
 function(FIND_LIB ARG_NAME LIB_NAME)
     set(
             LIB_PATHS_TO_FIND
-            "C:/Program Files (x86)/Windows Kits/*/Lib/*/*/${MY_PLATFORM}"
-            "C:/Windows Kits/*/Lib/*/*/${MY_PLATFORM}"
-            "C:/Program Files/Windows Kits/*/Lib/*/*/${MY_PLATFORM}"
+            "C:/Program Files (x86)/Windows Kits/*/Lib/*/*/${GT_PLATFORM}"
+            "C:/Windows Kits/*/Lib/*/*/${GT_PLATFORM}"
+            "C:/Program Files/Windows Kits/*/Lib/*/*/${GT_PLATFORM}"
     )
 
     set(LIB_FOUND_PATHS "")

@@ -3,9 +3,9 @@
 
 #include <string>
 
-#include <setters/table-setter.hpp>
+#include <gt_xml/setters/table-setter.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     class OffsetsSetter : public TableSetter
     {

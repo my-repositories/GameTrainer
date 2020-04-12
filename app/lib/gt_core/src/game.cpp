@@ -1,8 +1,7 @@
-#include <game.hpp>
+#include <gt_core/game.hpp>
 
-namespace GameTrainer::app
+namespace gt::core
 {
-    using namespace GameTrainer::mylib;
     Game::Game(DWORD processId)
     {
         this->processId = processId;
@@ -14,7 +13,7 @@ namespace GameTrainer::app
         CloseHandle(this->process);
     }
 
-    void Game::updateValue(const GameTrainer::mylib::xml::CheatEntry* entry, const float valueToAdd)
+    void Game::updateValue(const gt::xml::CheatEntry* entry, const float valueToAdd)
     {
 //        if (temp) // "entry" == "Float"
 //        {
@@ -27,7 +26,7 @@ namespace GameTrainer::app
 //        }
     }
 
-    DWORD_PTR Game::getValueAddress(const GameTrainer::mylib::xml::CheatEntry* entry) const
+    DWORD_PTR Game::getValueAddress(const gt::xml::CheatEntry* entry) const
     {
         DWORD_PTR valueAddress;
 #ifdef _WIN64
@@ -36,7 +35,7 @@ namespace GameTrainer::app
         const short dwSize = 4;
 #endif
 
-        auto moduleAddress = windows::getModuleAddress(entry->module, this->processId);
+        auto moduleAddress = os::getModuleAddress(entry->module, this->processId);
         auto baseAddress = moduleAddress + entry->address;
         ReadProcessMemory(this->process, (LPCVOID)baseAddress, &valueAddress, dwSize, nullptr);
 

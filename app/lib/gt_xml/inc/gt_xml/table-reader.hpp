@@ -4,9 +4,9 @@
 #include <filesystem>
 #include <iostream>
 
-#include <table-mediator.hpp>
+#include <gt_xml/table-mediator.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     class TableReader
     {

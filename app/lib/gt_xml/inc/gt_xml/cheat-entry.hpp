@@ -3,7 +3,7 @@
 
 #include <Windows.h>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     struct CheatEntry
     {

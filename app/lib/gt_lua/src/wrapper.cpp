@@ -1,6 +1,6 @@
-#include <wrapper.hpp>
+#include <gt_lua/wrapper.hpp>
 
-namespace GameTrainer::mylib::lua
+namespace gt::lua
 {
     LuaWrapper::LuaWrapper()
         : LuaWrapper(luaL_newstate())

@@ -7,9 +7,9 @@
 
 #include <lua.h>
 
-#include <stack-cleaner.hpp>
+#include <gt_lua/stack-cleaner.hpp>
 
-namespace GameTrainer::mylib::lua
+namespace gt::lua
 {
     struct ValueReader
     {

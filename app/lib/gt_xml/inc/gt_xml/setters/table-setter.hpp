@@ -3,9 +3,9 @@
 
 #include <fstream>
 
-#include <cheat-entry.hpp>
+#include <gt_xml/cheat-entry.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     class TableSetter
     {

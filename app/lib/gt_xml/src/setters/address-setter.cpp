@@ -1,6 +1,6 @@
-#include <setters/address-setter.hpp>
+#include <gt_xml/setters/address-setter.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     AddressSetter::AddressSetter(std::ifstream* file)
             : TableSetter(file)

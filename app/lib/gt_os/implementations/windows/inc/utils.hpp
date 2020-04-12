@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 
-namespace GameTrainer::mylib::windows
+namespace gt::os
 {
     void playSound(const char* sound);
     void setConsoleTitle(const char* title);

@@ -5,14 +5,13 @@
 #include <utility>
 
 #include <game.hpp>
-#include <wrapper.hpp>
 #include <keyboard-watcher.hpp>
 #include <utils.hpp>
 #include <window-manager.hpp>
 
-namespace GameTrainer::app
+namespace gt::core
 {
-    void loadLuaState(GameTrainer::mylib::lua::LuaWrapper &lua);
+    void loadLuaState(gt::lua::LuaWrapper &lua);
 
     class Trainer
     {
@@ -33,7 +32,7 @@ namespace GameTrainer::app
 
     private:
         const std::string title;
-        GameTrainer::mylib::windows::WindowManager *windowManager;
+        gt::os::WindowManager *windowManager;
     };
 }
 

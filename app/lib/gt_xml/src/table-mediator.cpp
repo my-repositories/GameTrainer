@@ -1,6 +1,6 @@
-#include <table-mediator.hpp>
+#include <gt_xml/table-mediator.hpp>
 
-namespace GameTrainer::mylib::xml {
+namespace gt::xml {
     TableMediator::TableMediator(std::ifstream *file)
     {
         this->setters.push_back(new DescriptionSetter(file));

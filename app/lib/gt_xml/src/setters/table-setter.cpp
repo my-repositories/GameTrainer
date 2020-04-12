@@ -1,6 +1,6 @@
-#include <setters/table-setter.hpp>
+#include <gt_xml/setters/table-setter.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     TableSetter::TableSetter(std::ifstream *file)
     {

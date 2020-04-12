@@ -8,13 +8,13 @@
 
 #include <lua.hpp>
 
-#include <error-handler.hpp>
-#include <stack-cleaner.hpp>
-#include <state-pusher.hpp>
-#include <value-reader.hpp>
-#include <table-reader.hpp>
+#include <gt_lua/error-handler.hpp>
+#include <gt_lua/stack-cleaner.hpp>
+#include <gt_lua/state-pusher.hpp>
+#include <gt_lua/value-reader.hpp>
+#include <gt_xml/table-reader.hpp>
 
-namespace GameTrainer::mylib::lua
+namespace gt::lua
 {
     class LuaWrapper
     {

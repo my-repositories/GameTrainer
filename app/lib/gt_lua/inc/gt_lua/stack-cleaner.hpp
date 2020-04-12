@@ -3,7 +3,7 @@
 
 #include <lua.h>
 
-namespace GameTrainer::mylib::lua
+namespace gt::lua
 {
     class LuaStackCleaner
     {

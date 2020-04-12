@@ -1,14 +1,12 @@
-#include <trainer.hpp>
+#include <gt_core/trainer.hpp>
 
-namespace GameTrainer::app
+namespace gt::core
 {
-    using namespace GameTrainer::mylib;
-
     Trainer::Trainer(std::string trainerTitle) :
             title(std::move(trainerTitle))
     {
-        windows::setConsoleTitle(this->title.c_str());
-        this->windowManager = new windows::WindowManager(this->title);
+        os::setConsoleTitle(this->title.c_str());
+        this->windowManager = new os::WindowManager(this->title);
     }
 
     Trainer::~Trainer()
@@ -32,7 +30,7 @@ namespace GameTrainer::app
 
         void (*lambada)(xml::CheatEntry*, float) = [](xml::CheatEntry* entry, float valueToAdd)
         {
-            DWORD processId = windows::getProcessIdByName("KillingFloor.exe");
+            DWORD processId = os::getProcessIdByName("KillingFloor.exe");
 
             Game game(processId);
             game.updateValue(entry, valueToAdd);
@@ -40,7 +38,7 @@ namespace GameTrainer::app
 
         lua.registerFunction("addValueTo", lambada);
 
-        lua.registerFunction("playSound", windows::playSound);
+        lua.registerFunction("playSound", os::playSound);
 
         lua.registerFunction("readFile", lua::LuaWrapper::createUserData);
 
@@ -49,9 +47,9 @@ namespace GameTrainer::app
         const auto registeredKeys = lua.getVector<int>((char *) "registeredKeys");
         const char* processName = *lua.getValue<char*>((char *) "processName");
         std::cout << processName << std::endl;
-        windows::KeyboardWatcher keyboardWatcher(registeredKeys);
+        os::KeyboardWatcher keyboardWatcher(registeredKeys);
 
-        for (;; windows::sleep(50))
+        for (;; os::sleep(50))
         {
             // TODO: remove it!
             if(keyboardWatcher.isKeyDown(VK_F13))

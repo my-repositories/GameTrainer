@@ -3,12 +3,12 @@
 
 #include <vector>
 
-#include <setters/description-setter.hpp>
-#include <setters/variable-type-setter.hpp>
-#include <setters/address-setter.hpp>
-#include <setters/offsets-setter.hpp>
+#include <gt_xml/setters/description-setter.hpp>
+#include <gt_xml/setters/variable-type-setter.hpp>
+#include <gt_xml/setters/address-setter.hpp>
+#include <gt_xml/setters/offsets-setter.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     class TableMediator
     {

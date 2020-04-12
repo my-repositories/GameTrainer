@@ -4,7 +4,7 @@
 #include <string>
 #include <Windows.h>
 
-namespace GameTrainer::mylib::windows
+namespace gt::os
 {
     class WindowManager
     {

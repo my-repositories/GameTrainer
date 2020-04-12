@@ -1,6 +1,6 @@
-#include <setters/description-setter.hpp>
+#include <gt_xml/setters/description-setter.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     DescriptionSetter::DescriptionSetter(std::ifstream* file)
             : TableSetter(file)

@@ -1,6 +1,6 @@
-#include <setters/offsets-setter.hpp>
+#include <gt_xml/setters/offsets-setter.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     OffsetsSetter::OffsetsSetter(std::ifstream* file)
             : TableSetter(file)

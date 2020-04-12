@@ -1,6 +1,6 @@
-#include <setters/variable-type-setter.hpp>
+#include <gt_xml/setters/variable-type-setter.hpp>
 
-namespace GameTrainer::mylib::xml
+namespace gt::xml
 {
     VariableTypeSetter::VariableTypeSetter(std::ifstream* file)
             : TableSetter(file)

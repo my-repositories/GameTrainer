@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include <error-handler.hpp>
+#include <gt_lua/error-handler.hpp>
 
-namespace GameTrainer::mylib::lua
+namespace gt::lua
 {
     int errorHandler(lua_State *state)
     {

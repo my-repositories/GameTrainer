@@ -5,7 +5,7 @@
 
 #include <lua.hpp>
 
-namespace GameTrainer::mylib::lua
+namespace gt::lua
 {
     int errorHandler(lua_State *state);
 }
