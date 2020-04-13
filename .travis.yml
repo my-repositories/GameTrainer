@@ -17,6 +17,14 @@ before_install:
 #    - pyenv global 3.6.3
 #    - pip3 install --user cpp-coveralls pyyaml
     - cd ..
+    # Download and install recent cmake
+    - |
+        if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
+          CMAKE_URL="http://www.cmake.org/files/v3.5/cmake-3.5.1-Linux-x86_64.tar.gz"
+          mkdir -p ${DEPS_DIR}/cmake
+          travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C ${DEPS_DIR}/cmake
+          export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+        fi
     - make A=x64
 
 #script:
