@@ -37,6 +37,14 @@ if(GT_CONFIGURATION STREQUAL "Debug")
     )
 endif()
 
+target_include_directories(
+        ${GT_PROJECT_NAME} PRIVATE
+        ${PROJECT_ROOT_DIR}/app/lib/gt_os/inc
+        ${PROJECT_ROOT_DIR}/app/lib/gt_xml/inc
+        ${PROJECT_ROOT_DIR}/app/lib/gt_lua/inc
+        ${PROJECT_ROOT_DIR}/app/lib/gt_core/inc
+)
+
 include(${PROJECT_ROOT_DIR}/tools/find_lib.cmake)
 FIND_LIB(LIBWMM "winmm.lib")
 message(STATUS "LIBWMM: ${LIBWMM}")
@@ -51,11 +59,11 @@ endif()
 
 target_link_libraries(
         ${GT_PROJECT_NAME} PRIVATE
+        ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.${GT_LIB_SUFFIX}
         gt_os
         gt_xml
         gt_lua
         gt_core
-        ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.${GT_LIB_SUFFIX}
 )
 
 if(LIBWMM)

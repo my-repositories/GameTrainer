@@ -2,6 +2,7 @@
 
 namespace gt::os
 {
+    OsApi WindowManager::osApi;
     HWND WindowManager::window = nullptr;
     std::string WindowManager::title;
 

@@ -7,12 +7,12 @@ else
 	CONFIGURATION = Release
 endif
 
-ifneq ($(strip $(A)), x64)
-	ARCH="Win32"
-	PLATFORM = x86
-else
-	ARCH="x64"
+ifeq ($(strip $(A)), x64)
+	ARCH=x64
 	PLATFORM = x64
+else
+	ARCH=Win32
+	PLATFORM = x86
 endif
 
 UNAME := $(shell uname)
@@ -43,7 +43,6 @@ install:
 	.\\.ci\\install-testing-deps.bat
 
 clean:
-	echo ${GENERATOR_PARAMS}
 	rm -rf ${BIN_DIR_NAME} ${OBJ_DIR_NAME}
 
 configure:
