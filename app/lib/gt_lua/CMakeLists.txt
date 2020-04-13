@@ -9,6 +9,7 @@ message(STATUS, ${PROJECT_ROOT_DIR}/deps/lua/inc-5.3.4)
 target_include_directories(
         ${GT_LUA_TARGET_NAME} PUBLIC
         ${PROJECT_ROOT_DIR}/deps/lua/inc-5.3.4
+        ${PROJECT_ROOT_DIR}/app/lib/gt_os/inc
         ${PROJECT_ROOT_DIR}/app/lib/gt_xml/inc
         ${GT_LUA_DIR}/inc
 )

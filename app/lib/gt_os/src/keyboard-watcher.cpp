@@ -12,12 +12,12 @@ namespace gt::os
 
     bool KeyboardWatcher::isKeyDown(const int key) const
     {
-        return (GetAsyncKeyState(key) & 0x8000) > 0; // NOLINT(hicpp-signed-bitwise)
+        return (this->osApi.getAsyncKeyState(key) & 0x8000) > 0; // NOLINT(hicpp-signed-bitwise)
     }
 
     bool KeyboardWatcher::isKeyPressed(const int key)
     {
-        auto currentState = GetAsyncKeyState(key);
+        auto currentState = this->osApi.getAsyncKeyState(key);
 
         if ((currentState & 0x8000) && !this->states[key]) // NOLINT(hicpp-signed-bitwise)
         {

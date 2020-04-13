@@ -4,7 +4,6 @@
 #include <iostream>
 #include <optional>
 #include <vector>
-#include <Windows.h>
 
 #include <lua.hpp>
 

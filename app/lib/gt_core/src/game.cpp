@@ -5,12 +5,12 @@ namespace gt::core
     Game::Game(DWORD processId)
     {
         this->processId = processId;
-        this->process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, this->processId); // NOLINT(hicpp-signed-bitwise)
+        this->process = this->osApi.openProcess(PROCESS_ALL_ACCESS, FALSE, this->processId); // NOLINT(hicpp-signed-bitwise)
     }
 
     Game::~Game()
     {
-        CloseHandle(this->process);
+        this->osApi.closeHandle(this->process);
     }
 
     void Game::updateValue(const gt::xml::CheatEntry* entry, const float valueToAdd)
@@ -20,9 +20,9 @@ namespace gt::core
         const DWORD_PTR ptr = this->getValueAddress(entry);
         float currentValue = 0;
 
-        ReadProcessMemory(this->process, (LPVOID)ptr, &currentValue, entry->size, nullptr);
+        this->osApi.readProcessMemory(this->process, (LPVOID)ptr, &currentValue, entry->size, nullptr);
         currentValue += valueToAdd;
-        WriteProcessMemory(this->process, (LPVOID)ptr, &currentValue, entry->size, nullptr);
+        this->osApi.writeProcessMemory(this->process, (LPVOID)ptr, &currentValue, entry->size, nullptr);
 //        }
     }
 
@@ -30,14 +30,14 @@ namespace gt::core
     {
         DWORD_PTR valueAddress;
 #ifdef _WIN64
-        const short dwSize = isWow64() ? 4 : 8;
+        const short dwSize = this->isWow64() ? 4 : 8;
 #else
         const short dwSize = 4;
 #endif
 
         auto moduleAddress = os::getModuleAddress(entry->module, this->processId);
         auto baseAddress = moduleAddress + entry->address;
-        ReadProcessMemory(this->process, (LPCVOID)baseAddress, &valueAddress, dwSize, nullptr);
+        this->osApi.readProcessMemory(this->process, (LPCVOID)baseAddress, &valueAddress, dwSize, nullptr);
 
         if (entry->offsetsCount == -1)
         {
@@ -47,7 +47,7 @@ namespace gt::core
         for (int i = 1; i < entry->offsetsCount; i++)
         {
             auto offset = valueAddress + entry->offsets[entry->offsetsCount - i];
-            ReadProcessMemory(this->process, (LPCVOID)offset, &valueAddress, dwSize, nullptr);
+            this->osApi.readProcessMemory(this->process, (LPCVOID)offset, &valueAddress, dwSize, nullptr);
         }
 
         return valueAddress + entry->offsets[0];
@@ -60,7 +60,7 @@ namespace gt::core
         typedef BOOL(WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
 
         LPFN_ISWOW64PROCESS fnIsWow64Process;
-        fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
+        fnIsWow64Process = (LPFN_ISWOW64PROCESS)this->osApi.getProcAddress(this->osApi.getModuleHandle(TEXT("kernel32")), "IsWow64Process");
 
         if (nullptr != fnIsWow64Process)
         {

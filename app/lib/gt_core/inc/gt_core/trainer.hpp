@@ -32,7 +32,7 @@ namespace gt::core
 
     private:
         const std::string title;
-        gt::os::WindowManager *windowManager;
+        gt::os::WindowManager* windowManager;
     };
 }
 

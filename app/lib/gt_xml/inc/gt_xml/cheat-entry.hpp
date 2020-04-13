@@ -1,7 +1,7 @@
 #ifndef GAMETRAINER_CHEAT_ENTRY_HPP
 #define GAMETRAINER_CHEAT_ENTRY_HPP
 
-#include <Windows.h>
+#include <gt_os/os-definitions.hpp>
 
 namespace gt::xml
 {

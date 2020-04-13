@@ -3,7 +3,8 @@
 
 #include <map>
 #include <vector>
-#include <Windows.h>
+
+#include <gt_os/os-api.hpp>
 
 namespace gt::os
 {
@@ -17,6 +18,7 @@ namespace gt::os
         [[nodiscard]] bool isKeyPressed(int key);
 
     private:
+        OsApi osApi;
         std::map<int, bool> states;
     };
 }
