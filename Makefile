@@ -7,21 +7,23 @@ else
 	CONFIGURATION = Release
 endif
 
-ifeq ($(strip $(A)), x64)
-	ARCH="x64"
-	PLATFORM = x64
-else
+ifneq ($(strip $(A)), x64)
 	ARCH="Win32"
 	PLATFORM = x86
+else
+	ARCH="x64"
+	PLATFORM = x64
 endif
 
 UNAME := $(shell uname)
 ifeq ($(findstring MINGW,$(UNAME)),MINGW)
     GENERATOR = "Visual Studio 16 2019"
     GENERATOR_PARAMS=-G ${GENERATOR} -A ${ARCH}
+    GT_OS=win
 else
     GENERATOR = "Unix Makefiles"
     GENERATOR_PARAMS=-G ${GENERATOR}
+    GT_OS=unix
 endif
 
 PROJECT_NAME = GameTrainer
@@ -49,6 +51,7 @@ configure:
 	-B ${OBJ_DIR} \
 	-S ${SOURCE_DIR} \
 	${GENERATOR_PARAMS} \
+	-DGT_OS=${GT_OS} \
 	-DGT_CONFIGURATION=${CONFIGURATION} \
 	-DGT_PLATFORM=${PLATFORM} \
 	-DGT_PROJECT_NAME=${PROJECT_NAME} \

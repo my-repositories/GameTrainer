@@ -37,14 +37,17 @@ if(GT_CONFIGURATION STREQUAL "Debug")
     )
 endif()
 
-target_link_directories(
-        ${GT_PROJECT_NAME} PRIVATE
-        ${GT_APP_DIR}/deps/lib
-)
-
 include(${PROJECT_ROOT_DIR}/tools/find_lib.cmake)
 FIND_LIB(LIBWMM "winmm.lib")
 message(STATUS "LIBWMM: ${LIBWMM}")
+
+if(GT_OS STREQUAL "win")
+set(GT_LIB_SUFFIX lib)
+elseif(APPLE)
+set(GT_LIB_SUFFIX a)
+else()
+set(GT_LIB_SUFFIX so)
+endif()
 
 target_link_libraries(
         ${GT_PROJECT_NAME} PRIVATE
@@ -52,7 +55,7 @@ target_link_libraries(
         gt_xml
         gt_lua
         gt_core
-        ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.lib
+        ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.${GT_LIB_SUFFIX}
 )
 
 if(LIBWMM)
