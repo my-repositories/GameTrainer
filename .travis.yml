@@ -27,6 +27,7 @@ before_install:
         fi
     - ls -lah cmake
     - cd cmake
+    - mkdir build
     - cmake -B build . && cmake --build build
     - ls -lah
     - ls -lah build
