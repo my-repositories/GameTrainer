@@ -12,17 +12,17 @@ namespace gt::os
 
     void WindowManager::show()
     {
-        ShowWindow(WindowManager::window, SW_RESTORE);
-        SetForegroundWindow(WindowManager::window);
+        WindowManager::osApi.showWindow(WindowManager::window, SW_RESTORE);
+        WindowManager::osApi.setForegroundWindow(WindowManager::window);
     }
 
     bool WindowManager::isOpened()
     {
-        HANDLE mutex = CreateMutex(nullptr, TRUE, WindowManager::title.c_str());
+        HANDLE mutex = WindowManager::osApi.createMutex(nullptr, TRUE, WindowManager::title.c_str());
 
-        if (mutex == nullptr || GetLastError() == ERROR_ALREADY_EXISTS)
+        if (mutex == nullptr || WindowManager::osApi.getLastError() == ERROR_ALREADY_EXISTS)
         {
-            if (EnumWindows(&WindowManager::enumWindowsProc, NULL) && window != nullptr)
+            if (WindowManager::osApi.enumWindows(&WindowManager::enumWindowsProc, NULL) && window != nullptr)
             {
                 return true;
             }
@@ -34,8 +34,8 @@ namespace gt::os
     BOOL CALLBACK WindowManager::enumWindowsProc(HWND hwnd, LPARAM) {
         char buffer[255];
 
-        if (GetWindowText(hwnd, buffer, sizeof(buffer))) {
-            CharToOem(buffer, buffer);
+        if (WindowManager::osApi.getWindowText(hwnd, buffer, sizeof(buffer))) {
+            WindowManager::osApi.charToOem(buffer, buffer);
             if (
                     !strcmp(buffer, WindowManager::title.c_str())
                     || !strcmp(buffer, ("Select " + WindowManager::title).c_str())
@@ -43,7 +43,7 @@ namespace gt::os
             {
                 buffer[0] = '\0';
 
-                if (GetClassName(hwnd, buffer, sizeof(buffer)))
+                if (WindowManager::osApi.getClassName(hwnd, buffer, sizeof(buffer)))
                 {
                     if (!strcmp("ConsoleWindowClass", buffer))
                     {

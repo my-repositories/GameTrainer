@@ -2,7 +2,8 @@
 #define GAMETRAINER_WINDOW_MANAGER_HPP
 
 #include <string>
-#include <Windows.h>
+
+#include <gt_os/os-api.hpp>
 
 namespace gt::os
 {
@@ -16,6 +17,7 @@ namespace gt::os
         [[nodiscard]] bool isOpened();
 
     private:
+        static OsApi osApi;
         static HWND window;
         static std::string title;
 
