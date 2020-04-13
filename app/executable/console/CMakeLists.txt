@@ -55,3 +55,12 @@ target_link_libraries(
         ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.lib
         ${LIBWMM}
 )
+
+if(LIBWMM)
+    target_link_libraries(
+            ${GT_PROJECT_NAME} PRIVATE
+            ${LIBWMM}
+    )
+endif()
+
+

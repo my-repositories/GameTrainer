@@ -8,16 +8,25 @@ else
 endif
 
 ifeq ($(strip $(A)), x64)
-	ARCH = x64
+	ARCH="x64"
 	PLATFORM = x64
 else
-	ARCH = Win32
+	ARCH="Win32"
 	PLATFORM = x86
+endif
+
+UNAME := $(shell uname)
+ifeq ($(findstring MINGW,$(UNAME)),MINGW)
+    GENERATOR = "Visual Studio 16 2019"
+    GENERATOR_PARAMS=-G ${GENERATOR} -A ${ARCH}
+else
+    GENERATOR = "Unix Makefiles"
+    GENERATOR_PARAMS=-G ${GENERATOR}
 endif
 
 PROJECT_NAME = GameTrainer
 PROJECT_VERSION = "1.2.3"
-GENERATOR = "Visual Studio 16 2019"
+
 TOOLCHAIN = msvc15
 
 SOURCE_DIR = .
@@ -32,14 +41,14 @@ install:
 	.\\.ci\\install-testing-deps.bat
 
 clean:
+	echo ${GENERATOR_PARAMS}
 	rm -rf ${BIN_DIR_NAME} ${OBJ_DIR_NAME}
 
 configure:
 	cmake \
 	-B ${OBJ_DIR} \
 	-S ${SOURCE_DIR} \
-	-G ${GENERATOR} \
-	-A ${ARCH} \
+	${GENERATOR_PARAMS} \
 	-DGT_CONFIGURATION=${CONFIGURATION} \
 	-DGT_PLATFORM=${PLATFORM} \
 	-DGT_PROJECT_NAME=${PROJECT_NAME} \
