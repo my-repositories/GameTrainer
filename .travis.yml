@@ -14,19 +14,20 @@ addons:
 before_install:
     - cd temp
     - git clone https://github.com/google/googletest.git gtest
-    - pyenv global 3.6.3
-    - pip3 install --user cpp-coveralls pyyaml
+#    - pyenv global 3.6.3
+#    - pip3 install --user cpp-coveralls pyyaml
+    - make A=x64
     - cd ..
 
-script:
-    - cd temp
-    - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCOVERAGE=1 .
-    - cmake --build .
-    - ./tests
-    - cd ..
-
-after_success:
-    - cd temp
-    - cp ./.ci/.coveralls.yml ./
-    - coveralls --skip-ssl-verify --root . -E ".*CMakeFiles.*"
-    - cd ..
+#script:
+#    - cd temp
+#    - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCOVERAGE=1 .
+#    - cmake --build .
+#    - ./tests
+#    - cd ..
+#
+#after_success:
+#    - cd temp
+#    - cp ./.ci/.coveralls.yml ./
+#    - coveralls --skip-ssl-verify --root . -E ".*CMakeFiles.*"
+#    - cd ..
