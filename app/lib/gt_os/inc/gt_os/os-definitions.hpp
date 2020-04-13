@@ -14,17 +14,23 @@
 #ifndef NULL
 #define NULL 0
 #endif
+#ifndef MAX_PATH
+#define MAX_PATH 255
+#endif
 #define FALSE 0
 #define TRUE 1
+#define MAX_MODULE_NAME32 255
 #define ERROR_ALREADY_EXISTS 183L
 #define __TEXT(quote) quote
 #define TEXT(quote) __TEXT(quote)
 #define PROCESS_ALL_ACCESS        (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
                                    0xFFFF)
 
+#define BYTE unsigned char
 #define SHORT short
 #define BOOL int
 #define LPARAM long
+#define LONG long
 #define DWORD unsigned long
 #define ULONG_PTR unsigned long
 #define LPVOID void*

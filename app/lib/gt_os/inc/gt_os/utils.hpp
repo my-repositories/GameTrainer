@@ -1,8 +1,7 @@
 #ifndef GAMETRAINER_UTILS_HPP
 #define GAMETRAINER_UTILS_HPP
 
-#include <Windows.h>
-#include <TlHelp32.h>
+#include <gt_os/os-definitions.hpp>
 
 namespace gt::os
 {
