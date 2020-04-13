@@ -17,9 +17,9 @@ before_install:
 #    - pyenv global 3.6.3
 #    - pip3 install --user cpp-coveralls pyyaml
     - cd ..
-    - sudo apt-get update
-    - sudo apt-get install cmake
-    - sudo apt-get upgrade
+    - sudo apt-get update -y
+    - sudo apt-get install cmake -y
+    - sudo apt-get upgrade -y
     - cmake --version
     - make A=x64
 
