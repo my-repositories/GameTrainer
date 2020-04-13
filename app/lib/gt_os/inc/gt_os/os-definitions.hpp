@@ -105,7 +105,7 @@ inline WINBASEAPI BOOL WINAPI SetConsoleTitle(_In_ LPCSTR lpConsoleTitle) {
 }
 
 inline WINBASEAPI _Success_(return != 0 && return < nBufferLength) DWORD WINAPI
-GetCurrentDirectoryA(
+GetCurrentDirectory(
     _In_ DWORD nBufferLength,
     _Out_writes_to_opt_(nBufferLength,return + 1) LPSTR lpBuffer
 ) {
