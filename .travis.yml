@@ -26,6 +26,8 @@ before_install:
           export PATH=cmake/bin:${PATH}
         fi
     - cmake --version
+    - which cmake
+    - ./cmake/bin/cmake --version
     - make A=x64
 
 #script:
