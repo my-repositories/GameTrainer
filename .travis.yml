@@ -19,7 +19,7 @@ before_install:
     - cd ..
     - sudo apt-get update -y
     - sudo apt-get install cmake -y
-    - sudo apt-get upgrade -y
+    - sudo apt-get upgrade -y --allow-unauthenticated
     - cmake --version
     - make A=x64
 
