@@ -1,5 +1,5 @@
 dist: trusty
-sudo: false
+sudo: true
 language: cpp
 
 addons:
@@ -17,24 +17,10 @@ before_install:
 #    - pyenv global 3.6.3
 #    - pip3 install --user cpp-coveralls pyyaml
     - cd ..
-    # Download and install recent cmake
-    - |
-        if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
-          CMAKE_URL="https://github.com/Kitware/CMake/releases/download/v3.17.1/cmake-3.17.1.tar.gz"
-          mkdir -p cmake
-          travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-          export PATH=cmake/bin:${PATH}
-        fi
-    - ls -lah cmake
-    - cd cmake
-    - mkdir build
-    - cmake -B build . && cmake --build build
-    - ls -lah
-    - ls -lah build
-    - ls -lah bin
-    - cd ..
-    - which cmake
-    - ./cmake/bin/cmake --version
+    - sudo apt-get update
+    - sudo apt-get install cmake
+    - sudo apt-get upgrade
+    - cmake --version
     - make A=x64
 
 #script:
