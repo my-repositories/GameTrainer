@@ -17,6 +17,11 @@ namespace gt::xml
 
         size_t offset = buffer.find('>') + 2;
         size_t length = buffer.find('/') - offset - 2;
+
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
         strcpy_s(entry.description, (char*) (buffer.substr(offset, length).c_str()));
+#else
+        strcpy(entry.description, (char*) (buffer.substr(offset, length).c_str()));
+#endif
     }
 }

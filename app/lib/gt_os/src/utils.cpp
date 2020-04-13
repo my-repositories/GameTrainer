@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include <gt_os/utils.hpp>
 #include <gt_os/os-tlhelp.hpp>
 

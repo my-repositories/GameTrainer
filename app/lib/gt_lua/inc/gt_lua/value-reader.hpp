@@ -56,7 +56,7 @@ namespace gt::lua
         {
             static auto read(lua_State *luaState)
             {
-                throw std::exception("Invalid type for struct 'valueReader'");
+                throw std::exception();
             }
         };
 

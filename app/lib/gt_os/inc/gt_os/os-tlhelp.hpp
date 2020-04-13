@@ -6,9 +6,10 @@
 #ifdef OS_WINDOWS
 #include <TlHelp32.h>
 #else
+#define TH32CS_SNAPPROCESS  0x00000002
 #define TH32CS_SNAPMODULE   0x00000008
 #define TH32CS_SNAPMODULE32 0x00000010
-#define RtlZeroMemory(Destination,Length) memset((Destination),0,(Length))
+#define ZeroMemory(Destination,Length) memset((Destination),0,(Length))
 
 typedef struct tagMODULEENTRY32
 {
@@ -38,27 +39,30 @@ typedef struct tagPROCESSENTRY32
     CHAR    szExeFile[MAX_PATH];    // Path
 } PROCESSENTRY32;
 
-HANDLE WINAPI CreateToolhelp32Snapshot(DWORD dwFlags, DWORD th32ProcessID) {
+typedef MODULEENTRY32 *LPMODULEENTRY32;
+typedef PROCESSENTRY32 *LPPROCESSENTRY32;
+
+inline HANDLE WINAPI CreateToolhelp32Snapshot(DWORD dwFlags, DWORD th32ProcessID) {
     return nullptr;
 }
 
-BOOL WINAPI Module32First(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
+inline BOOL WINAPI Module32First(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
     return 1;
 }
 
-BOOL WINAPI Module32Next(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
+inline BOOL WINAPI Module32Next(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
     return 1;
 }
 
-WINBASEAPI BOOL WINAPI CloseHandle(_In_ _Post_ptr_invalid_ HANDLE hObject) {
+inline WINBASEAPI BOOL WINAPI CloseHandle(_In_ _Post_ptr_invalid_ HANDLE hObject) {
     return 1;
 }
 
-BOOL WINAPI Process32First(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
+inline BOOL WINAPI Process32First(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
     return 1;
 }
 
-BOOL WINAPI Process32Next(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
+inline BOOL WINAPI Process32Next(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
     return 1;
 }
 #endif

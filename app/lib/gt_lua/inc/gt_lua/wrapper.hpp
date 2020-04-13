@@ -84,10 +84,21 @@ namespace gt::lua
                 constexpr const size_t offsetsSize = sizeof(entry.offsets);
                 memcpy_s(field->offsets, offsetsSize, entry.offsets, offsetsSize);
 
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+                memcpy_s(field->offsets, offsetsSize, entry.offsets, offsetsSize);
+#else
+                memcpy(field->offsets, entry.offsets, offsetsSize);
+#endif
+
                 field->address = entry.address;
 
                 constexpr const size_t moduleCount = sizeof(field->module)/sizeof(field->module[0]);
+
+#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
                 strncpy_s(field->module, entry.module, moduleCount);
+#else
+                strncpy(field->module, entry.module, moduleCount);
+#endif
 
                 field->description[0] = '\0';
                 field->variableType[0] = '\0';

@@ -19,18 +19,26 @@
 #endif
 #define FALSE 0
 #define TRUE 1
+#define SND_APPLICATION 0x0080
+#define SND_ASYNC 0x0001
+#define SND_NODEFAULT 0x0002
 #define MAX_MODULE_NAME32 255
 #define ERROR_ALREADY_EXISTS 183L
 #define __TEXT(quote) quote
 #define TEXT(quote) __TEXT(quote)
+#define STANDARD_RIGHTS_REQUIRED         (0x000F0000L)
+#define SYNCHRONIZE                      (0x00100000L)
 #define PROCESS_ALL_ACCESS        (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
                                    0xFFFF)
 
+#define CHAR char
 #define BYTE unsigned char
 #define SHORT short
 #define BOOL int
+#define PBOOL int*
 #define LPARAM long
 #define LONG long
+#define size_t unsigned int
 #define DWORD unsigned long
 #define ULONG_PTR unsigned long
 #define LPVOID void*
@@ -45,6 +53,7 @@
 #define _Post_equals_last_error_
 #define WINAPI
 #define WINBASEAPI
+#define WINMMAPI
 #define WINUSERAPI
 #define CALLBACK
 #define _Post_ptr_invalid_
@@ -72,6 +81,20 @@ typedef struct _SECURITY_ATTRIBUTES {
     LPVOID lpSecurityDescriptor;
     BOOL bInheritHandle;
 } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
+
+inline WINMMAPI BOOL WINAPI PlaySoundA(
+    _In_opt_ LPCSTR pszSound,
+    _In_opt_ HMODULE hmod,
+    _In_ DWORD fdwSound
+    ) {
+    return 0;
+}
+
+inline WINBASEAPI VOID WINAPI Sleep(_In_ DWORD dwMilliseconds) {}
+
+inline WINBASEAPI BOOL WINAPI SetConsoleTitle(_In_ LPCSTR lpConsoleTitle) {
+    return 0;
+}
 #endif
 
 #endif //GAMETRAINER_OS_DEFINITIONS_HPP

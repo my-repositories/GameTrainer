@@ -168,7 +168,7 @@ namespace gt::os
 #ifdef OS_WINDOWS
             return ::GetProcAddress(hModule, lpProcName);
 #else
-            return 1;
+            return nullptr;
 #endif
         }
     };
