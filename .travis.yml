@@ -27,6 +27,8 @@ before_install:
         fi
     - cmake --version
     - which cmake
+    - ls -lah
+    - ls -lah cmake
     - ./cmake/bin/cmake --version
     - make A=x64
 
