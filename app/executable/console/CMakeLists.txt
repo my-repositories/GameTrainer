@@ -48,9 +48,9 @@ message(STATUS "LIBWMM: ${LIBWMM}")
 
 target_link_libraries(
         ${GT_PROJECT_NAME} PRIVATE
+        gt_os
         gt_xml
         gt_lua
-        gt_os
         gt_core
         ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.lib
         ${LIBWMM}
