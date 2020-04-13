@@ -25,10 +25,14 @@ before_install:
           travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
           export PATH=cmake/bin:${PATH}
         fi
-    - cmake --version
-    - which cmake
-    - ls -lah
     - ls -lah cmake
+    - cd cmake
+    - cmake -B build . && cmake --build build
+    - ls -lah
+    - ls -lah build
+    - ls -lah bin
+    - cd ..
+    - which cmake
     - ./cmake/bin/cmake --version
     - make A=x64
 
