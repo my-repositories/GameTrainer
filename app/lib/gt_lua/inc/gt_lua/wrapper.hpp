@@ -82,7 +82,6 @@ namespace gt::lua
                 field->offsetsCount = entry.offsetsCount;
 
                 constexpr const size_t offsetsSize = sizeof(entry.offsets);
-                memcpy_s(field->offsets, offsetsSize, entry.offsets, offsetsSize);
 
 #if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
                 memcpy_s(field->offsets, offsetsSize, entry.offsets, offsetsSize);

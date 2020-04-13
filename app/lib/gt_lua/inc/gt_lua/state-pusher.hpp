@@ -28,7 +28,7 @@ namespace gt::lua
         {
             static void push(lua_State *luaState, const T& arg)
             {
-                throw std::exception("Invalid type for struct 'StatePusher'");
+                throw std::exception();
             }
         };
 

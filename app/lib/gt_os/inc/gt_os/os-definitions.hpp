@@ -19,6 +19,12 @@
 #endif
 #define FALSE 0
 #define TRUE 1
+#define VK_SHIFT 0
+#define VK_CONTROL 0
+#define VK_MENU 0
+#define VK_F13 0
+#define VK_RETURN 0
+#define VK_SPACE 0
 #define SND_APPLICATION 0x0080
 #define SND_ASYNC 0x0001
 #define SND_NODEFAULT 0x0002
@@ -60,8 +66,10 @@
 #define _In_
 #define _In_opt_
 #define _In_reads_bytes_(size)
+#define _Inout_updates_z_(size)
 #define _Out_opt_
 #define _Out_writes_to_(size,count)
+#define _Out_writes_to_opt_(size,count)
 #define _Out_writes_bytes_to_(size,count)
 #define _Out_writes_(size)
 #define _Success_(expr)
@@ -94,6 +102,21 @@ inline WINBASEAPI VOID WINAPI Sleep(_In_ DWORD dwMilliseconds) {}
 
 inline WINBASEAPI BOOL WINAPI SetConsoleTitle(_In_ LPCSTR lpConsoleTitle) {
     return 0;
+}
+
+inline WINBASEAPI _Success_(return != 0 && return < nBufferLength) DWORD WINAPI
+GetCurrentDirectoryA(
+    _In_ DWORD nBufferLength,
+    _Out_writes_to_opt_(nBufferLength,return + 1) LPSTR lpBuffer
+) {
+    return 1;
+}
+
+inline WINBASEAPI LPSTR WINAPI lstrcat(
+    _Inout_updates_z_(_String_length_(lpString1) + _String_length_(lpString2) + 1) LPSTR lpString1,
+    _In_    LPCSTR lpString2
+    ) {
+    return nullptr;
 }
 #endif
 

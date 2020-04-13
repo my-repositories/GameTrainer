@@ -53,7 +53,6 @@ target_link_libraries(
         gt_lua
         gt_core
         ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.lib
-        ${LIBWMM}
 )
 
 if(LIBWMM)
