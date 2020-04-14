@@ -6,8 +6,7 @@ WORKDIR /project
 COPY ./ ./
 
 RUN \
-    cmake -B . -DCOVERAGE=1 . && \
-    cmake --build . && \
-    ./tests && \
+    make T=1 && \
+    ./build/Release-x64/tests/gt_os/Release/test_gt_os && \
     mv ./.ci/.coveralls.yml ./ && \
-    coveralls --root . -E ".*CMakeFiles.*" --skip-ssl-verify
+    coveralls --root build -E ".*CMakeFiles.*" --skip-ssl-verify

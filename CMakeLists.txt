@@ -1,36 +1,52 @@
+# Download https://cmake.org/download/
 cmake_minimum_required(VERSION 3.15)
 
-project(clang_travis_cmake_gtest_coveralls_example)
-set(CMAKE_C_STANDARD 99) # or delete it?
+set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(PROJECT_DEPS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+if (NOT DEFINED GT_PROJECT_NAME)
+    set(GT_PROJECT_NAME GameTrainer)
+endif()
+
+if (NOT DEFINED GT_PROJECT_VERSION)
+    set(GT_PROJECT_VERSION 0.0.1)
+endif()
+
+if (NOT DEFINED GT_CONFIGURATION)
+    set(GT_CONFIGURATION Debug)
+endif()
+
+if (NOT DEFINED GT_PLATFORM)
+    set(GT_PLATFORM x86)
+endif()
+
+if (NOT DEFINED GT_TOOLCHAIN)
+    set(GT_TOOLCHAIN msvc15)
+endif()
+
+set(CMAKE_CONFIGURATION_TYPES ${GT_CONFIGURATION} CACHE STRING "" FORCE)
+
 set(CMAKE_CXX_STANDARD 17)
-include(gtest.cmake)
+#set_target_properties(
+#        ${TARGET} PROPERTIES
+#        CXX_STANDARD 17
+#        CXX_STANDARD_REQUIRED YES
+#        CXX_EXTENSIONS NO
+#)
 
-SET(COVERAGE OFF CACHE BOOL "Coverage")
 
-add_executable(tests unit_tests.cpp)
+if(GT_CONFIGURATION STREQUAL "Debug")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRT")
+endif()
 
-find_package (Threads)
-target_link_libraries(
-        tests PRIVATE
-        gtest
-        --coverage
-        ${CMAKE_THREAD_LIBS_INIT}
-)
+project(${GT_PROJECT_NAME} VERSION ${GT_PROJECT_VERSION})
 
-if (MSVC)
-    message('IS MSVC')
-    target_compile_options(tests PRIVATE /std:c++17 /W4 /WX)
+add_subdirectory(app)
 
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Ox")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Od")
-
-    # VS 2017 removed tr1
-    add_definitions(-DGTEST_HAS_TR1_TUPLE=0)
-else()
-    message('ISN'T MSVC')
-    target_compile_options(tests PRIVATE -std=c++14 -g -Wall -Werror -Wextra -Wpedantic -Wconversion -Wswitch-default -Wswitch-enum -Wunreachable-code -Wwrite-strings -Wcast-align -Wshadow -Wundef)
-
-    if (COVERAGE)
-        target_compile_options(tests PRIVATE --coverage)
-    endif()
+if(GT_ENABLE_TESTING)
+    message(STATUS, ${GT_ENABLE_TESTING})
+    enable_testing()
+    add_subdirectory(${PROJECT_DEPS_DIR}/googletest)
+    add_subdirectory(tests)
 endif()

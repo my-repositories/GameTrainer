@@ -7,6 +7,12 @@ else
 	CONFIGURATION = Release
 endif
 
+ifeq ($(strip $(T)),)
+	GT_ENABLE_TESTING=0
+else
+	GT_ENABLE_TESTING=1
+endif
+
 ifeq ($(strip $(A)),)
 	ARCH=x64
 	PLATFORM = x64
@@ -57,6 +63,7 @@ configure:
 	-S ${SOURCE_DIR} \
 	${GENERATOR_PARAMS} \
 	-DGT_OS=${GT_OS} \
+	-DGT_ENABLE_TESTING=${GT_ENABLE_TESTING} \
 	-DGT_CONFIGURATION=${CONFIGURATION} \
 	-DGT_PLATFORM=${PLATFORM} \
 	-DGT_PROJECT_NAME=${PROJECT_NAME} \
