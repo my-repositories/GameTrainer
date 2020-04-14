@@ -70,3 +70,27 @@ copy:
 release:
 	git tag $$(git tag -l | tail -n 1 | sed -E "s/^([0-9]+.[0-9]+.)[0-9]+$$/\1/")$$((1 + $$(git tag -l | tail -n 1 | tr "." "\\n" | tail -n 1)))
 	git push origin $$(git tag -l | tail -n 1)
+
+test: build_tests run_tests
+
+build_env:
+	docker build \
+	--build-arg ALPINE_TAG=${ALPINE_TAG} \
+	-f .ci/docker/env.Dockerfile \
+	-t gt/env-alpine:${ALPINE_TAG} \
+	.
+
+build_tests:
+	docker build \
+	--build-arg ALPINE_TAG=${ALPINE_TAG} \
+	-f .ci/docker/tests.Dockerfile \
+	-t gt/tests-alpine:${ALPINE_TAG} \
+	.
+
+run_tests:
+	mkdir out
+	docker run \
+	--rm \
+	--name gt__tests \
+	gt/tests-alpine
+

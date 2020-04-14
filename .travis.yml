@@ -1,29 +1,34 @@
-dist: trusty
-sudo: true
-language: cpp
+#dist: trusty
+#sudo: false
+#language: cpp
 
-addons:
-    apt:
-        sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-5.0
-        packages:
-            - g++-6
-            - clang-5.0
+services:
+    - docker
+
+#addons:
+#    apt:
+#        sources:
+#            - ubuntu-toolchain-r-test
+#            - llvm-toolchain-trusty-5.0
+#        packages:
+#            - g++-6
+#            - clang-5.0
 
 before_install:
-    - cd temp
-    - git clone https://github.com/google/googletest.git gtest
+#    - cd temp
+#    - git clone https://github.com/google/googletest.git gtest
 #    - pyenv global 3.6.3
 #    - pip3 install --user cpp-coveralls pyyaml
-    - cd ..
-    - sudo apt-get update -y
-    - sudo apt-get install cmake -y
-    - sudo apt-get upgrade -y --allow-unauthenticated
-    - cmake --version
-    - make A=x64
+#    - cd ..
 
-#script:
+    #- echo $GH_PCKG_READ | docker login docker.pkg.github.com -u loktionov129 --password-stdin
+    - echo $GH_PCKG_WRITE | docker login docker.pkg.github.com -u loktionov129 --password-stdin
+    - make build_env
+    - docker tag $(docker images -q gt/env-alpine:latest) docker.pkg.github.com/my-repositories/gametrainer/env-alpine:latest
+    - docker push docker.pkg.github.com/my-repositories/gametrainer/env-alpine:latest
+
+script:
+    - make test
 #    - cd temp
 #    - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCOVERAGE=1 .
 #    - cmake --build .
