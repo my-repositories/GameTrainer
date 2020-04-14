@@ -7,12 +7,18 @@ else
 	CONFIGURATION = Release
 endif
 
-ifeq ($(strip $(A)), x64)
+ifeq ($(strip $(A)),)
 	ARCH=x64
 	PLATFORM = x64
 else
 	ARCH=Win32
 	PLATFORM = x86
+endif
+
+ifeq ($(strip $(AT)),)
+	ALPINE_TAG = latest
+else
+	ALPINE_TAG = $(AT)
 endif
 
 UNAME := $(shell uname)
