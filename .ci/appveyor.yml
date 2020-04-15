@@ -44,11 +44,6 @@ build_script:
 after_build:
     - call .ci/zip.bat
 
-test_script:
-    - cd build
-    - ctest -VV -C Release
-    - cd ..
-
 artifacts:
     - path: bin/**/.zip
       name: app
