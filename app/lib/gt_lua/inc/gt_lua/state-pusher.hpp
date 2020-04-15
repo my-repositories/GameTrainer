@@ -7,22 +7,8 @@
 
 namespace gt::lua
 {
-    struct StatePusher
+    namespace internal
     {
-        template<class T>
-        static void push(lua_State* luaState, const T& arg)
-        {
-            StatePusherInternal<T>::push(luaState, arg);
-        }
-
-        template<class T, class... Rest>
-        static void push(lua_State* luaState, const T& arg, const Rest&... rest)
-        {
-            StatePusher::push(luaState, arg);
-            StatePusher::push(luaState, rest...);
-        }
-
-    private:
         template<class T>
         struct StatePusherInternal
         {
@@ -45,6 +31,22 @@ namespace gt::lua
         GENERATE_STATE_PUSHER(int, lua_pushinteger);
 
         GENERATE_STATE_PUSHER(bool, lua_pushboolean);
+    }
+
+    struct StatePusher
+    {
+        template<class T>
+        static void push(lua_State* luaState, const T& arg)
+        {
+            internal::StatePusherInternal<T>::push(luaState, arg);
+        }
+
+        template<class T, class... Rest>
+        static void push(lua_State* luaState, const T& arg, const Rest&... rest)
+        {
+            StatePusher::push(luaState, arg);
+            StatePusher::push(luaState, rest...);
+        }
     };
 }
 

@@ -19,6 +19,7 @@ mylib.lib
 cmake-build-debug-visual-studio*
 cmake-build-release-visual-studio*
 build-debug-vs-cmake*
+.ci/.travis.generated.sh
 
 # JetBrains CLion
 .idea/

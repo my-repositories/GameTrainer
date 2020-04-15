@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include <gt_xml/setters/address-setter.hpp>
 
 namespace gt::xml

@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include <gt_xml/setters/description-setter.hpp>
 
 namespace gt::xml

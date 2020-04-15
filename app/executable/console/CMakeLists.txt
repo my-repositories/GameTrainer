@@ -50,25 +50,25 @@ FIND_LIB(LIBWMM "winmm.lib")
 message(STATUS "LIBWMM: ${LIBWMM}")
 
 if(GT_OS STREQUAL "win")
-set(GT_LIB_SUFFIX lib)
+set(GT_LUA_EXTERNAL_LIB ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.lib)
 elseif(APPLE)
-set(GT_LIB_SUFFIX a)
+set(GT_LUA_EXTERNAL_LIB ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.a)
 else()
-set(GT_LIB_SUFFIX so)
+set(GT_LUA_EXTERNAL_LIB /usr/local/lib/liblua.a)
 endif()
 
 target_link_libraries(
-        ${GT_PROJECT_NAME} PRIVATE
-        ${PROJECT_ROOT_DIR}/deps/lua/lua-5.3.4-${GT_PLATFORM}.${GT_LIB_SUFFIX}
-        gt_os
-        gt_xml
-        gt_lua
+        ${GT_PROJECT_NAME} PUBLIC
         gt_core
+        gt_lua
+        ${GT_LUA_EXTERNAL_LIB}
+        gt_xml
+        gt_os
 )
 
 if(LIBWMM)
     target_link_libraries(
-            ${GT_PROJECT_NAME} PRIVATE
+            ${GT_PROJECT_NAME} PUBLIC
             ${LIBWMM}
     )
 endif()

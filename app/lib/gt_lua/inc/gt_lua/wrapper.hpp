@@ -1,6 +1,7 @@
 #ifndef GAMETRAINER_WRAPPER_HPP
 #define GAMETRAINER_WRAPPER_HPP
 
+#include <cstring>
 #include <iostream>
 #include <optional>
 #include <vector>
