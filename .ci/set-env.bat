@@ -15,7 +15,6 @@ if /i "%1" == "msvc16" goto :msvc16
 :version
 set GT_VERSION=%1
 shift
-goto :loop
 
 :: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
