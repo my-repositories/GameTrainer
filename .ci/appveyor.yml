@@ -25,6 +25,7 @@ platform:
     - x86
 
 configuration:
+    - Debug
     - Release
 
 environment:
@@ -35,7 +36,7 @@ environment:
 install:
     - appveyor UpdateBuild -Version %APPVEYOR_REPO_TAG_NAME%
     - call .ci/install-testing-deps.bat
-    - call .ci/set-env.bat %PLATFORM% %TOOLCHAIN% %APPVEYOR_REPO_TAG_NAME%
+    - call .ci/set-env.bat %PLATFORM% %TOOLCHAIN% %APPVEYOR_REPO_TAG_NAME% %CONFIGURATION%
 
 build_script:
     - cmake %CMAKE_CONFIGURE_FLAGS%

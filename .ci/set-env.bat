@@ -19,6 +19,15 @@ goto :loop
 
 :: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
+:: Configuration
+
+:configuration
+set GT_CONFIGURATION=%1
+shift
+goto :loop
+
+:: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
 :: Platform
 
 :x86
@@ -60,14 +69,14 @@ goto :loop
 if "%TOOLCHAIN%" == "" goto :msvc15
 if "%TARGET_CPU%" == "" goto :x64
 if "%PROJECT_NAME%" == "" set PROJECT_NAME=GameTrainer
-if "%CONFIGURATION%" == "" set CONFIGURATION=Release
+if "%GT_CONFIGURATION%" == "" set GT_CONFIGURATION=Release
 if "%GT_VERSION%" == "" set GT_VERSION=master
 
 set CMAKE_CONFIGURE_FLAGS= ^
 	-B build ^
 	-S . ^
 	-G "%CMAKE_GENERATOR%%CMAKE_GENERATOR_SUFFIX%"%CMAKE_GENERATOR_ARCH% ^
-	-DGT_CONFIGURATION=%CONFIGURATION% ^
+	-DGT_CONFIGURATION=%GT_CONFIGURATION% ^
 	-DGT_PLATFORM=%GT_PLATFORM% ^
 	-DGT_OS=win ^
 	-DGT_PROJECT_NAME=%PROJECT_NAME% ^
@@ -77,7 +86,7 @@ set CMAKE_CONFIGURE_FLAGS= ^
 
 set CMAKE_BUILD_FLAGS= ^
     --build build ^
-	--config %CONFIGURATION% ^
+	--config %GT_CONFIGURATION% ^
 	-- ^
 	/nologo ^
 	/verbosity:minimal ^
