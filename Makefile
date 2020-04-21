@@ -24,7 +24,7 @@ else
 	PLATFORM = x86
 endif
 
-A ?=latest
+AT ?=latest
 ifeq ($(strip $(AT)),latest)
 	ALPINE_TAG = latest
 else
