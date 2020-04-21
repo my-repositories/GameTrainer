@@ -5,9 +5,25 @@
 
 namespace gt::os
 {
-    void playSound(const char* sound)
+    void playWAV(const char* sound)
     {
         PlaySoundA((LPCSTR)sound, nullptr, SND_APPLICATION | SND_ASYNC | SND_NODEFAULT); // NOLINT(hicpp-signed-bitwise)
+    }
+
+    void playMP3(const char* sound)
+    {
+        char cmd[MAX_PATH] = { '\0' };
+        lstrcat(cmd, "play \"");
+        lstrcat(cmd, sound);
+        lstrcat(cmd, "\"");
+        mciSendString(cmd, nullptr, 0, nullptr);
+    }
+
+    // TODO: remove unused parameter.
+    void stopMP3(const char* sound)
+    {
+        mciSendString("stop all", nullptr, 0, nullptr);
+        mciSendString("close all", nullptr, 0, nullptr);
     }
 
     void setConsoleTitle(const char* title)

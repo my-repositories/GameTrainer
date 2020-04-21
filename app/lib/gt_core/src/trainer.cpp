@@ -38,7 +38,10 @@ namespace gt::core
 
         lua.registerFunction("addValueTo", lambada);
 
-        lua.registerFunction("playSound", os::playSound);
+        // TODO: remove unused parameter for stopMP3.
+        lua.registerFunction("stopMP3", os::stopMP3);
+        lua.registerFunction("playMP3", os::playMP3);
+        lua.registerFunction("playWAV", os::playWAV);
 
         lua.registerFunction("readFile", lua::LuaWrapper::createUserData);
 

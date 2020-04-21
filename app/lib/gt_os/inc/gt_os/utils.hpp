@@ -5,7 +5,9 @@
 
 namespace gt::os
 {
-    void playSound(const char* sound);
+    void stopMP3(const char* sound);
+    void playMP3(const char* sound);
+    void playWAV(const char* sound);
     void setConsoleTitle(const char* title);
     void sleep(size_t ms);
 
