@@ -28,7 +28,7 @@ namespace gt::core
 
     DWORD_PTR Game::getValueAddress(const gt::xml::CheatEntry* entry) const
     {
-        DWORD_PTR valueAddress;
+        DWORD valueAddress;
 #ifdef _WIN64
         const short dwSize = this->isWow64() ? 4 : 8;
 #else
@@ -46,7 +46,7 @@ namespace gt::core
 
         for (int i = 1; i < entry->offsetsCount; i++)
         {
-            auto offset = valueAddress + entry->offsets[entry->offsetsCount - i];
+            DWORD_PTR offset = valueAddress + entry->offsets[entry->offsetsCount - i];
             this->osApi.readProcessMemory(this->process, (LPCVOID)offset, &valueAddress, dwSize, nullptr);
         }
 

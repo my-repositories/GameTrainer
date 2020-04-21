@@ -1,19 +1,22 @@
 # download http://gnuwin32.sourceforge.net/downlinks/make.php
 # or here: http://gnuwin32.sourceforge.net/packages/make.htm
 
+C ?=Release
 ifeq ($(strip $(C)), Debug)
 	CONFIGURATION = Debug
 else
 	CONFIGURATION = Release
 endif
 
-ifeq ($(strip $(T)),)
+T ?=0
+ifeq ($(strip $(T)),0)
 	GT_ENABLE_TESTING=0
 else
 	GT_ENABLE_TESTING=1
 endif
 
-ifeq ($(strip $(A)),)
+A ?=x64
+ifeq ($(strip $(A)),x64)
 	ARCH=x64
 	PLATFORM = x64
 else
@@ -21,7 +24,8 @@ else
 	PLATFORM = x86
 endif
 
-ifeq ($(strip $(AT)),)
+A ?=latest
+ifeq ($(strip $(AT)),latest)
 	ALPINE_TAG = latest
 else
 	ALPINE_TAG = $(AT)

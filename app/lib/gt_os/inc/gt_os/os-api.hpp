@@ -8,11 +8,7 @@ namespace gt::os
     class OsApi
     {
     public:
-        inline WINUSERAPI int WINAPI getClassName(
-            _In_ HWND hWnd,
-            _Out_writes_to_(nMaxCount, return) LPSTR lpClassName,
-            _In_ int nMaxCount
-        ) const {
+        inline int getClassName(HWND hWnd, LPSTR lpClassName, int nMaxCount) const {
 #ifdef OS_WINDOWS
             return ::GetClassName(hWnd, lpClassName, nMaxCount);
 #else
@@ -20,11 +16,7 @@ namespace gt::os
 #endif
         }
 
-        inline WINUSERAPI int WINAPI getWindowText(
-            _In_ HWND hWnd,
-            _Out_writes_(nMaxCount) LPSTR lpString,
-            _In_ int nMaxCount
-        ) const {
+        inline int getWindowText(HWND hWnd, LPSTR lpString, int nMaxCount) const {
 #ifdef OS_WINDOWS
             return ::GetWindowText(hWnd, lpString, nMaxCount);
 #else
@@ -32,10 +24,7 @@ namespace gt::os
 #endif
         }
 
-        inline WINUSERAPI BOOL WINAPI charToOem(
-            _In_ LPCSTR pSrc,
-            _Out_writes_(_Inexpressible_(strlen(pSrc) + 1)) LPSTR pDst
-        ) const {
+        inline BOOL charToOem(LPCSTR pSrc, LPSTR pDst) const {
 #ifdef OS_WINDOWS
             return ::CharToOem(pSrc, pDst);
 #else
@@ -43,22 +32,15 @@ namespace gt::os
 #endif
         }
 
-        inline WINBASEAPI _Ret_maybenull_ HANDLE WINAPI createMutex(
-            _In_opt_ LPSECURITY_ATTRIBUTES lpMutexAttributes,
-            _In_ BOOL bInitialOwner,
-            _In_opt_ LPCSTR lpName
-        ) const {
+        inline HANDLE createMutex(LPSECURITY_ATTRIBUTES attrs, BOOL owner, LPCSTR name) const {
 #ifdef OS_WINDOWS
-            return ::CreateMutex(lpMutexAttributes, bInitialOwner, lpName);
+            return ::CreateMutex(attrs, owner, name);
 #else
             return nullptr;
 #endif
         }
 
-        inline WINUSERAPI BOOL WINAPI enumWindows(
-            _In_ WNDENUMPROC lpEnumFunc,
-            _In_ LPARAM lParam
-        ) const {
+        inline BOOL enumWindows(WNDENUMPROC lpEnumFunc, LPARAM lParam) const {
 #ifdef OS_WINDOWS
             return ::EnumWindows(lpEnumFunc, lParam);
 #else
@@ -66,8 +48,7 @@ namespace gt::os
 #endif
         }
 
-        inline WINBASEAPI _Check_return_ _Post_equals_last_error_ DWORD WINAPI
-        getLastError(VOID) const {
+        [[nodiscard]] inline DWORD getLastError() const {
 #ifdef OS_WINDOWS
             return ::GetLastError();
 #else
@@ -75,7 +56,7 @@ namespace gt::os
 #endif
         }
 
-        inline WINUSERAPI BOOL WINAPI showWindow(_In_ HWND hWnd, _In_ int nCmdShow) const {
+        inline BOOL showWindow(HWND hWnd, int nCmdShow) const {
 #ifdef OS_WINDOWS
             return ::ShowWindow(hWnd, nCmdShow);
 #else
@@ -83,7 +64,7 @@ namespace gt::os
 #endif
         }
 
-        inline WINUSERAPI BOOL WINAPI setForegroundWindow(_In_ HWND hWnd) const {
+        inline BOOL setForegroundWindow(HWND hWnd) const {
 #ifdef OS_WINDOWS
             return ::SetForegroundWindow(hWnd);
 #else
@@ -91,7 +72,7 @@ namespace gt::os
 #endif
         }
 
-        [[nodiscard]] inline WINUSERAPI SHORT WINAPI getAsyncKeyState(_In_ int vKey) const {
+        [[nodiscard]] inline SHORT getAsyncKeyState(int vKey) const {
 #ifdef OS_WINDOWS
             return ::GetAsyncKeyState(vKey);
 #else
@@ -99,12 +80,12 @@ namespace gt::os
 #endif
         }
 
-        inline WINBASEAPI _Success_(return != FALSE) BOOL WINAPI readProcessMemory(
-                _In_ HANDLE hProcess,
-                _In_ LPCVOID lpBaseAddress,
-                _Out_writes_bytes_to_(nSize,*lpNumberOfBytesRead) LPVOID lpBuffer,
-                _In_ SIZE_T nSize,
-                _Out_opt_ SIZE_T* lpNumberOfBytesRead
+        inline BOOL readProcessMemory(
+                HANDLE hProcess,
+                LPCVOID lpBaseAddress,
+                LPVOID lpBuffer,
+                SIZE_T nSize,
+                SIZE_T* lpNumberOfBytesRead
         ) const {
 #ifdef OS_WINDOWS
             return ::ReadProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead);
@@ -114,12 +95,12 @@ namespace gt::os
         }
 
 
-        inline WINBASEAPI _Success_(return != FALSE) BOOL WINAPI writeProcessMemory(
-                _In_ HANDLE hProcess,
-                _In_ LPVOID lpBaseAddress,
-                _In_reads_bytes_(nSize) LPCVOID lpBuffer,
-                _In_ SIZE_T nSize,
-                _Out_opt_ SIZE_T* lpNumberOfBytesWritten
+        inline BOOL writeProcessMemory(
+                HANDLE hProcess,
+                LPVOID lpBaseAddress,
+                LPCVOID lpBuffer,
+                SIZE_T nSize,
+                SIZE_T* lpNumberOfBytesWritten
         ) const {
 #ifdef OS_WINDOWS
             return ::WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten);
@@ -128,10 +109,10 @@ namespace gt::os
 #endif
         }
 
-        [[nodiscard]] inline WINBASEAPI HANDLE WINAPI openProcess(
-                _In_ DWORD dwDesiredAccess,
-                _In_ BOOL bInheritHandle,
-                _In_ DWORD dwProcessId
+        [[nodiscard]] inline HANDLE openProcess(
+                DWORD dwDesiredAccess,
+                BOOL bInheritHandle,
+                DWORD dwProcessId
         ) const {
 #ifdef OS_WINDOWS
             return ::OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId);
@@ -140,7 +121,7 @@ namespace gt::os
 #endif
         }
 
-        inline WINBASEAPI BOOL WINAPI closeHandle(_In_ _Post_ptr_invalid_ HANDLE hObject) const {
+        inline BOOL closeHandle(HANDLE hObject) const {
 #ifdef OS_WINDOWS
             return ::CloseHandle(hObject);
 #else
@@ -148,11 +129,7 @@ namespace gt::os
 #endif
         }
 
-        inline WINBASEAPI
-        _When_(lpModuleName == NULL,_Ret_notnull_)
-        _When_(lpModuleName != NULL,_Ret_maybenull_)
-        HMODULE WINAPI
-        getModuleHandle(_In_opt_ LPCSTR lpModuleName) const {
+        inline HMODULE getModuleHandle(LPCSTR lpModuleName) const {
 #ifdef OS_WINDOWS
             return ::GetModuleHandle(lpModuleName);
 #else
@@ -161,9 +138,7 @@ namespace gt::os
 #endif
         }
 
-        inline WINBASEAPI FARPROC WINAPI getProcAddress(
-                _In_ HMODULE hModule,
-                _In_ LPCSTR lpProcName
+        inline FARPROC getProcAddress(HMODULE hModule, LPCSTR lpProcName
         ) const {
 #ifdef OS_WINDOWS
             return ::GetProcAddress(hModule, lpProcName);

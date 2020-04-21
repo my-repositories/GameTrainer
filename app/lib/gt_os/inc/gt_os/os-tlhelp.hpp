@@ -42,27 +42,27 @@ typedef struct tagPROCESSENTRY32
 typedef MODULEENTRY32 *LPMODULEENTRY32;
 typedef PROCESSENTRY32 *LPPROCESSENTRY32;
 
-inline HANDLE WINAPI CreateToolhelp32Snapshot(DWORD dwFlags, DWORD th32ProcessID) {
+inline HANDLE CreateToolhelp32Snapshot(DWORD dwFlags, DWORD th32ProcessID) {
     return nullptr;
 }
 
-inline BOOL WINAPI Module32First(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
+inline BOOL Module32First(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
     return 1;
 }
 
-inline BOOL WINAPI Module32Next(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
+inline BOOL Module32Next(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
     return 1;
 }
 
-inline WINBASEAPI BOOL WINAPI CloseHandle(_In_ _Post_ptr_invalid_ HANDLE hObject) {
+inline BOOL CloseHandle(HANDLE hObject) {
     return 1;
 }
 
-inline BOOL WINAPI Process32First(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
+inline BOOL Process32First(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
     return 1;
 }
 
-inline BOOL WINAPI Process32Next(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
+inline BOOL Process32Next(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
     return 1;
 }
 #endif
