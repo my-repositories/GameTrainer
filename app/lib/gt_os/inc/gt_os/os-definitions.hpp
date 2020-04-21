@@ -44,8 +44,10 @@
 #define PBOOL int*
 #define LPARAM long
 #define LONG long
+#define UINT unsigned int
 #define size_t unsigned int
 #define DWORD unsigned long
+#define MCIERROR unsigned long
 #define ULONG_PTR unsigned long
 #define LPVOID void*
 #define LPCVOID const void*
@@ -70,6 +72,7 @@
 #define _Out_opt_
 #define _Out_writes_to_(size,count)
 #define _Out_writes_to_opt_(size,count)
+#define _Out_writes_opt_(size)
 #define _Out_writes_bytes_to_(size,count)
 #define _Out_writes_(size)
 #define _Success_(expr)
@@ -94,6 +97,15 @@ inline WINMMAPI BOOL WINAPI PlaySoundA(
     _In_opt_ LPCSTR pszSound,
     _In_opt_ HMODULE hmod,
     _In_ DWORD fdwSound
+    ) {
+    return 0;
+}
+
+inline WINMMAPI MCIERROR WINAPI mciSendString(
+    _In_ LPCSTR lpstrCommand,
+    _Out_writes_opt_(uReturnLength) LPSTR lpstrReturnString,
+    _In_ UINT uReturnLength,
+    _In_opt_ HWND hwndCallback
     ) {
     return 0;
 }
