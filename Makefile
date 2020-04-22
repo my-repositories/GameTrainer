@@ -56,7 +56,8 @@ OBJ_DIR = ${OBJ_DIR_NAME}/${CONFIGURATION}-${ARCH}
 run: clean configure build_all copy
 
 install:
-	.\\.ci\\install-testing-deps.bat
+	mkdir -p deps
+	git clone https://github.com/google/googletest.git deps/googletest
 
 clean:
 	rm -rf ${BIN_DIR_NAME} ${OBJ_DIR_NAME}
