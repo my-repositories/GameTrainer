@@ -10,14 +10,6 @@ if /i "%1" == "msvc16" goto :msvc16
 
 :: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-:: Version
-
-:version
-set GT_VERSION=%1
-shift
-
-:: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
 :: Configuration
 
 :configuration
@@ -69,7 +61,14 @@ if "%TOOLCHAIN%" == "" goto :msvc15
 if "%TARGET_CPU%" == "" goto :x64
 if "%PROJECT_NAME%" == "" set PROJECT_NAME=GameTrainer
 if "%GT_CONFIGURATION%" == "" set GT_CONFIGURATION=Release
-if "%GT_VERSION%" == "" set GT_VERSION=master
+if "%APPVEYOR_REPO_TAG_NAME%" == "" (
+    set GT_VERSION=0.0.1
+) else (
+    set GT_VERSION=%APPVEYOR_REPO_TAG_NAME%
+    appveyor UpdateBuild -Version %APPVEYOR_REPO_TAG_NAME%
+)
+
+
 
 set CMAKE_CONFIGURE_FLAGS= ^
 	-B build ^

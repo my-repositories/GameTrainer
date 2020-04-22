@@ -2,7 +2,7 @@ image:
     - Visual Studio 2019
     - Visual Studio 2017
 
-skip_non_tags: true
+skip_non_tags: false
 
 init:
     - git config --global core.autocrlf input
@@ -34,12 +34,14 @@ environment:
         - TOOLCHAIN: msvc16
 
 install:
-    - appveyor UpdateBuild -Version %APPVEYOR_REPO_TAG_NAME%
     - call .ci/install-testing-deps.bat
-    - call .ci/set-env.bat %PLATFORM% %TOOLCHAIN% %APPVEYOR_REPO_TAG_NAME% %CONFIGURATION%
+    - echo call .ci/set-env.bat %PLATFORM% %TOOLCHAIN% %CONFIGURATION%
+    - call .ci/set-env.bat %PLATFORM% %TOOLCHAIN% %CONFIGURATION%
 
 build_script:
+    - echo cmake %CMAKE_CONFIGURE_FLAGS%
     - cmake %CMAKE_CONFIGURE_FLAGS%
+    - echo cmake %CMAKE_BUILD_FLAGS%
     - cmake %CMAKE_BUILD_FLAGS%
 
 after_build:
