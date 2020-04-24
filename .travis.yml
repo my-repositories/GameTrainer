@@ -2,12 +2,12 @@ services:
     - docker
 
 before_install:
-    - echo $GH_PCKG_READ | docker login docker.pkg.github.com -u loktionov129 --password-stdin
+#    - echo $GH_PCKG_READ | docker login docker.pkg.github.com -u loktionov129 --password-stdin
 
-#    - echo $GH_PCKG_WRITE | docker login docker.pkg.github.com -u loktionov129 --password-stdin
-#    - make build_env
-#    - docker tag $(docker images -q gt/env-alpine:latest) docker.pkg.github.com/my-repositories/gametrainer/env-alpine:latest
-#    - docker push docker.pkg.github.com/my-repositories/gametrainer/env-alpine:latest
+    - echo $GH_PCKG_WRITE | docker login docker.pkg.github.com -u loktionov129 --password-stdin
+    - make build_env
+    - docker tag $(docker images -q gt/env-alpine:latest) docker.pkg.github.com/my-repositories/gametrainer/env-alpine:latest
+    - docker push docker.pkg.github.com/my-repositories/gametrainer/env-alpine:latest
 
 script:
     - make test
