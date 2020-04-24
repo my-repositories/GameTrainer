@@ -1,0 +1,50 @@
+name: build-windows
+
+on:
+    push:
+        branches: [ reborn, master ]
+    pull_request:
+        branches: [ reborn, master ]
+
+defaults:
+    run:
+        shell: cmd
+
+jobs:
+    install:
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v2
+            - run: call.ci/install-testing-deps.bat
+            - uses: actions/upload-artifact@master
+              with:
+                  name: src
+                  path: .
+
+    build:
+        needs: install
+        runs-on: ${{ matrix.OS }}
+        strategy:
+            matrix:
+                PLATFORM: [x64, x86]
+                CONFIGURATION: [Debug, Release]
+                TOOLCHAIN: [msvc15, msvc16]
+                OS: [windows-2016, windows-2019]
+                exclude:
+                    - OS: windows-2019
+                      TOOLCHAIN: msvc15
+                    - OS: windows-2016
+                      TOOLCHAIN: msvc16
+        steps:
+            - uses: actions/download-artifact@master
+              with:
+                  name: src
+                  path: .
+            - run: cmake --version
+            - run: call .ci/set-env.bat ${{ matrix.PLATFORM }} ${{ matrix.TOOLCHAIN }} ${{ matrix.CONFIGURATION }}
+            - run: |
+                  set /p CMAKE_CONFIGURE_FLAGS=<CMAKE_CONFIGURE_FLAGS.txt
+                  cmake %CMAKE_CONFIGURE_FLAGS%
+            - run: |
+                  set /p CMAKE_BUILD_FLAGS=<CMAKE_BUILD_FLAGS.txt
+                  cmake %CMAKE_BUILD_FLAGS%

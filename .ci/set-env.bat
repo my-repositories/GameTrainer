@@ -89,3 +89,6 @@ set CMAKE_BUILD_FLAGS= ^
 	/nologo ^
 	/verbosity:minimal ^
 	/consoleloggerparameters:Summary
+
+echo %CMAKE_CONFIGURE_FLAGS% > CMAKE_CONFIGURE_FLAGS.txt
+echo %CMAKE_BUILD_FLAGS% > CMAKE_BUILD_FLAGS.txt
