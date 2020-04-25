@@ -1,47 +1,19 @@
 set(GT_TEST_TARGET_NAME test_gt_os)
-project(${GT_TEST_TARGET_NAME})
 
-file(GLOB_RECURSE GT_TEST_SOURCES src/*.cpp)
-add_executable(${GT_TEST_TARGET_NAME} ${GT_TEST_SOURCES})
-add_test(${GT_TEST_TARGET_NAME} ${GT_TEST_TARGET_NAME})
+include(${PROJECT_ROOT_DIR}/tools/testing/init.cmake)
+include(${PROJECT_ROOT_DIR}/tools/testing/configure.cmake)
 
-find_package (Threads)
+INIT_TEST(${GT_TEST_TARGET_NAME})
+CONFIGURE_TEST(${GT_TEST_TARGET_NAME})
+
 target_link_libraries(
-        ${GT_TEST_TARGET_NAME} PRIVATE
-        gtest_main
-        gt_os
-#        gt_xml
-#        gt_lua
-#        gt_core
-        ${CMAKE_THREAD_LIBS_INIT}
+    ${GT_TEST_TARGET_NAME} PRIVATE
+    gt_os
 )
 
 target_include_directories(
-        ${GT_TEST_TARGET_NAME} PRIVATE
-        ${PROJECT_ROOT_DIR}/app/lib/gt_os/inc
-#        ${PROJECT_ROOT_DIR}/app/lib/gt_xml/inc
-#        ${PROJECT_ROOT_DIR}/app/lib/gt_lua/inc
-#        ${PROJECT_ROOT_DIR}/app/lib/gt_core/inc
+    ${GT_TEST_TARGET_NAME} PRIVATE
+    ${PROJECT_ROOT_DIR}/app/lib/gt_os/inc
 )
 
-if (GT_OS STREQUAL "win")
-    message('IS MSVC')
-    target_compile_options(${GT_TEST_TARGET_NAME} PRIVATE /std:c++17 /W4 /WX)
 
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Ox")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Od")
-
-    # VS 2017 removed tr1
-    add_definitions(-DGTEST_HAS_TR1_TUPLE=0)
-else()
-    message('ISN'T MSVC')
-    target_compile_options(${GT_TEST_TARGET_NAME} PRIVATE -std=c++17 -g -Wall -Werror -Wextra -Wpedantic -Wconversion -Wswitch-default -Wswitch-enum -Wunreachable-code -Wwrite-strings -Wcast-align -Wshadow -Wundef)
-
-    if (COVERAGE)
-        target_link_libraries(
-                ${GT_TEST_TARGET_NAME} PRIVATE
-                --coverage
-        )
-        target_compile_options(${GT_TEST_TARGET_NAME} PRIVATE --coverage)
-    endif()
-endif()

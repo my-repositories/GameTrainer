@@ -5,6 +5,6 @@ file(GLOB_RECURSE GT_OS_SOURCES ${GT_OS_DIR}/src/*.cpp)
 add_library(${GT_OS_TARGET_NAME} ${GT_OS_SOURCES})
 
 target_include_directories(
-        ${GT_OS_TARGET_NAME} PUBLIC
-        ${GT_OS_DIR}/inc
+    ${GT_OS_TARGET_NAME} PUBLIC
+    ${GT_OS_DIR}/inc
 )

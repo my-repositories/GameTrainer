@@ -15,6 +15,7 @@ x86/
 [Oo]bj/
 [Ll]og/
 Testing/
+!tools/testing
 mylib.lib
 cmake-build-debug-visual-studio*
 cmake-build-release-visual-studio*
