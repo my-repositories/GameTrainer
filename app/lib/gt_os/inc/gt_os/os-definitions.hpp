@@ -32,16 +32,15 @@
 #define ERROR_ALREADY_EXISTS 183L
 #define __TEXT(quote) quote
 #define TEXT(quote) __TEXT(quote)
-#define STANDARD_RIGHTS_REQUIRED         (0x000F0000L)
-#define SYNCHRONIZE                      (0x00100000L)
-#define PROCESS_ALL_ACCESS        (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
-                                   0xFFFF)
+#define STANDARD_RIGHTS_REQUIRED (0x000F0000L)
+#define SYNCHRONIZE (0x00100000L)
+#define PROCESS_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF)
 
 #define CHAR char
 #define BYTE unsigned char
 #define SHORT short
 #define BOOL int
-#define PBOOL int*
+#define PBOOL int *
 #define LPARAM long
 #define LONG long
 #define UINT unsigned int
@@ -49,11 +48,11 @@
 #define DWORD unsigned long
 #define MCIERROR unsigned long
 #define ULONG_PTR unsigned long
-#define LPVOID void*
-#define LPCVOID const void*
-#define HANDLE void*
-#define LPSTR char*
-#define LPCSTR const char*
+#define LPVOID void *
+#define LPCVOID const void *
+#define HANDLE void *
+#define LPSTR char *
+#define LPCSTR const char *
 #define VOID void
 
 #define _Ret_maybenull_
@@ -70,22 +69,26 @@
 #define _In_reads_bytes_(size)
 #define _Inout_updates_z_(size)
 #define _Out_opt_
-#define _Out_writes_to_(size,count)
-#define _Out_writes_to_opt_(size,count)
+#define _Out_writes_to_(size, count)
+#define _Out_writes_to_opt_(size, count)
 #define _Out_writes_opt_(size)
-#define _Out_writes_bytes_to_(size,count)
+#define _Out_writes_bytes_to_(size, count)
 #define _Out_writes_(size)
 #define _Success_(expr)
 #define _When_(expr, annos)
 
-#define DECLARE_HANDLE(name) struct name##__{int unused;}; typedef struct name##__ *name
-DECLARE_HANDLE (HWND);
+#define DECLARE_HANDLE(name)                                                   \
+    struct name##__ {                                                          \
+        int unused;                                                            \
+    };                                                                         \
+    typedef struct name##__ *name
+DECLARE_HANDLE(HWND);
 DECLARE_HANDLE(HINSTANCE);
 
 typedef ULONG_PTR DWORD_PTR, SIZE_T;
 typedef HINSTANCE HMODULE;
-typedef BOOL (CALLBACK* WNDENUMPROC)(HWND, LPARAM);
-typedef int (FAR WINAPI *FARPROC)();
+typedef BOOL(CALLBACK *WNDENUMPROC)(HWND, LPARAM);
+typedef int(FAR WINAPI *FARPROC)();
 
 typedef struct _SECURITY_ATTRIBUTES {
     DWORD nLength;
@@ -93,11 +96,10 @@ typedef struct _SECURITY_ATTRIBUTES {
     BOOL bInheritHandle;
 } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
 
-inline WINMMAPI BOOL WINAPI PlaySoundA(
-    [[maybe_unused]] _In_opt_ LPCSTR pszSound,
-    [[maybe_unused]] _In_opt_ HMODULE hmod,
-    [[maybe_unused]] _In_ DWORD fdwSound
-    ) {
+inline WINMMAPI BOOL WINAPI
+PlaySoundA([[maybe_unused]] _In_opt_ LPCSTR pszSound,
+           [[maybe_unused]] _In_opt_ HMODULE hmod,
+           [[maybe_unused]] _In_ DWORD fdwSound) {
     return 0;
 }
 
@@ -105,31 +107,33 @@ inline WINMMAPI MCIERROR WINAPI mciSendString(
     [[maybe_unused]] _In_ LPCSTR lpstrCommand,
     [[maybe_unused]] _Out_writes_opt_(uReturnLength) LPSTR lpstrReturnString,
     [[maybe_unused]] _In_ UINT uReturnLength,
-    [[maybe_unused]] _In_opt_ HWND hwndCallback
-    ) {
+    [[maybe_unused]] _In_opt_ HWND hwndCallback) {
     return 0;
 }
 
-inline WINBASEAPI VOID WINAPI Sleep([[maybe_unused]] _In_ DWORD dwMilliseconds) {}
+inline WINBASEAPI VOID WINAPI Sleep([
+    [maybe_unused]] _In_ DWORD dwMilliseconds) {}
 
-inline WINBASEAPI BOOL WINAPI SetConsoleTitle([[maybe_unused]] _In_ LPCSTR lpConsoleTitle) {
+inline WINBASEAPI BOOL WINAPI SetConsoleTitle([
+    [maybe_unused]] _In_ LPCSTR lpConsoleTitle) {
     return 0;
 }
 
 inline WINBASEAPI _Success_(return != 0 && return < nBufferLength) DWORD WINAPI
-GetCurrentDirectory(
-    [[maybe_unused]] _In_ DWORD nBufferLength,
-    [[maybe_unused]] _Out_writes_to_opt_(nBufferLength,return + 1) LPSTR lpBuffer
-) {
+    GetCurrentDirectory([[maybe_unused]] _In_ DWORD nBufferLength,
+                        [[maybe_unused]] _Out_writes_to_opt_(nBufferLength,
+                                                             return +1)
+                            LPSTR lpBuffer) {
     return 1;
 }
 
-inline WINBASEAPI LPSTR WINAPI lstrcat(
-    [[maybe_unused]] _Inout_updates_z_(_String_length_(lpString1) + _String_length_(lpString2) + 1) LPSTR lpString1,
-    [[maybe_unused]] _In_    LPCSTR lpString2
-    ) {
+inline WINBASEAPI LPSTR WINAPI
+lstrcat([[maybe_unused]] _Inout_updates_z_(_String_length_(lpString1) +
+                                           _String_length_(lpString2) + 1)
+            LPSTR lpString1,
+        [[maybe_unused]] _In_ LPCSTR lpString2) {
     return nullptr;
 }
 #endif
 
-#endif //GAMETRAINER_OS_DEFINITIONS_HPP
+#endif // GAMETRAINER_OS_DEFINITIONS_HPP

@@ -5,24 +5,23 @@
 
 #include <gt_os/os-api.hpp>
 
-namespace gt::os
-{
-    class WindowManager
-    {
-    public:
-        explicit WindowManager(const std::string &title);
+namespace gt::os {
+class WindowManager {
+  public:
+    explicit WindowManager(const std::string &title);
 
-        void show();
+    void show();
 
-        [[nodiscard]] bool isOpened();
+    [[nodiscard]] bool isOpened();
 
-    private:
-        static OsApi osApi;
-        static HWND window;
-        static std::string title;
+  private:
+    static OsApi osApi;
+    static HWND window;
+    static std::string title;
 
-        [[nodiscard]] static  BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam);
-    };
-}
+    [[nodiscard]] static BOOL CALLBACK enumWindowsProc(HWND hwnd,
+                                                       LPARAM lParam);
+};
+} // namespace gt::os
 
-#endif //GAMETRAINER_WINDOW_MANAGER_HPP
+#endif // GAMETRAINER_WINDOW_MANAGER_HPP
