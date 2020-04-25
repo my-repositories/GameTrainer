@@ -5,9 +5,8 @@
 
 #include <lua.hpp>
 
-namespace gt::lua
-{
-    int errorHandler(lua_State *state);
+namespace gt::lua {
+int errorHandler(lua_State *state);
 }
 
-#endif //GAMETRAINER_ERROR_HANDLER_HPP
+#endif // GAMETRAINER_ERROR_HANDLER_HPP

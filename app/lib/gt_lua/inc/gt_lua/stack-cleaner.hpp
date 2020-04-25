@@ -3,25 +3,19 @@
 
 #include <lua.h>
 
-namespace gt::lua
-{
-    class LuaStackCleaner
-    {
-    public:
-        explicit LuaStackCleaner(lua_State *state)
-        {
-            this->state = state;
-            this->top = lua_gettop(this->state);
-        }
+namespace gt::lua {
+class LuaStackCleaner {
+  public:
+    explicit LuaStackCleaner(lua_State *state) {
+        this->state = state;
+        this->top = lua_gettop(this->state);
+    }
 
-        ~LuaStackCleaner()
-        {
-            lua_settop(this->state, this->top);
-        }
+    ~LuaStackCleaner() { lua_settop(this->state, this->top); }
 
-    private:
-        lua_State *state;
-        int top;
-    };
-}
-#endif //GAMETRAINER_STACK_CLEANER_HPP
+  private:
+    lua_State *state;
+    int top;
+};
+} // namespace gt::lua
+#endif // GAMETRAINER_STACK_CLEANER_HPP

@@ -14,104 +14,108 @@
 #include <gt_lua/value-reader.hpp>
 #include <gt_xml/table-reader.hpp>
 
-namespace gt::lua
-{
-    class LuaWrapper
-    {
-    public:
-        LuaWrapper();
+namespace gt::lua {
+class LuaWrapper {
+  public:
+    LuaWrapper();
 
-        explicit LuaWrapper(lua_State* state);
+    explicit LuaWrapper(lua_State *state);
 
-        ~LuaWrapper();
+    ~LuaWrapper();
 
-        inline void loadFile(const char* path) const { luaL_dofile(this->state, path); }
+    inline void loadFile(const char *path) const {
+        luaL_dofile(this->state, path);
+    }
 
-        inline void loadString(const char* script) const { luaL_dostring(this->state, script); }
+    inline void loadString(const char *script) const {
+        luaL_dostring(this->state, script);
+    }
 
-        template<class... Args>
-        void callFunction(const char *name, const Args&... args) const
-        {
-            LuaStackCleaner cleaner(this->state);
+    template <class... Args>
+    void callFunction(const char *name, const Args &... args) const {
+        LuaStackCleaner cleaner(this->state);
 
-            lua_pushcfunction(this->state, errorHandler);
-            lua_getglobal(this->state, name);
-            if (!lua_isfunction(this->state, -1))
-            {
-                std::cout << "function '" << name << "'" << " was not found." << std::endl;
+        lua_pushcfunction(this->state, errorHandler);
+        lua_getglobal(this->state, name);
+        if (!lua_isfunction(this->state, -1)) {
+            std::cout << "function '" << name << "'"
+                      << " was not found." << std::endl;
 
-                return;
-            }
-
-            StatePusher::push(this->state, args...);
-            const int argsCount = sizeof...(args);
-
-            lua_pcall(this->state, argsCount, 0, -(2 + argsCount));
+            return;
         }
 
-        void registerFunction(const char* name, void(*callback)(xml::CheatEntry*, float)) const;
+        StatePusher::push(this->state, args...);
+        const int argsCount = sizeof...(args);
 
-        void registerFunction(const char* name, void(*callback)(const char*)) const;
+        lua_pcall(this->state, argsCount, 0, -(2 + argsCount));
+    }
 
-        void registerFunction(const char* name, int(*callback)(lua_State*, const char*)) const;
+    void registerFunction(const char *name,
+                          void (*callback)(xml::CheatEntry *, float)) const;
 
-        template<class T>
-        [[nodiscard]] std::optional<T> getValue(char* variableName = nullptr) const
-        {
-            return ValueReader::readValue<T>(this->state, variableName);
-        }
+    void registerFunction(const char *name,
+                          void (*callback)(const char *)) const;
 
-        template<class T>
-        [[nodiscard]] std::vector<T> getVector(char* variableName) const
-        {
-            return ValueReader::readVector<T>(this->state, variableName);
-        }
+    void registerFunction(const char *name,
+                          int (*callback)(lua_State *, const char *)) const;
 
-        [[nodiscard]] static int createUserData(lua_State* luaState, const char* fileName)
-        {
-            auto entries = xml::TableReader::read(fileName);
+    template <class T>
+    [[nodiscard]] std::optional<T>
+    getValue(char *variableName = nullptr) const {
+        return ValueReader::readValue<T>(this->state, variableName);
+    }
 
-            lua_newtable(luaState);
+    template <class T>
+    [[nodiscard]] std::vector<T> getVector(char *variableName) const {
+        return ValueReader::readVector<T>(this->state, variableName);
+    }
 
-            for (auto& entry : entries)
-            {
-                lua_pushstring(luaState, entry.description);
+    [[nodiscard]] static int createUserData(lua_State *luaState,
+                                            const char *fileName) {
+        auto entries = xml::TableReader::read(fileName);
 
-                auto field = (xml::CheatEntry *) lua_newuserdata(luaState, sizeof(xml::CheatEntry));
+        lua_newtable(luaState);
 
-                field->size = entry.size;
-                field->offsetsCount = entry.offsetsCount;
+        for (auto &entry : entries) {
+            lua_pushstring(luaState, entry.description);
 
-                constexpr const size_t offsetsSize = sizeof(entry.offsets);
+            auto field = (xml::CheatEntry *)lua_newuserdata(
+                luaState, sizeof(xml::CheatEntry));
+
+            field->size = entry.size;
+            field->offsetsCount = entry.offsetsCount;
+
+            constexpr const size_t offsetsSize = sizeof(entry.offsets);
 
 #if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
-                memcpy_s(field->offsets, offsetsSize, entry.offsets, offsetsSize);
+            memcpy_s(field->offsets, offsetsSize, entry.offsets, offsetsSize);
 #else
-                memcpy(field->offsets, entry.offsets, offsetsSize);
+            memcpy(field->offsets, entry.offsets, offsetsSize);
 #endif
 
-                field->address = entry.address;
+            field->address = entry.address;
 
-                constexpr const size_t moduleCount = sizeof(field->module)/sizeof(field->module[0]);
+            constexpr const size_t moduleCount =
+                sizeof(field->module) / sizeof(field->module[0]);
 
 #if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
-                strncpy_s(field->module, entry.module, moduleCount);
+            strncpy_s(field->module, entry.module, moduleCount);
 #else
-                strncpy(field->module, entry.module, moduleCount);
+            strncpy(field->module, entry.module, moduleCount);
 #endif
 
-                field->description[0] = '\0';
-                field->variableType[0] = '\0';
+            field->description[0] = '\0';
+            field->variableType[0] = '\0';
 
-                lua_settable(luaState, -3);
-            }
-
-            return 1;
+            lua_settable(luaState, -3);
         }
 
-    private:
-        lua_State* state;
-    };
-}
+        return 1;
+    }
 
-#endif //GAMETRAINER_WRAPPER_HPP
+  private:
+    lua_State *state;
+};
+} // namespace gt::lua
+
+#endif // GAMETRAINER_WRAPPER_HPP
