@@ -39,7 +39,8 @@ void Trainer::start() const {
     const auto registeredKeys = lua.getVector<int>((char *)"registeredKeys");
     const char *processName = *lua.getValue<char *>((char *)"processName");
     std::cout << processName << std::endl;
-    os::KeyboardWatcher keyboardWatcher(registeredKeys);
+    os::OsApi osApi;
+    os::KeyboardWatcher keyboardWatcher(registeredKeys, &osApi);
 
     for (;; os::sleep(50)) {
         // TODO: remove it!

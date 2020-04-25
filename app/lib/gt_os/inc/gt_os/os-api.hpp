@@ -6,7 +6,7 @@
 namespace gt::os {
 class OsApi {
   public:
-    inline int getClassName([[maybe_unused]] HWND hWnd,
+    virtual int getClassName([[maybe_unused]] HWND hWnd,
                             [[maybe_unused]] LPSTR lpClassName,
                             [[maybe_unused]] int nMaxCount) const {
 #ifdef OS_WINDOWS
@@ -16,7 +16,7 @@ class OsApi {
 #endif
     }
 
-    inline int getWindowText([[maybe_unused]] HWND hWnd,
+    virtual int getWindowText([[maybe_unused]] HWND hWnd,
                              [[maybe_unused]] LPSTR lpString,
                              [[maybe_unused]] int nMaxCount) const {
 #ifdef OS_WINDOWS
@@ -26,7 +26,7 @@ class OsApi {
 #endif
     }
 
-    inline BOOL charToOem([[maybe_unused]] LPCSTR pSrc,
+    virtual BOOL charToOem([[maybe_unused]] LPCSTR pSrc,
                           [[maybe_unused]] LPSTR pDst) const {
 #ifdef OS_WINDOWS
         return ::CharToOem(pSrc, pDst);
@@ -35,7 +35,7 @@ class OsApi {
 #endif
     }
 
-    inline HANDLE createMutex([[maybe_unused]] LPSECURITY_ATTRIBUTES attrs,
+    virtual HANDLE createMutex([[maybe_unused]] LPSECURITY_ATTRIBUTES attrs,
                               [[maybe_unused]] BOOL owner,
                               [[maybe_unused]] LPCSTR name) const {
 #ifdef OS_WINDOWS
@@ -45,7 +45,7 @@ class OsApi {
 #endif
     }
 
-    inline BOOL enumWindows([[maybe_unused]] WNDENUMPROC lpEnumFunc,
+    virtual BOOL enumWindows([[maybe_unused]] WNDENUMPROC lpEnumFunc,
                             [[maybe_unused]] LPARAM lParam) const {
 #ifdef OS_WINDOWS
         return ::EnumWindows(lpEnumFunc, lParam);
@@ -54,7 +54,7 @@ class OsApi {
 #endif
     }
 
-    [[nodiscard]] inline DWORD getLastError() const {
+    [[nodiscard]] virtual DWORD getLastError() const {
 #ifdef OS_WINDOWS
         return ::GetLastError();
 #else
@@ -62,7 +62,7 @@ class OsApi {
 #endif
     }
 
-    inline BOOL showWindow([[maybe_unused]] HWND hWnd,
+    virtual BOOL showWindow([[maybe_unused]] HWND hWnd,
                            [[maybe_unused]] int nCmdShow) const {
 #ifdef OS_WINDOWS
         return ::ShowWindow(hWnd, nCmdShow);
@@ -71,7 +71,7 @@ class OsApi {
 #endif
     }
 
-    inline BOOL setForegroundWindow([[maybe_unused]] HWND hWnd) const {
+    virtual BOOL setForegroundWindow([[maybe_unused]] HWND hWnd) const {
 #ifdef OS_WINDOWS
         return ::SetForegroundWindow(hWnd);
 #else
@@ -79,7 +79,7 @@ class OsApi {
 #endif
     }
 
-    [[nodiscard]] inline SHORT getAsyncKeyState([
+    [[nodiscard]] virtual SHORT getAsyncKeyState([
         [maybe_unused]] int vKey) const {
 #ifdef OS_WINDOWS
         return ::GetAsyncKeyState(vKey);
@@ -88,7 +88,7 @@ class OsApi {
 #endif
     }
 
-    inline BOOL
+    virtual BOOL
     readProcessMemory([[maybe_unused]] HANDLE hProcess,
                       [[maybe_unused]] LPCVOID lpBaseAddress,
                       [[maybe_unused]] LPVOID lpBuffer,
@@ -102,7 +102,7 @@ class OsApi {
 #endif
     }
 
-    inline BOOL writeProcessMemory(
+    virtual BOOL writeProcessMemory(
         [[maybe_unused]] HANDLE hProcess, [[maybe_unused]] LPVOID lpBaseAddress,
         [[maybe_unused]] LPCVOID lpBuffer, [[maybe_unused]] SIZE_T nSize,
         [[maybe_unused]] SIZE_T *lpNumberOfBytesWritten) const {
@@ -114,7 +114,7 @@ class OsApi {
 #endif
     }
 
-    [[nodiscard]] inline HANDLE
+    [[nodiscard]] virtual HANDLE
     openProcess([[maybe_unused]] DWORD dwDesiredAccess,
                 [[maybe_unused]] BOOL bInheritHandle,
                 [[maybe_unused]] DWORD dwProcessId) const {
@@ -125,7 +125,7 @@ class OsApi {
 #endif
     }
 
-    inline BOOL closeHandle([[maybe_unused]] HANDLE hObject) const {
+    virtual BOOL closeHandle([[maybe_unused]] HANDLE hObject) const {
 #ifdef OS_WINDOWS
         return ::CloseHandle(hObject);
 #else
@@ -133,7 +133,7 @@ class OsApi {
 #endif
     }
 
-    inline HMODULE getModuleHandle([[maybe_unused]] LPCSTR lpModuleName) const {
+    virtual HMODULE getModuleHandle([[maybe_unused]] LPCSTR lpModuleName) const {
 #ifdef OS_WINDOWS
         return ::GetModuleHandle(lpModuleName);
 #else
@@ -142,7 +142,7 @@ class OsApi {
 #endif
     }
 
-    inline FARPROC getProcAddress([[maybe_unused]] HMODULE hModule,
+    virtual FARPROC getProcAddress([[maybe_unused]] HMODULE hModule,
                                   [[maybe_unused]] LPCSTR lpProcName) const {
 #ifdef OS_WINDOWS
         return ::GetProcAddress(hModule, lpProcName);

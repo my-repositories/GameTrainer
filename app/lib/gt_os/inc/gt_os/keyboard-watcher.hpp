@@ -9,14 +9,14 @@
 namespace gt::os {
 class KeyboardWatcher {
   public:
-    explicit KeyboardWatcher(const std::vector<int> &keysToWatch);
+    explicit KeyboardWatcher(const std::vector<int> &keysToWatch, OsApi* _osApi);
 
     [[nodiscard]] bool isKeyDown(int key) const;
 
     [[nodiscard]] bool isKeyPressed(int key);
 
   private:
-    OsApi osApi;
+    OsApi* osApi;
     std::map<int, bool> states;
 };
 } // namespace gt::os

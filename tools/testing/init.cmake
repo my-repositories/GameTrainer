@@ -8,7 +8,7 @@ function(INIT_TEST TEST_TARGET_NAME)
     find_package(Threads)
     target_link_libraries(
         ${GT_TEST_TARGET_NAME} PRIVATE
-        gtest_main
+        gmock_main
         ${CMAKE_THREAD_LIBS_INIT}
     )
 endfunction()

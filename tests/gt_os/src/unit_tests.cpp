@@ -54,6 +54,8 @@ std::cout << *this->data << std::endl;
 EXPECT_EQ(result, 5);
 }
 
+//test_death
+
 // instantiate_test_case_p + test_p ????
 
 // try to use member& instead of member*
