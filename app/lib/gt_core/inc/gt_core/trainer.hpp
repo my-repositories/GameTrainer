@@ -9,31 +9,29 @@
 #include <gt_os/utils.hpp>
 #include <gt_os/window-manager.hpp>
 
-namespace gt::core
-{
-    void loadLuaState(gt::lua::LuaWrapper &lua);
+namespace gt::core {
+void loadLuaState(gt::lua::LuaWrapper &lua);
 
-    class Trainer
-    {
-    public:
-        explicit Trainer(std::string trainerTitle);
+class Trainer {
+  public:
+    explicit Trainer(std::string trainerTitle);
 
-        ~Trainer();
+    ~Trainer();
 
-        [[nodiscard]] bool trainerIsRunning() const;
+    [[nodiscard]] bool trainerIsRunning() const;
 
-        void showOpenedWindow() const;
+    void showOpenedWindow() const;
 
-        [[nodiscard]] bool chooseConfig() const;
+    [[nodiscard]] bool chooseConfig() const;
 
-        [[nodiscard]] bool gameIsRunning() const;
+    [[nodiscard]] bool gameIsRunning() const;
 
-        void start() const;
+    void start() const;
 
-    private:
-        const std::string title;
-        gt::os::WindowManager* windowManager;
-    };
-}
+  private:
+    const std::string title;
+    gt::os::WindowManager *windowManager;
+};
+} // namespace gt::core
 
-#endif //GAMETRAINER_TRAINER_HPP
+#endif // GAMETRAINER_TRAINER_HPP

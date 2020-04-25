@@ -5,26 +5,26 @@
 #include <gt_os/os-api.hpp>
 #include <gt_os/utils.hpp>
 
-namespace gt::core
-{
-    class Game {
-    public:
-        explicit Game(DWORD processId);
-        ~Game();
+namespace gt::core {
+class Game {
+  public:
+    explicit Game(DWORD processId);
+    ~Game();
 
-        void updateValue(const gt::xml::CheatEntry* entry, float valueToAdd);
+    void updateValue(const gt::xml::CheatEntry *entry, float valueToAdd);
 
-    private:
-        os::OsApi osApi;
-        DWORD processId;
-        HANDLE process;
+  private:
+    os::OsApi osApi;
+    DWORD processId;
+    HANDLE process;
 
-        // TODO: move from here to smth.
-        [[nodiscard]] DWORD_PTR getValueAddress(const gt::xml::CheatEntry* entry) const;
+    // TODO: move from here to smth.
+    [[nodiscard]] DWORD_PTR
+    getValueAddress(const gt::xml::CheatEntry *entry) const;
 
-        // TODO: move from here to smth.
-        [[nodiscard]] BOOL isWow64() const;
-    };
-}
+    // TODO: move from here to smth.
+    [[nodiscard]] BOOL isWow64() const;
+};
+} // namespace gt::core
 
-#endif //GAMETRAINER_GAME_HPP
+#endif // GAMETRAINER_GAME_HPP
