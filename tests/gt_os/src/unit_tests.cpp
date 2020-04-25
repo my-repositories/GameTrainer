@@ -1,7 +1,4 @@
-
 #include <gtest/gtest.h>
-
-//#include <gt_os/os-api.hpp>
 
 TEST(Suma, 2plus3__shouldbe5) {
 int result = 2 + 3;

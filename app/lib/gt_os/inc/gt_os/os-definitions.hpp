@@ -94,39 +94,39 @@ typedef struct _SECURITY_ATTRIBUTES {
 } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
 
 inline WINMMAPI BOOL WINAPI PlaySoundA(
-    _In_opt_ LPCSTR pszSound,
-    _In_opt_ HMODULE hmod,
-    _In_ DWORD fdwSound
+    [[maybe_unused]] _In_opt_ LPCSTR pszSound,
+    [[maybe_unused]] _In_opt_ HMODULE hmod,
+    [[maybe_unused]] _In_ DWORD fdwSound
     ) {
     return 0;
 }
 
 inline WINMMAPI MCIERROR WINAPI mciSendString(
-    _In_ LPCSTR lpstrCommand,
-    _Out_writes_opt_(uReturnLength) LPSTR lpstrReturnString,
-    _In_ UINT uReturnLength,
-    _In_opt_ HWND hwndCallback
+    [[maybe_unused]] _In_ LPCSTR lpstrCommand,
+    [[maybe_unused]] _Out_writes_opt_(uReturnLength) LPSTR lpstrReturnString,
+    [[maybe_unused]] _In_ UINT uReturnLength,
+    [[maybe_unused]] _In_opt_ HWND hwndCallback
     ) {
     return 0;
 }
 
-inline WINBASEAPI VOID WINAPI Sleep(_In_ DWORD dwMilliseconds) {}
+inline WINBASEAPI VOID WINAPI Sleep([[maybe_unused]] _In_ DWORD dwMilliseconds) {}
 
-inline WINBASEAPI BOOL WINAPI SetConsoleTitle(_In_ LPCSTR lpConsoleTitle) {
+inline WINBASEAPI BOOL WINAPI SetConsoleTitle([[maybe_unused]] _In_ LPCSTR lpConsoleTitle) {
     return 0;
 }
 
 inline WINBASEAPI _Success_(return != 0 && return < nBufferLength) DWORD WINAPI
 GetCurrentDirectory(
-    _In_ DWORD nBufferLength,
-    _Out_writes_to_opt_(nBufferLength,return + 1) LPSTR lpBuffer
+    [[maybe_unused]] _In_ DWORD nBufferLength,
+    [[maybe_unused]] _Out_writes_to_opt_(nBufferLength,return + 1) LPSTR lpBuffer
 ) {
     return 1;
 }
 
 inline WINBASEAPI LPSTR WINAPI lstrcat(
-    _Inout_updates_z_(_String_length_(lpString1) + _String_length_(lpString2) + 1) LPSTR lpString1,
-    _In_    LPCSTR lpString2
+    [[maybe_unused]] _Inout_updates_z_(_String_length_(lpString1) + _String_length_(lpString2) + 1) LPSTR lpString1,
+    [[maybe_unused]] _In_    LPCSTR lpString2
     ) {
     return nullptr;
 }

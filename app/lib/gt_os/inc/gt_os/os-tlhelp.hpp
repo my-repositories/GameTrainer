@@ -42,27 +42,42 @@ typedef struct tagPROCESSENTRY32
 typedef MODULEENTRY32 *LPMODULEENTRY32;
 typedef PROCESSENTRY32 *LPPROCESSENTRY32;
 
-inline HANDLE CreateToolhelp32Snapshot(DWORD dwFlags, DWORD th32ProcessID) {
+inline HANDLE CreateToolhelp32Snapshot(
+    [[maybe_unused]] DWORD dwFlags,
+    [[maybe_unused]] DWORD th32ProcessID
+    ) {
     return nullptr;
 }
 
-inline BOOL Module32First(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
+inline BOOL Module32First(
+    [[maybe_unused]] HANDLE hSnapshot,
+    [[maybe_unused]] LPMODULEENTRY32 lpme
+    ) {
     return 1;
 }
 
-inline BOOL Module32Next(HANDLE hSnapshot, LPMODULEENTRY32 lpme) {
+inline BOOL Module32Next(
+    [[maybe_unused]] HANDLE hSnapshot,
+    [[maybe_unused]] LPMODULEENTRY32 lpme
+    ) {
     return 1;
 }
 
-inline BOOL CloseHandle(HANDLE hObject) {
+inline BOOL CloseHandle([[maybe_unused]] HANDLE hObject) {
     return 1;
 }
 
-inline BOOL Process32First(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
+inline BOOL Process32First(
+    [[maybe_unused]] HANDLE hSnapshot,
+    [[maybe_unused]] LPPROCESSENTRY32 lppe
+    ) {
     return 1;
 }
 
-inline BOOL Process32Next(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) {
+inline BOOL Process32Next(
+    [[maybe_unused]] HANDLE hSnapshot,
+    [[maybe_unused]] LPPROCESSENTRY32 lppe
+    ) {
     return 1;
 }
 #endif

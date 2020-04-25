@@ -8,7 +8,11 @@ namespace gt::os
     class OsApi
     {
     public:
-        inline int getClassName(HWND hWnd, LPSTR lpClassName, int nMaxCount) const {
+        inline int getClassName(
+            [[maybe_unused]] HWND hWnd,
+            [[maybe_unused]] LPSTR lpClassName,
+            [[maybe_unused]] int nMaxCount
+        ) const {
 #ifdef OS_WINDOWS
             return ::GetClassName(hWnd, lpClassName, nMaxCount);
 #else
@@ -16,7 +20,11 @@ namespace gt::os
 #endif
         }
 
-        inline int getWindowText(HWND hWnd, LPSTR lpString, int nMaxCount) const {
+        inline int getWindowText(
+            [[maybe_unused]] HWND hWnd,
+            [[maybe_unused]] LPSTR lpString,
+            [[maybe_unused]] int nMaxCount
+        ) const {
 #ifdef OS_WINDOWS
             return ::GetWindowText(hWnd, lpString, nMaxCount);
 #else
@@ -24,7 +32,10 @@ namespace gt::os
 #endif
         }
 
-        inline BOOL charToOem(LPCSTR pSrc, LPSTR pDst) const {
+        inline BOOL charToOem(
+            [[maybe_unused]] LPCSTR pSrc,
+            [[maybe_unused]] LPSTR pDst
+        ) const {
 #ifdef OS_WINDOWS
             return ::CharToOem(pSrc, pDst);
 #else
@@ -32,7 +43,11 @@ namespace gt::os
 #endif
         }
 
-        inline HANDLE createMutex(LPSECURITY_ATTRIBUTES attrs, BOOL owner, LPCSTR name) const {
+        inline HANDLE createMutex(
+            [[maybe_unused]] LPSECURITY_ATTRIBUTES attrs,
+            [[maybe_unused]] BOOL owner,
+            [[maybe_unused]] LPCSTR name
+        ) const {
 #ifdef OS_WINDOWS
             return ::CreateMutex(attrs, owner, name);
 #else
@@ -40,7 +55,10 @@ namespace gt::os
 #endif
         }
 
-        inline BOOL enumWindows(WNDENUMPROC lpEnumFunc, LPARAM lParam) const {
+        inline BOOL enumWindows(
+            [[maybe_unused]] WNDENUMPROC lpEnumFunc,
+            [[maybe_unused]] LPARAM lParam
+        ) const {
 #ifdef OS_WINDOWS
             return ::EnumWindows(lpEnumFunc, lParam);
 #else
@@ -56,7 +74,10 @@ namespace gt::os
 #endif
         }
 
-        inline BOOL showWindow(HWND hWnd, int nCmdShow) const {
+        inline BOOL showWindow(
+            [[maybe_unused]] HWND hWnd,
+            [[maybe_unused]] int nCmdShow
+        ) const {
 #ifdef OS_WINDOWS
             return ::ShowWindow(hWnd, nCmdShow);
 #else
@@ -64,7 +85,9 @@ namespace gt::os
 #endif
         }
 
-        inline BOOL setForegroundWindow(HWND hWnd) const {
+        inline BOOL setForegroundWindow(
+            [[maybe_unused]] HWND hWnd
+        ) const {
 #ifdef OS_WINDOWS
             return ::SetForegroundWindow(hWnd);
 #else
@@ -72,7 +95,9 @@ namespace gt::os
 #endif
         }
 
-        [[nodiscard]] inline SHORT getAsyncKeyState(int vKey) const {
+        [[nodiscard]] inline SHORT getAsyncKeyState(
+            [[maybe_unused]] int vKey
+        ) const {
 #ifdef OS_WINDOWS
             return ::GetAsyncKeyState(vKey);
 #else
@@ -81,11 +106,11 @@ namespace gt::os
         }
 
         inline BOOL readProcessMemory(
-                HANDLE hProcess,
-                LPCVOID lpBaseAddress,
-                LPVOID lpBuffer,
-                SIZE_T nSize,
-                SIZE_T* lpNumberOfBytesRead
+            [[maybe_unused]] HANDLE hProcess,
+            [[maybe_unused]] LPCVOID lpBaseAddress,
+            [[maybe_unused]] LPVOID lpBuffer,
+            [[maybe_unused]] SIZE_T nSize,
+            [[maybe_unused]] SIZE_T* lpNumberOfBytesRead
         ) const {
 #ifdef OS_WINDOWS
             return ::ReadProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead);
@@ -96,11 +121,11 @@ namespace gt::os
 
 
         inline BOOL writeProcessMemory(
-                HANDLE hProcess,
-                LPVOID lpBaseAddress,
-                LPCVOID lpBuffer,
-                SIZE_T nSize,
-                SIZE_T* lpNumberOfBytesWritten
+            [[maybe_unused]] HANDLE hProcess,
+            [[maybe_unused]] LPVOID lpBaseAddress,
+            [[maybe_unused]] LPCVOID lpBuffer,
+            [[maybe_unused]] SIZE_T nSize,
+            [[maybe_unused]] SIZE_T* lpNumberOfBytesWritten
         ) const {
 #ifdef OS_WINDOWS
             return ::WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten);
@@ -110,9 +135,9 @@ namespace gt::os
         }
 
         [[nodiscard]] inline HANDLE openProcess(
-                DWORD dwDesiredAccess,
-                BOOL bInheritHandle,
-                DWORD dwProcessId
+            [[maybe_unused]] DWORD dwDesiredAccess,
+            [[maybe_unused]] BOOL bInheritHandle,
+            [[maybe_unused]] DWORD dwProcessId
         ) const {
 #ifdef OS_WINDOWS
             return ::OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId);
@@ -121,7 +146,7 @@ namespace gt::os
 #endif
         }
 
-        inline BOOL closeHandle(HANDLE hObject) const {
+        inline BOOL closeHandle([[maybe_unused]] HANDLE hObject) const {
 #ifdef OS_WINDOWS
             return ::CloseHandle(hObject);
 #else
@@ -129,7 +154,7 @@ namespace gt::os
 #endif
         }
 
-        inline HMODULE getModuleHandle(LPCSTR lpModuleName) const {
+        inline HMODULE getModuleHandle([[maybe_unused]] LPCSTR lpModuleName) const {
 #ifdef OS_WINDOWS
             return ::GetModuleHandle(lpModuleName);
 #else
@@ -138,7 +163,9 @@ namespace gt::os
 #endif
         }
 
-        inline FARPROC getProcAddress(HMODULE hModule, LPCSTR lpProcName
+        inline FARPROC getProcAddress(
+            [[maybe_unused]] HMODULE hModule,
+            [[maybe_unused]] LPCSTR lpProcName
         ) const {
 #ifdef OS_WINDOWS
             return ::GetProcAddress(hModule, lpProcName);
