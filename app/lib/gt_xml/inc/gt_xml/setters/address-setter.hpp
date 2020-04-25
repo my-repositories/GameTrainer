@@ -5,17 +5,15 @@
 
 #include <gt_xml/setters/table-setter.hpp>
 
-namespace gt::xml
-{
-    class AddressSetter : public TableSetter
-    {
-    public:
-        explicit AddressSetter(std::ifstream* file);
+namespace gt::xml {
+class AddressSetter : public TableSetter {
+  public:
+    explicit AddressSetter(std::ifstream *file);
 
-        ~AddressSetter() override;
+    ~AddressSetter() override;
 
-        void set(const std::string& buffer, CheatEntry& entry) override;
-    };
-}
+    void set(const std::string &buffer, CheatEntry &entry) override;
+};
+} // namespace gt::xml
 
-#endif //GAMETRAINER_ADDRESS_SETTER_HPP
+#endif // GAMETRAINER_ADDRESS_SETTER_HPP

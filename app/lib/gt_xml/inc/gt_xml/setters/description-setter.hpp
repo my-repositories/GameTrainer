@@ -5,17 +5,15 @@
 
 #include <gt_xml/setters/table-setter.hpp>
 
-namespace gt::xml
-{
-    class DescriptionSetter : public TableSetter
-    {
-    public:
-        explicit DescriptionSetter(std::ifstream* file);
+namespace gt::xml {
+class DescriptionSetter : public TableSetter {
+  public:
+    explicit DescriptionSetter(std::ifstream *file);
 
-        ~DescriptionSetter() override;
+    ~DescriptionSetter() override;
 
-        void set(const std::string& buffer, CheatEntry& entry) override;
-    };
-}
+    void set(const std::string &buffer, CheatEntry &entry) override;
+};
+} // namespace gt::xml
 
-#endif //GAMETRAINER_DESCRIPTION_SETTER_HPP
+#endif // GAMETRAINER_DESCRIPTION_SETTER_HPP

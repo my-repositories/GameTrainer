@@ -6,26 +6,24 @@
 
 #include <gt_xml/table-mediator.hpp>
 
-namespace gt::xml
-{
-    class TableReader
-    {
-    public:
-        static std::vector<CheatEntry> read(const char* fileName);
+namespace gt::xml {
+class TableReader {
+  public:
+    static std::vector<CheatEntry> read(const char *fileName);
 
-    private:
-        explicit TableReader(const char* filePath);
+  private:
+    explicit TableReader(const char *filePath);
 
-        ~TableReader();
+    ~TableReader();
 
-        char* filePath;
-        std::ifstream file;
-        TableMediator* tableMediator;
+    char *filePath;
+    std::ifstream file;
+    TableMediator *tableMediator;
 
-        [[nodiscard]] std::vector<CheatEntry> readEntries();
+    [[nodiscard]] std::vector<CheatEntry> readEntries();
 
-        [[nodiscard]] CheatEntry readEntry();
-    };
-}
+    [[nodiscard]] CheatEntry readEntry();
+};
+} // namespace gt::xml
 
-#endif //GAMETRAINER_TABLE_READER_HPP
+#endif // GAMETRAINER_TABLE_READER_HPP

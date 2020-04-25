@@ -5,21 +5,19 @@
 
 #include <gt_xml/cheat-entry.hpp>
 
-namespace gt::xml
-{
-    class TableSetter
-    {
-    public:
-        explicit TableSetter(std::ifstream *file);
+namespace gt::xml {
+class TableSetter {
+  public:
+    explicit TableSetter(std::ifstream *file);
 
-        virtual ~TableSetter();
+    virtual ~TableSetter();
 
-        virtual void set(const std::string &buffer, CheatEntry &entry) = 0;
+    virtual void set(const std::string &buffer, CheatEntry &entry) = 0;
 
-    protected:
-        std::ifstream *file;
-    };
+  protected:
+    std::ifstream *file;
+};
 
-}
+} // namespace gt::xml
 
-#endif //GAMETRAINER_TABLE_SETTER_HPP
+#endif // GAMETRAINER_TABLE_SETTER_HPP

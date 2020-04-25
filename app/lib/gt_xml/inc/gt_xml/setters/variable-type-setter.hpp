@@ -5,17 +5,15 @@
 
 #include <gt_xml/setters/table-setter.hpp>
 
-namespace gt::xml
-{
-    class VariableTypeSetter : public TableSetter
-    {
-    public:
-        explicit VariableTypeSetter(std::ifstream* file);
+namespace gt::xml {
+class VariableTypeSetter : public TableSetter {
+  public:
+    explicit VariableTypeSetter(std::ifstream *file);
 
-        ~VariableTypeSetter() override;
+    ~VariableTypeSetter() override;
 
-        void set(const std::string& buffer, CheatEntry& entry) override;
-    };
-}
+    void set(const std::string &buffer, CheatEntry &entry) override;
+};
+} // namespace gt::xml
 
-#endif //GAMETRAINER_VARIABLE_TYPE_SETTER_HPP
+#endif // GAMETRAINER_VARIABLE_TYPE_SETTER_HPP
