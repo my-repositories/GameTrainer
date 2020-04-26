@@ -14,6 +14,7 @@ target_link_libraries(
 target_include_directories(
     ${GT_TEST_TARGET_NAME} PRIVATE
     ${PROJECT_ROOT_DIR}/app/lib/gt_os/inc
+    inc
 )
 
 
