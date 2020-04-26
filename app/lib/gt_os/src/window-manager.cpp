@@ -3,29 +3,28 @@
 #include <gt_os/window-manager.hpp>
 
 namespace gt::os {
-OsApi WindowManager::osApi;
+OsApi* WindowManager::osApi = nullptr;
 HWND WindowManager::window = nullptr;
 std::string WindowManager::title;
 
-WindowManager::WindowManager(const std::string &windowTitle) {
+WindowManager::WindowManager(const std::string &windowTitle, OsApi* _osApi) {
     WindowManager::title = windowTitle;
+    WindowManager::osApi = _osApi;
 }
 
 void WindowManager::show() {
-    WindowManager::osApi.showWindow(WindowManager::window, SW_RESTORE);
-    WindowManager::osApi.setForegroundWindow(WindowManager::window);
+    WindowManager::osApi->showWindow(WindowManager::window, SW_RESTORE);
+    WindowManager::osApi->setForegroundWindow(WindowManager::window);
 }
 
 bool WindowManager::isOpened() {
-    HANDLE mutex = WindowManager::osApi.createMutex(
-        nullptr, TRUE, WindowManager::title.c_str());
+    HANDLE mutex = WindowManager::osApi->createMutex(nullptr, TRUE, WindowManager::title);
 
-    if (mutex == nullptr ||
-        WindowManager::osApi.getLastError() == ERROR_ALREADY_EXISTS) {
-        if (WindowManager::osApi.enumWindows(&WindowManager::enumWindowsProc,
-                                             NULL) &&
-            window != nullptr) {
-            return true;
+    if (mutex == nullptr || WindowManager::osApi->getLastError() == ERROR_ALREADY_EXISTS) {
+        if (WindowManager::osApi->enumWindows(&WindowManager::enumWindowsProc, NULL)) {
+            if (WindowManager::window != nullptr) {
+                return true;
+            }
         }
     }
 
@@ -35,14 +34,14 @@ bool WindowManager::isOpened() {
 BOOL CALLBACK WindowManager::enumWindowsProc(HWND hwnd, LPARAM) {
     char buffer[255];
 
-    if (WindowManager::osApi.getWindowText(hwnd, buffer, sizeof(buffer))) {
-        WindowManager::osApi.charToOem(buffer, buffer);
+    if (WindowManager::osApi->getWindowText(hwnd, buffer, sizeof(buffer))) {
+        WindowManager::osApi->charToOem(buffer, buffer);
+
         if (!strcmp(buffer, WindowManager::title.c_str()) ||
             !strcmp(buffer, ("Select " + WindowManager::title).c_str())) {
             buffer[0] = '\0';
 
-            if (WindowManager::osApi.getClassName(hwnd, buffer,
-                                                  sizeof(buffer))) {
+            if (WindowManager::osApi->getClassName(hwnd, buffer, sizeof(buffer))) {
                 if (!strcmp("ConsoleWindowClass", buffer)) {
                     WindowManager::window = hwnd;
                 }

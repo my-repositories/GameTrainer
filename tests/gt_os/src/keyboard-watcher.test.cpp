@@ -10,7 +10,7 @@ TEST_F(isKeyDown, returns_true_when_VK_F6_pressed) {
 
     bool actual = this->keyboardWatcher->isKeyDown(this->key);
 
-    EXPECT_EQ(true, actual);
+    EXPECT_TRUE(actual);
 }
 
 TEST_F(isKeyDown, returns_false_when_VK_F6_not_pressed) {
@@ -20,7 +20,7 @@ TEST_F(isKeyDown, returns_false_when_VK_F6_not_pressed) {
 
     bool actual = this->keyboardWatcher->isKeyDown(this->key);
 
-    EXPECT_EQ(false, actual);
+    EXPECT_FALSE(actual);
 }
 
 TEST_F(isKeyPressed, returns_false_by_default) {
@@ -30,7 +30,7 @@ TEST_F(isKeyPressed, returns_false_by_default) {
 
     bool actual = this->keyboardWatcher->isKeyPressed(this->key);
 
-    EXPECT_EQ(false, actual);
+    EXPECT_FALSE(actual);
 }
 
 TEST_F(isKeyPressed, returns_true_once) {
@@ -40,7 +40,7 @@ TEST_F(isKeyPressed, returns_true_once) {
 
     bool actual = this->keyboardWatcher->isKeyPressed(this->key);
 
-    EXPECT_EQ(true, actual);
+    EXPECT_TRUE(actual);
 }
 
 TEST_F(isKeyPressed, returns_always_false_after_first_true) {
@@ -56,7 +56,7 @@ TEST_F(isKeyPressed, returns_always_false_after_first_true) {
     for (int i = 1; i < checksCount; ++i) {
         bool actual = this->keyboardWatcher->isKeyPressed(this->key);
 
-        EXPECT_EQ(false, actual);
+        EXPECT_FALSE(actual);
     }
 }
 
@@ -71,5 +71,5 @@ TEST_F(isKeyPressed, returns_true_after_keyup) {
     (void)this->keyboardWatcher->isKeyPressed(this->key);
     bool actual = this->keyboardWatcher->isKeyPressed(this->key);
 
-    EXPECT_EQ(true, actual);
+    EXPECT_TRUE(actual);
 }

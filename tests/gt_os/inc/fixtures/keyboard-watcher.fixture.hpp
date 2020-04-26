@@ -15,11 +15,10 @@ protected:
     void SetUp() override {
         this->key = VK_F6;
         std::vector<int> keysToWatch{this->key};
-        this->keyboardWatcher =
-                new gt::os::KeyboardWatcher(keysToWatch, &this->osApiMock);
+        this->keyboardWatcher = new gt::os::KeyboardWatcher(keysToWatch, &this->osApiMock);
 
         ON_CALL(this->osApiMock, getAsyncKeyState(::testing::_))
-                .WillByDefault(::testing::Return((SHORT)0));
+            .WillByDefault(::testing::Return((SHORT)0));
     }
 
     void TearDown() override { delete this->keyboardWatcher; }

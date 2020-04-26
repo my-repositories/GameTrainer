@@ -3,10 +3,14 @@
 namespace gt::core {
 Trainer::Trainer(std::string trainerTitle) : title(std::move(trainerTitle)) {
     os::setConsoleTitle(this->title.c_str());
-    this->windowManager = new os::WindowManager(this->title);
+    this->osApi = new os::OsApi();
+    this->windowManager = new os::WindowManager(this->title, this->osApi);
 }
 
-Trainer::~Trainer() { delete this->windowManager; }
+Trainer::~Trainer() {
+    delete this->windowManager;
+    delete this->osApi;
+}
 
 bool Trainer::trainerIsRunning() const {
     return this->windowManager->isOpened();

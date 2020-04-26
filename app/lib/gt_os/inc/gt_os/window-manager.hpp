@@ -8,19 +8,18 @@
 namespace gt::os {
 class WindowManager {
   public:
-    explicit WindowManager(const std::string &title);
+    explicit WindowManager(const std::string &title, OsApi* _osApi);
 
     void show();
 
     [[nodiscard]] bool isOpened();
 
   private:
-    static OsApi osApi;
+    static OsApi* osApi;
     static HWND window;
     static std::string title;
 
-    [[nodiscard]] static BOOL CALLBACK enumWindowsProc(HWND hwnd,
-                                                       LPARAM lParam);
+    [[nodiscard]] static BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam);
 };
 } // namespace gt::os
 

@@ -1,6 +1,8 @@
 #ifndef GAMETRAINER_OS_API_HPP
 #define GAMETRAINER_OS_API_HPP
 
+#include <string>
+
 #include <gt_os/os-definitions.hpp>
 
 namespace gt::os {
@@ -37,9 +39,9 @@ class OsApi {
 
     virtual HANDLE createMutex([[maybe_unused]] LPSECURITY_ATTRIBUTES attrs,
                               [[maybe_unused]] BOOL owner,
-                              [[maybe_unused]] LPCSTR name) const {
+                              [[maybe_unused]] std::string name) const {
 #ifdef OS_WINDOWS
-        return ::CreateMutex(attrs, owner, name);
+        return ::CreateMutex(attrs, owner, name.c_str());
 #else
         return nullptr;
 #endif
