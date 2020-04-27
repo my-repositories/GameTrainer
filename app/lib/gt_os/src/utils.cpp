@@ -5,9 +5,7 @@
 
 namespace gt::os {
 void playWAV(const char *sound) {
-    PlaySoundA((LPCSTR)sound, nullptr,
-               SND_APPLICATION | SND_ASYNC |
-                   SND_NODEFAULT); // NOLINT(hicpp-signed-bitwise)
+    PlaySoundA((LPCSTR)sound,nullptr, SND_APPLICATION | SND_ASYNC | SND_NODEFAULT); // NOLINT(hicpp-signed-bitwise)
 }
 
 void playMP3(const char *sound) {
@@ -20,6 +18,7 @@ void playMP3(const char *sound) {
 
 // TODO: remove unused parameter.
 void stopMP3(const char *sound) {
+    (void) sound;
     mciSendString("stop all", nullptr, 0, nullptr);
     mciSendString("close all", nullptr, 0, nullptr);
 }
@@ -31,8 +30,7 @@ void sleep(const size_t ms) { Sleep(ms); }
 DWORD_PTR getModuleAddress(const char *moduleName, const DWORD processId) {
     MODULEENTRY32 lpModuleEntry = {0};
     HANDLE hSnapShot =
-        CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32,
-                                 processId); // NOLINT(hicpp-signed-bitwise)
+        CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processId); // NOLINT(hicpp-signed-bitwise)
 
     if (!hSnapShot)
         return NULL;

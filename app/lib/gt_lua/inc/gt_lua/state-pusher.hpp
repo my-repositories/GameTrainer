@@ -20,9 +20,9 @@ template <class T> struct StatePusherInternal {
         }                                                                      \
     };
 
-GENERATE_STATE_PUSHER(int, lua_pushinteger);
+GENERATE_STATE_PUSHER(int, lua_pushinteger)
 
-GENERATE_STATE_PUSHER(bool, lua_pushboolean);
+GENERATE_STATE_PUSHER(bool, lua_pushboolean)
 } // namespace internal
 
 struct StatePusher {

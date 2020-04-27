@@ -39,7 +39,7 @@ class OsApi {
 
     virtual HANDLE createMutex([[maybe_unused]] LPSECURITY_ATTRIBUTES attrs,
                               [[maybe_unused]] BOOL owner,
-                              [[maybe_unused]] std::string name) const {
+                              [[maybe_unused]] const std::string& name) const {
 #ifdef OS_WINDOWS
         return ::CreateMutex(attrs, owner, name.c_str());
 #else
@@ -157,10 +157,12 @@ class OsApi {
         static OsApi  instance;
         return instance;
     }
-protected:
-    OsApi() = default;
+
     OsApi(const OsApi&) = delete;
     OsApi& operator=(OsApi&) = delete;
+
+protected:
+    OsApi() = default;
 };
 } // namespace gt::os
 

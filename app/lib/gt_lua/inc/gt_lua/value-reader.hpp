@@ -28,9 +28,9 @@ template <class T> struct ValueReaderInternal {
         }                                                                      \
     };
 
-GENERATE_VALUE_READER(int, lua_isinteger, lua_tointeger);
+GENERATE_VALUE_READER(int, lua_isinteger, lua_tointeger)
 
-GENERATE_VALUE_READER(char *, lua_isstring, lua_tostring);
+GENERATE_VALUE_READER(char *, lua_isstring, lua_tostring)
 } // namespace internal
 
 struct ValueReader {

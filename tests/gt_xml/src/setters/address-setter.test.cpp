@@ -5,11 +5,11 @@
 #include <gt_xml/setters/address-setter.hpp>
 
 TEST(address_setter, set) {
-const std::string buffer = "";
-gt::xml::CheatEntry entry;
-gt::xml::AddressSetter setter(NULL);
+    const std::string buffer;
+    gt::xml::CheatEntry entry;
+    gt::xml::AddressSetter setter(nullptr);
 
-setter.set(buffer, entry);
+    setter.set(buffer, entry);
 
-EXPECT_EQ(entry.address, 0);
+    EXPECT_EQ(entry.address, 0);
 }

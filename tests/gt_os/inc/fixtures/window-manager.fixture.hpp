@@ -9,7 +9,7 @@
 class WindowManagerFixture : public ::testing::Test {
 protected:
     std::string title{};
-    OsApiMock osApiMock{};
+    OsApiMock osApiMock;
     gt::os::WindowManager *windowManager{};
 
     void SetUp() override {

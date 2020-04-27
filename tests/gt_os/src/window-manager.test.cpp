@@ -13,8 +13,7 @@ TEST_F(show, should_call_showWindow_and_setForegroundWindow) {
 }
 
 TEST_F(isOpened, returns_false_if_mutex_is_null) {
-    EXPECT_CALL(this->osApiMock,
-                createMutex(nullptr, TRUE, this->title))
+    EXPECT_CALL(this->osApiMock, createMutex(nullptr, TRUE, this->title))
         .Times(1)
         .WillOnce(::testing::Return(nullptr));
 

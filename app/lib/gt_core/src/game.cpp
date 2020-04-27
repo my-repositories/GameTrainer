@@ -4,9 +4,7 @@ namespace gt::core {
 Game::Game(DWORD processId, os::OsApi* osApi) {
     this->processId = processId;
     this->osApi = osApi;
-    this->process = this->osApi->openProcess(
-        PROCESS_ALL_ACCESS, FALSE,
-        this->processId); // NOLINT(hicpp-signed-bitwise)
+    this->process = this->osApi->openProcess(PROCESS_ALL_ACCESS, FALSE, this->processId);  // NOLINT(hicpp-signed-bitwise)
 }
 
 Game::~Game() { this->osApi->closeHandle(this->process); }
