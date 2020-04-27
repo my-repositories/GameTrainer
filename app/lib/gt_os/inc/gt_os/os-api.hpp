@@ -152,6 +152,15 @@ class OsApi {
         return nullptr;
 #endif
     }
+
+    static OsApi& getInstance() {
+        static OsApi  instance;
+        return instance;
+    }
+protected:
+    OsApi() = default;
+    OsApi(const OsApi&) = delete;
+    OsApi& operator=(OsApi&) = delete;
 };
 } // namespace gt::os
 

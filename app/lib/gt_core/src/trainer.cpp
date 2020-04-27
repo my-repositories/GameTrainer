@@ -1,9 +1,10 @@
 #include <gt_core/trainer.hpp>
 
 namespace gt::core {
-Trainer::Trainer(std::string trainerTitle) : title(std::move(trainerTitle)) {
+Trainer::Trainer(std::string&& trainerTitle, os::OsApi *osApi)
+    : title(trainerTitle) {
     os::setConsoleTitle(this->title.c_str());
-    this->osApi = new os::OsApi();
+    this->osApi = osApi;
     this->windowManager = new os::WindowManager(this->title, this->osApi);
 }
 
@@ -25,7 +26,7 @@ void Trainer::start() const {
                                                    float valueToAdd) {
         DWORD processId = os::getProcessIdByName("KillingFloor.exe");
 
-        Game game(processId);
+        Game game(processId, &os::OsApi::getInstance());
         game.updateValue(entry, valueToAdd);
     };
 
@@ -43,8 +44,7 @@ void Trainer::start() const {
     const auto registeredKeys = lua.getVector<int>((char *)"registeredKeys");
     const char *processName = *lua.getValue<char *>((char *)"processName");
     std::cout << processName << std::endl;
-    os::OsApi osApi;
-    os::KeyboardWatcher keyboardWatcher(registeredKeys, &osApi);
+    os::KeyboardWatcher keyboardWatcher(registeredKeys, this->osApi);
 
     for (;; os::sleep(50)) {
         // TODO: remove it!

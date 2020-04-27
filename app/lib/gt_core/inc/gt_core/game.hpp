@@ -8,13 +8,13 @@
 namespace gt::core {
 class Game {
   public:
-    explicit Game(DWORD processId);
+    explicit Game(DWORD processId, os::OsApi* osApi);
     ~Game();
 
     void updateValue(const gt::xml::CheatEntry *entry, float valueToAdd);
 
   private:
-    os::OsApi osApi;
+    os::OsApi* osApi;
     DWORD processId;
     HANDLE process;
 

@@ -2,10 +2,10 @@
 
 // TODO: move this logic to gt_console.lib
 int main(int argc, char *argv[]) {
-    const std::string title =
+    std::string title =
         std::string(GT_PROJECT_NAME) + " " + GT_PROJECT_VERSION;
 
-    gt::core::Trainer trainer(title);
+    gt::core::Trainer trainer(std::move(title), &gt::os::OsApi::getInstance());
 
     // Allow only one instance of application.
     if (trainer.trainerIsRunning()) {

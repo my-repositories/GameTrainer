@@ -14,7 +14,7 @@ void loadLuaState(gt::lua::LuaWrapper &lua);
 
 class Trainer {
   public:
-    explicit Trainer(std::string trainerTitle);
+    explicit Trainer(std::string&& trainerTitle, os::OsApi *osApi);
 
     ~Trainer();
 
@@ -30,8 +30,8 @@ class Trainer {
 
   private:
     const std::string title;
-    gt::os::OsApi *osApi;
-    gt::os::WindowManager *windowManager;
+    os::OsApi *osApi;
+    os::WindowManager *windowManager;
 };
 } // namespace gt::core
 
