@@ -4,22 +4,20 @@
 #include <string>
 
 #include <gt_os/os-api.hpp>
+#include <gt_os/window-finder.hpp>
 
 namespace gt::os {
 class WindowManager {
   public:
-    explicit WindowManager(const std::string &title, OsApi* _osApi);
+    explicit WindowManager(OsApi* _osApi, WindowFinder* _windowFinder);
 
-    void show();
+    void show(const std::string& _title);
 
-    [[nodiscard]] bool isOpened();
+    [[nodiscard]] bool isOpened(const std::string &_title);
 
   private:
-    static OsApi* osApi;
-    static HWND window;
-    static std::string title;
-
-    [[nodiscard]] static BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam);
+    OsApi* osApi;
+    WindowFinder* windowFinder;
 };
 } // namespace gt::os
 

@@ -31,7 +31,6 @@ class Trainer {
   private:
     const std::string title;
     os::OsApi *osApi;
-    os::WindowManager *windowManager;
 };
 } // namespace gt::core
 

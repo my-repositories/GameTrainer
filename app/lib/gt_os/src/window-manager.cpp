@@ -1,56 +1,24 @@
-#include <cstring>
-
 #include <gt_os/window-manager.hpp>
 
 namespace gt::os {
-OsApi* WindowManager::osApi = nullptr;
-HWND WindowManager::window = nullptr;
-std::string WindowManager::title;
 
-WindowManager::WindowManager(const std::string &windowTitle, OsApi* _osApi) {
-    WindowManager::title = windowTitle;
-    WindowManager::osApi = _osApi;
+WindowManager::WindowManager(OsApi* _osApi, WindowFinder* _windowFinder) {
+    this->osApi = _osApi;
+    this->windowFinder = _windowFinder;
 }
 
-void WindowManager::show() {
-    WindowManager::osApi->showWindow(WindowManager::window, SW_RESTORE);
-    WindowManager::osApi->setForegroundWindow(WindowManager::window);
-}
+void WindowManager::show(const std::string& _title) {
+    HWND window = this->windowFinder->findWindow(_title);
 
-bool WindowManager::isOpened() {
-    HANDLE mutex = WindowManager::osApi->createMutex(nullptr, TRUE, WindowManager::title);
-
-    if (mutex == nullptr || WindowManager::osApi->getLastError() == ERROR_ALREADY_EXISTS) {
-        if (WindowManager::osApi->enumWindows(&WindowManager::enumWindowsProc, NULL)) {
-            if (WindowManager::window != nullptr) {
-                return true;
-            }
-        }
+    if (window != nullptr) {
+        this->osApi->showWindow(window, SW_RESTORE);
+        this->osApi->setForegroundWindow(window);
     }
-
-    return false;
 }
 
-BOOL CALLBACK WindowManager::enumWindowsProc(HWND hwnd, LPARAM) {
-    char buffer[255];
+bool WindowManager::isOpened(const std::string& _title) {
+    HANDLE mutex = this->osApi->createMutex(nullptr, TRUE, _title);
 
-    if (WindowManager::osApi->getWindowText(hwnd, buffer, sizeof(buffer))) {
-        WindowManager::osApi->charToOem(buffer, buffer);
-
-        if (!strcmp(buffer, WindowManager::title.c_str()) ||
-            !strcmp(buffer, ("Select " + WindowManager::title).c_str())) {
-            buffer[0] = '\0';
-
-            if (WindowManager::osApi->getClassName(hwnd, buffer, sizeof(buffer))) {
-                if (!strcmp("ConsoleWindowClass", buffer)) {
-                    WindowManager::window = hwnd;
-                }
-            }
-        }
-    }
-
-    buffer[0] = '\0';
-
-    return TRUE;
+    return mutex == nullptr || this->osApi->getLastError() == ERROR_ALREADY_EXISTS;
 }
 } // namespace gt::os

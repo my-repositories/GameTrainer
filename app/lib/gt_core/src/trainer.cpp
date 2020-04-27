@@ -1,23 +1,30 @@
 #include <gt_core/trainer.hpp>
+#include <gt_os/window-finder.hpp>
 
 namespace gt::core {
 Trainer::Trainer(std::string&& trainerTitle, os::OsApi *osApi)
     : title(trainerTitle) {
     os::setConsoleTitle(this->title.c_str());
     this->osApi = osApi;
-    this->windowManager = new os::WindowManager(this->title, this->osApi);
 }
 
-Trainer::~Trainer() {
-    delete this->windowManager;
-    delete this->osApi;
-}
+Trainer::~Trainer() = default;
 
 bool Trainer::trainerIsRunning() const {
-    return this->windowManager->isOpened();
+    os::WindowEnumerator windowEnumerator(this->osApi);
+    os::WindowFinder windowFinder(&windowEnumerator);
+    os::WindowManager windowManager(this->osApi, &windowFinder);
+
+    return windowManager.isOpened(this->title);
 }
 
-void Trainer::showOpenedWindow() const { this->windowManager->show(); }
+void Trainer::showOpenedWindow() const {
+    os::WindowEnumerator windowEnumerator(this->osApi);
+    os::WindowFinder windowFinder(&windowEnumerator);
+    os::WindowManager windowManager(this->osApi, &windowFinder);
+
+    windowManager.show(this->title);
+}
 
 void Trainer::start() const {
     lua::LuaWrapper lua;
@@ -48,7 +55,7 @@ void Trainer::start() const {
 
     for (;; os::sleep(50)) {
         // TODO: remove it!
-        if (keyboardWatcher.isKeyDown(VK_F13)) {
+        if (keyboardWatcher.isKeyDown(VK_F12)) {
             break;
         }
 
