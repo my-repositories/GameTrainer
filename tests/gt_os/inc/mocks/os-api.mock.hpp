@@ -1,6 +1,8 @@
 #ifndef GAMETRAINER_OS_API_MOCK_HPP
 #define GAMETRAINER_OS_API_MOCK_HPP
 
+#include <gt_os/os-api.hpp>
+
 class OsApiMock : public gt::os::OsApi {
 public:
     MOCK_CONST_METHOD1(getAsyncKeyState, SHORT(int));

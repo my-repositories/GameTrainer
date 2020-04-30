@@ -2,7 +2,7 @@
 
 namespace gt::os {
 
-WindowFinder::WindowFinder(WindowEnumerator *_windowEnumerator) {
+WindowFinder::WindowFinder(IWindowEnumerator *_windowEnumerator) {
     this->windowEnumerator = _windowEnumerator;
 }
 

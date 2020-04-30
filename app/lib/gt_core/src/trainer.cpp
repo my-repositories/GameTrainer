@@ -1,5 +1,6 @@
 #include <gt_core/trainer.hpp>
 #include <gt_os/window-finder.hpp>
+#include <gt_os/window-enumerator.hpp>
 
 namespace gt::core {
 Trainer::Trainer(std::string&& trainerTitle, os::OsApi *osApi)

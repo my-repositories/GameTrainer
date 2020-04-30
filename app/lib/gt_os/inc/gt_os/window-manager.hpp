@@ -4,12 +4,12 @@
 #include <string>
 
 #include <gt_os/os-api.hpp>
-#include <gt_os/window-finder.hpp>
+#include <gt_os/window-finder.i.hpp>
 
 namespace gt::os {
 class WindowManager {
   public:
-    explicit WindowManager(OsApi* _osApi, WindowFinder* _windowFinder);
+    explicit WindowManager(OsApi* _osApi, IWindowFinder* _windowFinder);
 
     void show(const std::string& _title);
 
@@ -17,7 +17,7 @@ class WindowManager {
 
   private:
     OsApi* osApi;
-    WindowFinder* windowFinder;
+    IWindowFinder* windowFinder;
 };
 } // namespace gt::os
 

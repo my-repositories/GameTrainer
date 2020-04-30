@@ -11,13 +11,13 @@ WindowEnumerator::WindowEnumerator(OsApi *_osApi) {
     WindowEnumerator::osApi = _osApi;
 }
 
-WindowEnumerator* WindowEnumerator::setTitle(const std::string &_title) {
+IWindowEnumerator* WindowEnumerator::setTitle(const std::string &_title) {
     WindowEnumerator::title = _title;
 
     return this;
 }
 
-WindowEnumerator* WindowEnumerator::enumerate() {
+IWindowEnumerator* WindowEnumerator::enumerate() {
     WindowEnumerator::osApi->enumWindows(&WindowEnumerator::enumWindowsProc, NULL);
 
     return this;

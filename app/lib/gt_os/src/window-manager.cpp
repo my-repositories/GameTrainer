@@ -2,7 +2,7 @@
 
 namespace gt::os {
 
-WindowManager::WindowManager(OsApi* _osApi, WindowFinder* _windowFinder) {
+WindowManager::WindowManager(OsApi* _osApi, IWindowFinder* _windowFinder) {
     this->osApi = _osApi;
     this->windowFinder = _windowFinder;
 }

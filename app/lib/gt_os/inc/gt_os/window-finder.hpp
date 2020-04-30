@@ -3,16 +3,17 @@
 
 #include <string>
 
-#include <gt_os/window-enumerator.hpp>
+#include <gt_os/window-finder.i.hpp>
+#include <gt_os/window-enumerator.i.hpp>
 
 namespace gt::os {
-class WindowFinder {
+class WindowFinder : public IWindowFinder {
   public:
-    explicit WindowFinder(WindowEnumerator* _windowEnumerator);
-    HWND findWindow(const std::string& _title);
+    explicit WindowFinder(IWindowEnumerator* _windowEnumerator);
+    HWND findWindow(const std::string& _title) override;
 
   private:
-    WindowEnumerator* windowEnumerator;
+    IWindowEnumerator* windowEnumerator;
 };
 } // namespace gt::os
 

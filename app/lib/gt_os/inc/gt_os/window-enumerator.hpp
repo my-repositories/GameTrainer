@@ -4,15 +4,16 @@
 #include <string>
 
 #include <gt_os/os-api.hpp>
+#include <gt_os/window-enumerator.i.hpp>
 
 namespace gt::os {
-    class WindowEnumerator {
+    class WindowEnumerator : public IWindowEnumerator {
     public:
         explicit WindowEnumerator(OsApi* _osApi);
 
-        WindowEnumerator* setTitle(const std::string& _title);
-        WindowEnumerator* enumerate();
-        [[nodiscard]] HWND getWindow() const;
+        IWindowEnumerator* setTitle(const std::string& _title) override;
+        IWindowEnumerator* enumerate() override;
+        [[nodiscard]] HWND getWindow() const override;
 
     private:
         static OsApi* osApi;

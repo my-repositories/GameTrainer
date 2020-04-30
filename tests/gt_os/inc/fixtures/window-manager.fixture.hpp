@@ -5,63 +5,26 @@
 
 #include <gt_os/window-manager.hpp>
 #include <mocks/os-api.mock.hpp>
+#include <mocks/window-finder.mock.hpp>
 
 class WindowManagerFixture : public ::testing::Test {
 protected:
     std::string title{};
     OsApiMock osApiMock;
+    WindowFinderMock windowFinderMock;
     gt::os::WindowManager *windowManager{};
 
     void SetUp() override {
         this->title = "TEST_TITLE";
-        this->windowManager = new gt::os::WindowManager(this->title, &this->osApiMock);
-
-        ON_CALL(this->osApiMock, createMutex(::testing::_, ::testing::_, ::testing::_))
-            .WillByDefault(::testing::Return((void *)TRUE));
-
-        ON_CALL(this->osApiMock, enumWindows(::testing::_, NULL))
-            .WillByDefault(::testing::Return(NULL));
-
-        ON_CALL(this->osApiMock, getLastError())
-            .WillByDefault(::testing::Return(ERROR_ALREADY_EXISTS));
-
-        ON_CALL(this->osApiMock,
-                getWindowText(::testing::_, ::testing::_, ::testing::_))
-            .WillByDefault(
-                ::testing::DoAll(
-                    ::testing::Invoke([](HWND, LPSTR dest, int) -> int {
-                        auto source = (char *)"TEST_TITLE";
-#ifdef OS_WINDOWS
-                        strcpy_s(dest, strlen(source) + 1, source);
-#else
-                        strcpy(dest, source);
-#endif
-                        return 1;
-                    }),
-                    ::testing::Return(1))
-            );
-
-        ON_CALL(this->osApiMock,
-                getClassName(::testing::_, ::testing::_, ::testing::_))
-            .WillByDefault(
-                ::testing::DoAll(
-                    ::testing::Invoke([](HWND, LPSTR dest, int) -> int {
-                        auto source = (char *)"ConsoleWindowClass";
-#ifdef OS_WINDOWS
-                        strcpy_s(dest, strlen(source) + 1, source);
-#else
-                        strcpy(dest, source);
-#endif
-                        return 1;
-                    }),
-                    ::testing::Return(1))
-            );
+        this->windowManager = new gt::os::WindowManager(&this->osApiMock, &this->windowFinderMock);
     }
 
-    void TearDown() override { delete this->windowManager; }
+    void TearDown() override {
+        delete this->windowManager;
+    }
 };
 
-class show : public WindowManagerFixture {};
-class isOpened : public WindowManagerFixture {};
+class WindowManager__show : public WindowManagerFixture {};
+class WindowManager__isOpened : public WindowManagerFixture {};
 
 #endif // GAMETRAINER_WINDOW_MANAGER_FIXTURE_HPP
