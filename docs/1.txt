@@ -1,0 +1,16 @@
+Generate 1st pointer map, label it PointerMap1
+For each variable you want to find a pointer for, place the variable in the cheat table.
+Label them PointerMap1
+
+Close the game, re-open it.
+
+Genereate 2nd pointermap, label it PointerMap2
+For each variable you want to find a pointer for, place the variable in the cheat table.
+Label them PointerMap2
+
+Now do a pointer scan for your variable
+Select Saved pointermap #2
+Compare against Saved Pointermap #1 and select the address from the 1st pointer map for each variable
+Define your offset if you know it
+
+https://www.youtube.com/watch?v=nQ2F2iW80Fk
