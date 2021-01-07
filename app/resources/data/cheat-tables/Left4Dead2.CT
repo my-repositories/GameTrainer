@@ -6,63 +6,55 @@
       <Description>"CHEAT_ONEHITKILL"</Description>
       <LastState/>
       <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-//code from here to '[DISABLE]' will be used to enable the cheat
+      <AssemblerScript>
+[ENABLE]
+
+define(INJECT, server.dll+41D21)
+registersymbol(INJECT)
+
 alloc(newmem,2048)
 label(returnhere)
 label(originalcode)
 label(exit)
 
-newmem: //this is allocated memory, you have read,write,execute access
-//place your code here
-cmp dword ptr [edi-b8],0
-jne @F
-mov [edi],64
-jmp originalcode
+newmem:
+  cmp dword ptr [edi-b8],0
+  jne @F
+  mov [edi],esi
+  jmp originalcode
 
 @@:
-mov [edi],0
+   mov [edi],0
 
 originalcode:
-nop
-pop edi
-mov eax,00000001
+  pop edi
+  mov eax,00000001
+  pop esi
+  mov esp,ebp
+  pop ebp
+  ret 0004
 
 exit:
-jmp returnhere
+  jmp returnhere
 
-"server.dll"+3F2A1:
-jmp newmem
-nop
-nop
-nop
+INJECT:
+  jmp newmem
+  nop
+
 returnhere:
 
-
- 
- 
 [DISABLE]
-//code from here till the end of the code will be used to disable the cheat
 dealloc(newmem)
-"server.dll"+3F2A1:
-mov [edi],esi
-pop edi
-mov eax,00000001
-//Alt: db 89 37 5F B8 01 00 00 00
-//instructionAddress: "server.dll"+3F2A1
-//returnAddress: "server.dll"+3F2A9
-{
-83 BF 48 FF FF FF 00
-0F 85 07 00 00 00
-89 37
-E9 06 00 00 00
-C7 07 00 00 00 00
-90
-5F
-B8 01 00 00 00
-E9 7F F2 8D 04
-}
-</AssemblerScript>
+
+INJECT:
+  mov [edi],esi
+  pop edi
+  mov eax,00000001
+  pop esi
+  mov esp,ebp
+  pop ebp
+  ret 0004
+      </AssemblerScript>
     </CheatEntry>
     <CheatEntry>
       <ID>3</ID>

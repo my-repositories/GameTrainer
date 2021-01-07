@@ -4,17 +4,15 @@
 #include <gmock/gmock.h>
 
 #include <gt_os/window-finder.hpp>
-#include <mocks/os-api.mock.hpp>
 #include <mocks/window-enumerator.mock.hpp>
 
 class WindowFinderFixture : public ::testing::Test {
 protected:
-    OsApiMock osApiMock;
     WindowEnumeratorMock windowEnumeratorMock;
     gt::os::WindowFinder *windowFinder{};
 
     void SetUp() override {
-        this->windowFinder = new gt::os::WindowFinder(&this->osApiMock, &this->windowEnumeratorMock);
+        this->windowFinder = new gt::os::WindowFinder(&this->windowEnumeratorMock);
     }
 
     void TearDown() override {
