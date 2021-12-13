@@ -6,30 +6,24 @@ registersymbol(INJECT)
 alloc(newmem,2048)
 label(returnhere)
 label(originalcode)
-label(exit)
+label(kill)
 
 newmem:
-  {if is_player_flag = 0}
-  {then mov [rdi],esi}
-  {else js @F}
-  cmp BYTE ptr [rdi-384+4c],1
-  je @F
-  mov [rdi],0
+  cmp word ptr [rdi-384+170],1
+  je kill
+  sub [rdi],eax
   jmp originalcode
 
-@@:
-  sub [rdi],eax
+kill:
+  mov [rdi],0
 
 originalcode:
   mov eax,[rdi]
   mov [rsi],eax
   add rsp,20
-  mov r14,0x00007FF7C0CA4BB0
   pop r14
   pop rdi
   pop rsi
-
-exit:
   jmp returnhere
 
 INJECT:
@@ -38,6 +32,7 @@ INJECT:
 returnhere:
 
 [DISABLE]
+unregistersymbol(INJECT)
 dealloc(newmem)
 
 INJECT:
